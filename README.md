@@ -1,4 +1,5 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Go-Barber-Frontend
+Sistema de gerenciamento para a barbearia fictícia GoBarber. Esse sistema é um projeto para a disciplina de Engenharia de Software
 
 ## Getting Started
 
