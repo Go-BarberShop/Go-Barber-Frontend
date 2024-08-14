@@ -1,0 +1,114 @@
+.login{
+    height: 100%;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+
+    &__logo{
+        margin: -5em 0 3em 0;
+    }
+    &__image{
+        background-image: url('/assets/capa_login.svg');
+        background-size: cover ;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 1.6rem;
+        &_input {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            gap: 0.4rem;
+        }
+    }
+
+    &__title {
+
+        .title {
+            font-size: 1.6em;
+            font-family: "Roboto Slab", serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;            
+            color: #fff;
+            text-shadow: 1px 0 #919090;
+        }
+        
+    }
+
+    &__content{
+        width: 100%;
+        background-color: rgba(var(--background));
+        
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+
+
+        &__label{
+        
+            input{
+                background-color: rgba(var(--input));
+                min-width: 20em;
+                padding: 0.6em 2em;
+                height: 2.5em;
+                border: 1px rgba(var(--input)) solid;
+                border-radius: 0.4em;
+                color: rgba(var(--gray));
+                font-size: 1em;
+
+                &:focus {
+                    outline: none;
+                }
+                &:-webkit-autofill {
+                    background-color: rgba(var(--input)) !important; /* Altere para a cor de fundo desejada */
+                    -webkit-box-shadow: 0 0 0 30px rgba(var(--input)) inset !important;
+                    -webkit-text-fill-color: rgba(var(--gray-hard)) !important; /* Cor do texto durante o autofill */
+                }
+            }
+        }
+
+        &_errorLogin{
+            color: red;
+        }
+
+        &__button_login{
+            width: 100%;
+            min-width: 20em;
+            height: 3.6em;
+
+            padding: 0.6em 2em;
+
+            background-color: rgba(var(--orange));
+            
+            font-family: "Roboto Slab", serif;
+            font-weight: 500;
+            font-size: 1em;
+            color: rgba(var(--background));
+            
+            border: 1px rgba(var(--input)) solid;
+            border-radius: 0.6em;
+            box-shadow: 0.4em 0.4em 0.6em 0 rgba(var(--input)); /* Sombra inferior e lateral direita */
+
+
+
+            &:hover{
+                transition: all .4s;
+                background-color: rgba(217, 126, 8 , 0.8);
+            }
+        }
+
+        .active{
+            background-color: #ffa01c41;  
+        }
+    }
+}
+
