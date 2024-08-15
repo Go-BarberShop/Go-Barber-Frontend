@@ -1,0 +1,37 @@
+.text{
+    background-color: #28262E;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 12px;
+}
+
+.date{
+    background-color: #28262E;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 12px;
+}
+
+.small{
+    width: 150px;
+}
+
+.medium{
+    width: 250px;
+}
+
+.large{
+    width: 300px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: #3E3B47;
+}
+
+.label{
+    color: white;
+}
