@@ -1,0 +1,26 @@
+.container{
+    height: 100%;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 0.8fr 2fr;
+
+
+    background-color: rgba(var(--background));
+
+
+    &__menu{
+        display: flex;
+
+
+    
+    }
+    &__main{
+        background-image: url('/assets/logo.svg');
+        background-size: 50% ;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
+}
+
