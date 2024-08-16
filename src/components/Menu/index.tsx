@@ -18,22 +18,22 @@ const Menu = () => {
            <Botao_menu 
             title="Gerenciamento Barbeiro" 
             icon="/assets/icons/navalha.svg"
-            route={APP_ROUTES.private.gerencia_barbeiro.name}
+            route={APP_ROUTES.private.barbeiros.name}
             />
             <Botao_menu 
             title="Gerenciamento Serviço" 
             icon="/assets/icons/cadeira.svg"
-            route={APP_ROUTES.private.gerencia_servico.name}
+            route={APP_ROUTES.private.servicos.name}
             />
             <Botao_menu 
             title="Gerenciamento Produtos" 
             icon="/assets/icons/sexta.svg"
-            route={APP_ROUTES.private.gerencia_produto.name}
+            route={APP_ROUTES.private.produtos.name}
             />
             <Botao_menu 
             title="Gerenciamento Promoções" 
             icon="/assets/icons/promocao.svg"
-            route={APP_ROUTES.private.gerencia_promocao.name}
+            route={APP_ROUTES.private.promocoes.name}
             />
            </div>
             <div>

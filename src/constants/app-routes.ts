@@ -3,17 +3,20 @@ export const APP_ROUTES = {
         home: {
             name: "/home"
         },
-        gerencia_barbeiro: {
-            name: "/gerenciar-barbeiro"
+        barbeiros: {
+            name: "/barbeiros"
         },
-        gerencia_servico: {
-            name: "/gerenciar-servico"
+        servicos: {
+            name: "/servicos"
         },
-        gerencia_produto: {
-            name: "/gerenciar-produto"
+        produtos: {
+            name: "/produtos"
         },
-        gerencia_promocao: {
-            name: "/gerenciar-promocao"
+        promocoes: {
+            name: "/promocoes"
+        },
+        cadastrar_promocao:{
+            name: "/promocoes/cadastrar-promocao"
         },
         unauthorized: {
             name: "/unauthorized"
