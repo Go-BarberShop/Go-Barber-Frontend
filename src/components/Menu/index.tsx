@@ -1,8 +1,8 @@
 import style from "./menu.module.scss";
 import { APP_ROUTES } from "@/constants/app-routes";
-import Header_menu from "../Header_menu";
-import Botao_menu from "../Botao_menu";
-import Footer_menu from "../Footer_menu";
+import Header_menu from "./Header_menu";
+import Botao_menu from "./Botao_menu";
+import Footer_menu from "./Footer_menu";
 
 const Menu = () => {
 
@@ -11,7 +11,7 @@ const Menu = () => {
         <div className={style.menu}>
             <div>
                 
-            <Header_menu />
+            <Header_menu photo="/assets/photo.svg" name="Adenilson Ramos" />
             </div>
            <div>
             
