@@ -16,12 +16,22 @@ interface TableProps {
 }
 
 interface Promocao {
+  id: string;
   name: string;
-  totalPrice: number;
+  totalPrice: string;
   startDate: string;
   endDate: string;
   coupon: string;
 }
+
+const mockPromocao: Promocao = {
+  id: "00",
+  name: "Corte e Barba",
+  totalPrice: "49.90",
+  startDate: "2024-11-30",
+  endDate: "2024-12-30",
+  coupon: "12313"
+};
 
 const Table: React.FC<TableProps> = ({ 
   listPromocoes, 
@@ -60,27 +70,25 @@ const Table: React.FC<TableProps> = ({
               </tr>
             </thead>
             <tbody className={style.content__table__body}>
-            <tr >
-                  <td>Corte e Barba</td>
-                  <td>R$ 49.90</td>
-                  <td>25/09/24</td>
-                  <td>25/10/24</td>
-                  <td>
-                    <img 
-                      src="/assets/icons/visualizar.svg" 
-                      alt="Visualizar" 
-          
-                      className={style.content__table__body_click} 
-                    />
-                    <img 
-                      src="/assets/icons/enviar.svg" 
-                      alt="Enviar" 
-          
-                      className={style.content__table__body_click} 
-                    />
-                    {/*<ExcluirButton itemId={promocao.coupon} onDelete={handleDeletePromocao} /> */}
-                  </td>
-                </tr>
+              <tr>
+                <td>{mockPromocao.name}</td>
+                <td>{mockPromocao.totalPrice}</td>
+                <td>{mockPromocao.startDate}</td>
+                <td>{mockPromocao.endDate}</td>
+                <td>
+                  <img 
+                    src="/assets/icons/visualizar.svg" 
+                    alt="Visualizar" 
+                    onClick={() => onSelectPromocao(mockPromocao)} 
+                    className={style.content__table__body_click} 
+                  />
+                  <img 
+                    src="/assets/icons/enviar.svg" 
+                    alt="Enviar" 
+                    className={style.content__table__body_click} 
+                  />
+                </td>
+              </tr>
               {listPromocoes.map((promocao, index) => (
                 <tr key={index}>
                   <td>{promocao.name}</td>
@@ -107,6 +115,25 @@ const Table: React.FC<TableProps> = ({
         <div className={style.content}>
           <table className={style.content__table}>
             <tbody className={style.content__table__body}>
+              <tr>
+                <td data-label={table1}>{mockPromocao.name}</td>
+                <td data-label={table2}>{mockPromocao.totalPrice}</td>
+                <td data-label={table3}>{mockPromocao.startDate}</td>
+                <td data-label={table4}>{mockPromocao.endDate}</td>
+                <td className={style.content__table__buttonTabela}>
+                  <div className={style.content__table__button}>
+                    <h1>Visualizar</h1>
+                    <Image 
+                      className={style.content__table__button_img} 
+                      src="/assets/iconOlhoBranco.png" 
+                      onClick={() => onSelectPromocao(mockPromocao)} 
+                      alt="Visualizar" 
+                      width={27} 
+                      height={26} 
+                    />
+                  </div>
+                </td>
+              </tr>
               {listPromocoes.map((promocao, index) => (
                 <tr key={index}>
                   <td data-label={table1}>{promocao.name}</td>

@@ -9,36 +9,38 @@ const Menu = () => {
 
     return (
         <div className={style.menu}>
-            <div>
+            <div className={style.menu__container}>
                 
-            <Header_menu photo="/assets/photo.svg" name="Adenilson Ramos" />
+                <div>
+                    <Header_menu photo="/assets/photo.svg" name="Adenilson Ramos" />
+                </div>
+                <div>
+                    <Botao_menu 
+                        title="Gerenciamento Barbeiro" 
+                        icon="/assets/icons/navalha.svg"
+                        route={APP_ROUTES.private.barbeiros.name}
+                    />
+                    <Botao_menu 
+                        title="Gerenciamento Serviço" 
+                        icon="/assets/icons/cadeira.svg"
+                        route={APP_ROUTES.private.servicos.name}
+                    />
+                    <Botao_menu 
+                        title="Gerenciamento Produtos" 
+                        icon="/assets/icons/sexta.svg"
+                        route={APP_ROUTES.private.produtos.name}
+                    />
+                        <Botao_menu 
+                        title="Gerenciamento Promoções" 
+                        icon="/assets/icons/promocao.svg"
+                        route={APP_ROUTES.private.promocoes.name}
+                    />
+                </div>
+                <div>
+                    <Footer_menu />
+                </div>
             </div>
-           <div>
             
-           <Botao_menu 
-            title="Gerenciamento Barbeiro" 
-            icon="/assets/icons/navalha.svg"
-            route={APP_ROUTES.private.barbeiros.name}
-            />
-            <Botao_menu 
-            title="Gerenciamento Serviço" 
-            icon="/assets/icons/cadeira.svg"
-            route={APP_ROUTES.private.servicos.name}
-            />
-            <Botao_menu 
-            title="Gerenciamento Produtos" 
-            icon="/assets/icons/sexta.svg"
-            route={APP_ROUTES.private.produtos.name}
-            />
-            <Botao_menu 
-            title="Gerenciamento Promoções" 
-            icon="/assets/icons/promocao.svg"
-            route={APP_ROUTES.private.promocoes.name}
-            />
-           </div>
-            <div>
-            <Footer_menu />
-            </div>
         </div>
     )
 }

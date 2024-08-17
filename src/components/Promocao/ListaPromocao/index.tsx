@@ -7,10 +7,13 @@ import Table from "./Table";
 import { getAllPromocoes } from "@/api/promocoes/getAllPromocoes";
 import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/constants/app-routes";
+import DetalhamentoPromocao from "../DetalharPromocao";
+import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
 
 interface Promocao {
+  id: string;
   name: string;
-  totalPrice: number;
+  totalPrice: string;
   startDate: string;
   endDate: string;
   coupon: string;
@@ -49,22 +52,30 @@ const PromocaoComponent = () => {
     setSelectedPromocao(null);
   };
 
+  if (selectedPromocao) {
+
+    return <DetalhamentoPromocao
+      diretorioAtual="dirAtual"
+      promocao={selectedPromocao}
+      backDetalhamento={handleBackToList}
+      dirAnt="dirAnt"
+      hrefAnterior={APP_ROUTES.private.home.name}
+      hrefAtual={APP_ROUTES.private.promocoes.name}
+    />
+  }
+
   return (
     <div>
       <div className={style.header}>
-        <div className={style.header__title}>
-            <h1>Promoções</h1>
-            <div className={style.header__title_line}></div>
-        </div>
-        <div className={style.header__navegacao}>
-          <div className={style.header__navegacao_voltar} onClick={() => (push(APP_ROUTES.private.home.name))}>
-            <img src="/assets/icons/menor_que.svg" alt="Voltar" />
-            <h1>Voltar</h1>
-          </div>
-          <div className={style.header__navegacao_guia}>
-            <h1>Promoções</h1>
-          </div>
-        </div>
+      <HeaderDetalhamento
+            titulo="Promoções"
+            hrefAnterior={APP_ROUTES.private.home.name}
+            diretorioAnterior="Home /"
+            diretorioAtual="Promoções"
+
+       />
+        
+        
         <div className={style.header__container}>
           <div className={style.dropdown}>
             <div className={style.botaoDropdown}>

@@ -22,59 +22,7 @@
       }
       
     }
-    &__navegacao {
-      display: flex;
-      align-items: center;
-      align-content: center;
-      justify-content: space-between;
-      width: 100%;
-      font-size: 1em;
-      margin: 0em 0em 3em 0em;
 
-      h1 {
-        font-size: 1em;
-        font-weight: bold;
-      }
-
-      &_voltar {
-        display: flex; // Mostra o botão voltar em telas maiores
-        align-items: center;
-        font-size: 1em;
-
-        color: rgba(var(--white));
-
-        cursor: pointer;
-        
-        h1{
-          border-bottom: 0.1em solid rgba(var(--orange));
-          padding-bottom: 0.2em;
-        }
-      }
-
-      &_guia {
-        display: flex;
-        align-items: center;
-        justify-content: space-between; // Reajusta o conteúdo do título para espaçamento entre itens
-
-        gap: 0.3em;
-    
-        h1 {
-          font-size: 1em;
-          font-weight: bold;
-          color: rgba(var(--white));
-          border-bottom: 0.1em solid rgba(var(--orange));
-          padding-bottom: 0.2em;        
-        }
-    
-        span {
-          color: #245501;
-        }
-      }
-    }
-    
-  
-      
-   
   
     &__container {
       display: flex;
@@ -98,6 +46,7 @@
           align-content: center;
           align-items: center;
           margin-left: -2em;
+          border: none;
           padding: 1em;
           gap: 0.47em;
     
