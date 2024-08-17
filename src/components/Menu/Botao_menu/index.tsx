@@ -20,7 +20,7 @@ const Botao_menu : React.FC<BotaoMenuProps> = ({ title, icon, route }) => {
             <div className={style.container__menu_button_menu_icon}>
                 <img src={icon} alt={title} />
             </div>
-</button>
+        </button>
             
         </>
     )

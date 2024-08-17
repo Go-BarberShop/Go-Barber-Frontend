@@ -1,8 +1,9 @@
 "use client";
 
-import style from "./home.module.scss";
+import style from "./promocao.module.scss";
 import Menu from "@/components/Menu";
 import Home from "@/components/Home";
+import Promocao from "@/components/Promocao/ListaPromocao";
 
 export default function page() {
   return (
@@ -12,7 +13,7 @@ export default function page() {
                 <Menu />
             </div>
             <div className={style.container__main}>
-                <Home />
+                <Promocao />
             </div>
         </div>
     </>
