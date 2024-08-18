@@ -12,12 +12,15 @@
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.7",
+    "@tanstack/react-query": "^5.51.23",
     "axios": "^1.7.3",
     "formik": "^2.4.6",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
     "react-query": "^3.39.3",
+    "react-redux": "^9.1.2",
     "sass": "^1.77.8",
     "scss": "^0.2.4",
     "yup": "^1.4.0"
