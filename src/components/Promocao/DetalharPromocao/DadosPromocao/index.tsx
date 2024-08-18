@@ -21,7 +21,7 @@ const DadosPromocao: React.FC<DadosPromocaoProps> = ({ formik, editar, hrefAnter
         {editar === false ? (
           <>
             <div>
-              <label htmlFor="nome">Nome</label>
+              <label htmlFor="name">Nome</label>
               <input
                 id="name"
                 className={style.container__ContainerForm_form_input}

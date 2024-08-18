@@ -13,7 +13,7 @@ export default function DadosPromocao({ formik }) {
       <div className={style.container__ContainerForm_form_halfContainer}>
 
         <div>
-            <label >Nome da Promoção<span>*</span></label>
+            <label htmlFor="name">Nome da Promoção<span>*</span></label>
             <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="name"
@@ -29,7 +29,7 @@ export default function DadosPromocao({ formik }) {
         </div>
 
         <div>
-            <label >Código do Cupom</label>
+            <label htmlFor="coupon">Código do Cupom</label>
             <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="coupon"
@@ -47,7 +47,7 @@ export default function DadosPromocao({ formik }) {
       <div className={style.container__ContainerForm_form_threePartsContainer}>
 
       <div>
-        <label >Valor <span>*</span></label>
+        <label htmlFor="totalPrice">Valor <span>*</span></label>
             <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="totalPrice"
@@ -63,7 +63,7 @@ export default function DadosPromocao({ formik }) {
             ) : null}
         </div>
         <div>
-        <label >Data Inicio<span>*</span></label>
+        <label htmlFor="startDate">Data Inicio<span>*</span></label>
             <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="startDate"
@@ -79,7 +79,7 @@ export default function DadosPromocao({ formik }) {
         </div>
 
         <div>
-            <label >Data Fim <span>*</span></label>
+            <label htmlFor="endDate">Data Fim <span>*</span></label>
             <input
                 className={style.container__ContainerForm_form_halfContainer_input}
                 id="endDate"

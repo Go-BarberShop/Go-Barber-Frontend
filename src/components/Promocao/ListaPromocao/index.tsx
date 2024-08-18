@@ -19,17 +19,18 @@ interface Promocao {
   coupon: string;
 }
 
-const PromocaoComponent = () => {
+const ListaPromocoes = () => {
   const [promocoes, setPromocoes] = useState<Promocao[]>([]);
   const [selectedPromocao, setSelectedPromocao] = useState<Promocao | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [open, setOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const { push } = useRouter();
 
-
-  const { mutate } = useMutation(getAllPromocoes, {
+  const { mutate } = useMutation(() => getAllPromocoes(currentPage, 3), {
     onSuccess: (res) => {
-      setPromocoes(res.data);
+      setPromocoes(res.data.content);
+      setTotalPages(res.data.totalPages);
     },
     onError: (error) => {
       console.error('Erro ao recuperar as promoções:', error);
@@ -38,7 +39,7 @@ const PromocaoComponent = () => {
 
   useEffect(() => {
     mutate();
-  }, []);
+  }, [currentPage]);
 
   const filteredPromocoes = promocoes.filter((promocao) =>
     promocao.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -53,7 +54,6 @@ const PromocaoComponent = () => {
   };
 
   if (selectedPromocao) {
-
     return <DetalhamentoPromocao
       diretorioAtual="dirAtual"
       promocao={selectedPromocao}
@@ -67,52 +67,23 @@ const PromocaoComponent = () => {
   return (
     <div>
       <div className={style.header}>
-      <HeaderDetalhamento
-            titulo="Promoções"
-            hrefAnterior={APP_ROUTES.private.home.name}
-            diretorioAnterior="Home /"
-            diretorioAtual="Promoções"
-
-       />
-        
-        
+        <HeaderDetalhamento
+          titulo="Promoções"
+          hrefAnterior={APP_ROUTES.private.home.name}
+          diretorioAnterior="Home /"
+          diretorioAtual="Promoções"
+        />
         <div className={style.header__container}>
-          <div className={style.dropdown}>
-            <div className={style.botaoDropdown}>
-              <Image onClick={() => setOpen(!open)}
-                src="/assets/dropdown.svg" alt="Dropdown" width={27} height={24} />
-            </div>
-            {open && (
-              <div className={style.dropdown}>
-                <ul className={style.botaoDropdown__lista}>
-                  <li>
-                    <div className={style.botaoDropdown__button}>
-                      <img src="/assets/navalha.svg" alt="Adicionar Promoção" />
-                      <Link className={style.header__container_link} href="/promocoes/novaPromocao">
-                        <h1>
-                          Adicionar Promoção
-                        </h1>
-                      </Link>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-          <div className={style.header__container_botoes}>
+         <div className={style.header__container_botoes}>
             <button onClick={() => (push(APP_ROUTES.private.cadastrar_promocao.name))}>
-              
               <h1>
                 Adicionar Promoção
               </h1>
               <img src="/assets/icons/navalha.svg" alt="Navalha" />
-
             </button>
           </div>
         </div>
       </div>
-
-      {/* <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
 
       <Table
         listPromocoes={filteredPromocoes}
@@ -123,9 +94,12 @@ const PromocaoComponent = () => {
         table3="Data Inicio"
         table4="Data Fim"
         table5="Ações"
+        currentPage={currentPage}
+        totalPages={totalPages}
+        setCurrentPage={setCurrentPage}
       />
     </div>
   );
 };
 
-export default PromocaoComponent;
+export default ListaPromocoes;

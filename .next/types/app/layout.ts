@@ -1,4 +1,4 @@
-// File: /Users/jorgecosta/Desktop/Go-Barber-Frontend/src/app/layout.tsx
+// File: /home/deno/workspace/engenharia/Go-Barber-Frontend/src/app/layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
