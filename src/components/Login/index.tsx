@@ -60,8 +60,8 @@ const Login = () => {
                         <input type="password" name="password" placeholder="Enter a strong password" onChange={(e) => setPassword(e.target.value)} value={password} onKeyUp={getEnter} />
                     </label>
                     </div>
-                    {status === "error" ? <p className={style.login__content_errorLogin}>Erro no login...</p> : false}
-                        <button className={`${style.login__content__button_login} ${status === "loading" || status === "success" ? style.active : ""}`} onClick={() => push(APP_ROUTES.private.home.name) /*mutate()*/}>Entrar</button>
+                    {/*status === "error" ? <p className={style.login__content_errorLogin}>Erro no login...</p> : false* ${status === "loading" || status === "success" ? style.active : ""}*/}
+                        <button className={`${style.login__content__button_login} `} onClick={() => push(APP_ROUTES.private.home.name) /*mutate()*/}>Entrar</button>
                     
                 </div>
             </div>
