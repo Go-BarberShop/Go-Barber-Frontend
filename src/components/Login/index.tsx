@@ -1,16 +1,9 @@
 import { useState } from "react";
-//import BackgroundDropdown from "../BackgroundDropdown";
 import style from "./login.module.scss";
-import { useMutation } from "react-query";
-import api from "@/api/http-common";
-//import { postLogin } from "@/api/login/postLogin";
+
 import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/constants/app-routes";
 import { setStorageItem } from "@/utils/localStore";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from '@/redux/store'
-import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
-import Image from "next/image";
 
 const Login = () => {
     const [login, setLogin] = useState("");

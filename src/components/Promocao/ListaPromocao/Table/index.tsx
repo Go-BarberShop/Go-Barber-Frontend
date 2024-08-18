@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import style from "./table.module.scss";
-import { deletePromocao } from "@/api/promocoes/deletePromocao";
 
 interface TableProps {
   table1: string;
@@ -28,8 +26,7 @@ interface Promocao {
 }
 
 const Table: React.FC<TableProps> = ({ 
-  listPromocoes, 
-  setPromocoes, 
+  listPromocoes,  
   onSelectPromocao, 
   table1, 
   table2, 
@@ -41,10 +38,10 @@ const Table: React.FC<TableProps> = ({
   setCurrentPage 
 }) => {
 
-  const handleDeletePromocao = async (id: string) => {
-    await deletePromocao(id);
-    setPromocoes(listPromocoes.filter(promocao => promocao.coupon !== id));
-  };
+ // const handleDeletePromocao = async (id: string) => {
+//    await deletePromocao(id);
+ //   setPromocoes(listPromocoes.filter(promocao => promocao.coupon !== id));
+ // };
 
   return (
     <>
@@ -72,12 +69,15 @@ const Table: React.FC<TableProps> = ({
                   <td>{promocao.startDate}</td>
                   <td>{promocao.endDate}</td>
                   <td>
+                  <button 
+                    onClick={() => onSelectPromocao(promocao)} 
+                    className={style.content__table__body_click}
+                  >
                     <img 
                       src="/assets/icons/visualizar.svg" 
                       alt="Visualizar" 
-                      onClick={() => onSelectPromocao(promocao)} 
-                      className={style.content__table__body_click} 
                     />
+                  </button>
                     <img 
                       src="/assets/icons/enviar.svg" 
                       alt="Enviar" 

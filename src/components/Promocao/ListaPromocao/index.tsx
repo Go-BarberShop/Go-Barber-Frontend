@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import style from "./promocao.module.scss";
 import { useMutation } from "react-query";
-import Link from "next/link";
-import Image from "next/image";
+
 import Table from "./Table";
 import { getAllPromocoes } from "@/api/promocoes/getAllPromocoes";
 import { useRouter } from "next/navigation";
@@ -22,7 +21,7 @@ interface Promocao {
 const ListaPromocoes = () => {
   const [promocoes, setPromocoes] = useState<Promocao[]>([]);
   const [selectedPromocao, setSelectedPromocao] = useState<Promocao | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const { push } = useRouter();

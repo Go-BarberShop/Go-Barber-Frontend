@@ -7,7 +7,6 @@ import SelectBarber from "@/ components/Barber/SelectBarber";
 import { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import BarberInfo from "../BarberInfo/BarberInfo";
 
 export default function BarberRegister() {
   const [serviceType] = useState([

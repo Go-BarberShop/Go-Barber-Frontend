@@ -1,7 +1,5 @@
 "use client"
 import style from "./promocao.module.scss";
-import { useEffect, useState } from "react";
-import { useMutation } from "react-query";
 
 interface DadosPromocaoProps {
     formik: any;
@@ -9,7 +7,7 @@ interface DadosPromocaoProps {
     hrefAnterior: string;
     }
 
-const DadosPromocao: React.FC<DadosPromocaoProps> = ({ formik, editar, hrefAnterior }) => {
+const DadosPromocao: React.FC<DadosPromocaoProps> = ({ formik, editar }) => {
 
 
   return (

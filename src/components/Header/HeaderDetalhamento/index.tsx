@@ -1,4 +1,3 @@
-import Image from "next/image";
 import style from "./header-detalhamento.module.scss";
 import { useRouter } from "next/navigation";
 
