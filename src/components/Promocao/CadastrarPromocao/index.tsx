@@ -13,18 +13,19 @@ import { useRouter } from "next/navigation";
 
 interface Promocao {
   name: string;
-  totalPrice: number;
+  totalPrice: string;
   startDate: string;
   endDate: string;
-  coupon: string;
+  coupon: string | null;  
 }
+
 
 const CadastroPromocao = () => {
   const { push } = useRouter();
 
   const initialValues: Promocao = {
     name: "",
-    totalPrice: 0,
+    totalPrice: "",
     startDate: "",
     endDate: "",
     coupon: ""
@@ -42,12 +43,15 @@ const CadastroPromocao = () => {
     endDate: Yup.date()
       .min(Yup.ref('startDate'), "O fim da promoção não pode ser antes da data de início.")
       .required('Obrigatório'),
+    
   });
 
   const { status, mutate } = useMutation(
     async (values: Promocao) => {
-        console.log(values);
-      return postPromocao(values);
+      const coupon = values.coupon === "" ? null : values.coupon;
+      const updatedValues = { ...values, coupon }; // Atualiza o campo coupon no objeto values
+    
+      return postPromocao(updatedValues);    
     }, {
     onSuccess: () => {
         push(APP_ROUTES.private.promocoes.name); // Ajuste conforme necessário

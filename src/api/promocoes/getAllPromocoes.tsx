@@ -1,5 +1,5 @@
 import api from "@/api/http-common";
 
-export async function getAllPromocoes() {
-    return await api.get("/sale");
+export function getAllPromocoes(page: number, size: number) {
+    return  api.get(`/sale?page=${page}&size=${size}`);
 }
