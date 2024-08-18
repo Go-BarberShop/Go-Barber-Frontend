@@ -1,104 +1,90 @@
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[9].use[5]!./src/components/Barber/BarberInfo/BarberInfo.module.scss ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-.BarberInfo_container__TTMZX {
-  background-color: #3e3b47;
-  border-radius: 5px;
-  min-height: 600px;
-  width: 50vw;
-  max-width: 1200px;
-  padding: 20px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.BarberInfo_container__TTMZX h3 {
-  color: white;
-  margin-bottom: 15px;
-}
-
-.BarberInfo_userProfile__rOz5I {
-  display: flex;
-  gap: 25px;
-  margin-bottom: 15px;
-}
-
-.BarberInfo_photo__mqlIv {
-  background-color: #555;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 12px;
-}
-
-.BarberInfo_userInfo__O4JAL {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.BarberInfo_userInfo__O4JAL h3 {
-  margin: 0;
-  color: white;
-}
-.BarberInfo_userInfo__O4JAL p {
-  margin: 0;
-  color: #FF9000;
-}
-
-.BarberInfo_personalInfo__sF2iN, .BarberInfo_address__StQTG, .BarberInfo_admissionInfo__0CdTN {
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[9].use[5]!./src/components/Login/login.module.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.login_login__6dBPT {
+  height: 100%;
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-  gap: 10px;
-  margin-bottom: 20px;
+  grid-template-columns: 1.5fr 2fr;
 }
-
-.BarberInfo_row__bwsRJ {
+.login_login__logo__Wm54x {
+  margin: -5em 0 3em 0;
+}
+.login_login__image__x9OAE {
+  background-image: url("/assets/capa_login.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.login_login__form__EK8IH {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
-  color: white;
+  align-items: end;
+  gap: 1.6rem;
 }
-.BarberInfo_row__bwsRJ strong {
-  color: white;
+.login_login__form_input__0koY4 {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 0.4rem;
 }
-.BarberInfo_row__bwsRJ p {
-  color: #ccc;
-  margin-left: 5px;
+.login_login__title__f8bLM .login_title__okjg9 {
+  font-size: 1.6em;
+  font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  color: #fff;
+  text-shadow: 1px 0 #919090;
 }
-
-.BarberInfo_line__Rf5iw {
-  border: 0;
-  border-top: 1px solid #FF9000;
-  margin: 20px 0;
+.login_login__content__DQJeq {
+  width: 100%;
+  background-color: rgba(var(--background));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
 }
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[9].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[9].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[9].use[5]!./src/components/Barber/FormButton/formButton.module.scss ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-.formButton_btn__O7Lf2 {
-  width: 120px;
-  padding: 8px;
-  border-radius: 5px;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
+.login_login__content__label__y_upx input {
+  background-color: rgba(var(--input));
+  min-width: 20em;
+  padding: 0.6em 2em;
+  height: 2.5em;
+  border: 1px rgba(var(--input)) solid;
+  border-radius: 0.4em;
+  color: rgba(var(--gray));
+  font-size: 1em;
 }
-
-.formButton_btn__O7Lf2:hover {
-  transition: 0.7s;
-  opacity: 0.7;
+.login_login__content__label__y_upx input:focus {
+  outline: none;
 }
-
-.formButton_cancel__Syd9s {
-  background-color: #999591;
+.login_login__content__label__y_upx input:-webkit-autofill {
+  background-color: rgba(var(--input)) !important; /* Altere para a cor de fundo desejada */
+  -webkit-box-shadow: 0 0 0 30px rgba(var(--input)) inset !important;
+  -webkit-text-fill-color: rgba(var(--gray-hard)) !important; /* Cor do texto durante o autofill */
 }
-
-.formButton_submit__zy0Tz {
-  background-color: #FF9000;
+.login_login__content_errorLogin__HcI_U {
+  color: red;
+}
+.login_login__content__button_login__9QBO3 {
+  width: 100%;
+  min-width: 20em;
+  height: 3.6em;
+  padding: 0.6em 2em;
+  background-color: rgba(var(--orange));
+  font-family: "Roboto Slab", serif;
+  font-weight: 500;
+  font-size: 1em;
+  color: rgba(var(--background));
+  border: 1px rgba(var(--input)) solid;
+  border-radius: 0.6em;
+  box-shadow: 0.4em 0.4em 0.6em 0 rgba(var(--input)); /* Sombra inferior e lateral direita */
+}
+.login_login__content__button_login__9QBO3:hover {
+  transition: all 0.4s;
+  background-color: rgba(217, 126, 8, 0.8);
+}
+.login_login__content__DQJeq .login_active__eRQVb {
+  background-color: rgba(255, 160, 28, 0.2549019608);
 }
