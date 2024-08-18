@@ -1,0 +1,64 @@
+.container {
+    background-color: #3E3B47;
+    border-radius: 5px;
+    min-height: 600px;
+    width: 50vw; /* Utilize uma largura responsiva */
+    max-width: 1200px; /* Defina um máximo para grandes telas */
+    padding: 20px; /* Adicione padding para dar espaço ao conteúdo */
+    margin: auto; /* Centraliza o container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h3 {
+      color: white;
+      margin-bottom: 15px;
+    }
+  }
+  
+  .personalInfo, .address, .admissionInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px; /* Reduza o gap para 5px */
+    margin-bottom: 15px;
+  }
+  
+  .buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  /* Responsividade para telas menores */
+  @media (max-width: 768px) {
+    .container {
+      width: 95vw; /* Aumenta a largura em telas menores */
+    }
+    
+    .personalInfo, .address, .admissionInfo {
+      grid-template-columns: 1fr; /* Alinhar em uma única coluna */
+      gap: 10px; /* Ajuste para manter um espaçamento decente em colunas únicas */
+    }
+    
+    .buttons {
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+  }
+  
+  /* Responsividade para telas muito pequenas */
+  @media (max-width: 480px) {
+    .container {
+      padding: 15px; /* Reduzir o padding para telas muito pequenas */
+    }
+    
+    .container h3 {
+      font-size: 18px; /* Reduzir tamanho do texto */
+    }
+    
+    .personalInfo, .address, .admissionInfo {
+      gap: 5px; /* Manter o gap reduzido em telas pequenas */
+    }
+  }
+  
