@@ -2,10 +2,10 @@
     background-color: #3E3B47;
     border-radius: 5px;
     min-height: 600px;
-    width: 50vw; /* Utilize uma largura responsiva */
-    max-width: 1200px; /* Defina um máximo para grandes telas */
-    padding: 20px; /* Adicione padding para dar espaço ao conteúdo */
-    margin: auto; /* Centraliza o container */
+    width: 50vw; 
+    max-width: 1200px; 
+    padding: 20px; 
+    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,15 +29,14 @@
     gap: 10px;
   }
   
-  /* Responsividade para telas menores */
   @media (max-width: 768px) {
     .container {
-      width: 95vw; /* Aumenta a largura em telas menores */
+      width: 95vw; 
     }
     
     .personalInfo, .address, .admissionInfo {
-      grid-template-columns: 1fr; /* Alinhar em uma única coluna */
-      gap: 10px; /* Ajuste para manter um espaçamento decente em colunas únicas */
+      grid-template-columns: 1fr; 
+      gap: 10px; 
     }
     
     .buttons {
@@ -47,18 +46,17 @@
     }
   }
   
-  /* Responsividade para telas muito pequenas */
   @media (max-width: 480px) {
     .container {
-      padding: 15px; /* Reduzir o padding para telas muito pequenas */
+      padding: 15px; 
     }
     
     .container h3 {
-      font-size: 18px; /* Reduzir tamanho do texto */
+      font-size: 18px; 
     }
     
     .personalInfo, .address, .admissionInfo {
-      gap: 5px; /* Manter o gap reduzido em telas pequenas */
+      gap: 5px;
     }
   }
   

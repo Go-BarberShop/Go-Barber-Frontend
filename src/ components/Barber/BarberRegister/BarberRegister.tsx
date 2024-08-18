@@ -7,6 +7,7 @@ import SelectBarber from "@/ components/Barber/SelectBarber";
 import { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import BarberInfo from "../BarberInfo/BarberInfo";
 
 export default function BarberRegister() {
   const [serviceType] = useState([
@@ -211,7 +212,6 @@ export default function BarberRegister() {
                   name="salario"
                   value={values.salario}
                   onChange={(e) => {
-                    // Converta o valor para número
                     setFieldValue("salario", Number(e.target.value));
                   }}
                   onBlur={handleBlur}
