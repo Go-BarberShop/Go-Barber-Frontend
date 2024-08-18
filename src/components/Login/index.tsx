@@ -1,16 +1,9 @@
 import { useState } from "react";
-//import BackgroundDropdown from "../BackgroundDropdown";
 import style from "./login.module.scss";
-import { useMutation } from "react-query";
-import api from "@/api/http-common";
-//import { postLogin } from "@/api/login/postLogin";
+
 import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/constants/app-routes";
 import { setStorageItem } from "@/utils/localStore";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from '@/redux/store'
-import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
-import Image from "next/image";
 
 const Login = () => {
     const [login, setLogin] = useState("");
@@ -67,8 +60,8 @@ const Login = () => {
                         <input type="password" name="password" placeholder="Enter a strong password" onChange={(e) => setPassword(e.target.value)} value={password} onKeyUp={getEnter} />
                     </label>
                     </div>
-                    {status === "error" ? <p className={style.login__content_errorLogin}>Erro no login...</p> : false}
-                        <button className={`${style.login__content__button_login} ${status === "loading" || status === "success" ? style.active : ""}`} onClick={() => push(APP_ROUTES.private.home.name) /*mutate()*/}>Entrar</button>
+                    {/*status === "error" ? <p className={style.login__content_errorLogin}>Erro no login...</p> : false* ${status === "loading" || status === "success" ? style.active : ""}*/}
+                        <button className={`${style.login__content__button_login} `} onClick={() => push(APP_ROUTES.private.home.name) /*mutate()*/}>Entrar</button>
                     
                 </div>
             </div>

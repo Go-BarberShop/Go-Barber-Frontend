@@ -2,7 +2,6 @@
 
 import { useMutation } from "react-query";
 import { Form, Formik } from "formik";
-import { useState } from "react";
 import style from "./cadastrar-promocao.module.scss";
 import DadosPromocao from "./dadosPromocao/index";
 import * as Yup from 'yup';
@@ -46,7 +45,7 @@ const CadastroPromocao = () => {
     
   });
 
-  const { status, mutate } = useMutation(
+  const { mutate } = useMutation(
     async (values: Promocao) => {
       const coupon = values.coupon === "" ? null : values.coupon;
       const updatedValues = { ...values, coupon }; // Atualiza o campo coupon no objeto values

@@ -51,6 +51,8 @@
         font-size: .875em;
         &
         &_click{
+          background: none;
+          border: none;
           cursor: pointer;
         }
         tr {

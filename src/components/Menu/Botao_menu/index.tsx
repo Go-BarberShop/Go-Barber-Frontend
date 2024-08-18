@@ -1,5 +1,4 @@
 //import BackgroundDropdown from "../BackgroundDropdown";
-import { APP_ROUTES } from "@/constants/app-routes";
 import style from "./botao_menu.module.scss";
 import { useRouter } from "next/navigation";
 
