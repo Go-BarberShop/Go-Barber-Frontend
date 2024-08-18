@@ -28,22 +28,21 @@ module.exports = {
     "jsx-a11y",
   ],
   rules: {
-    "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "jsx-a11y/anchor-is-valid": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
-    "@next/next/no-img-element": "off",
-    "jsx-a11y/label-has-associated-control": "off",
-    "react-hooks/exhaustive-deps": "off",
-    'react/prop-types': 'off',
-    'react/no-unescaped-entities': 'off',
-    'jsx-a11y/click-events-have-key-events': 'off',
-
+    "react/react-in-jsx-scope": "off", // Next.js automatically imports React
+    "@typescript-eslint/explicit-module-boundary-types": "off", // Optional return types on functions
+    "jsx-a11y/anchor-is-valid": "off", // Next.js uses its own Link component
+    "@typescript-eslint/no-explicit-any": "off", // Allows usage of 'any' type
+    "jsx-a11y/no-static-element-interactions": "off", // Disables enforcement on static elements
+    "@next/next/no-img-element": "off", // Disables the enforcement to use <Image />
+    "jsx-a11y/label-has-associated-control": "off", // Disables the need for form labels to be associated with a control
+    "react-hooks/exhaustive-deps": "off", // Disables missing dependency warnings in useEffect
+    'react/prop-types': 'off', // Disables prop-types checks (TypeScript is handling types)
+    'react/no-unescaped-entities': 'off', // Disables unescaped entities check
+    'jsx-a11y/click-events-have-key-events': 'off', // Disables enforcement on click events without keyboard events
   },
   settings: {
     react: {
-      version: "detect",
+      version: "detect", // Automatically detects the React version
     },
   },
 };
