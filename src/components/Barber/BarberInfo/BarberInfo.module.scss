@@ -9,6 +9,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 40px;
+  border: 1px solid gray;
 
   h2 {
     color: white;
@@ -102,5 +104,14 @@
     &:hover {
       background-color: #e68a00;
     }
+    &.cancelButton{
+      background-color: #999591;
+    }
   }
+}
+
+.formButton{
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
 }

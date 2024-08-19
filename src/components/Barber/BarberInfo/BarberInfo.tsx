@@ -104,7 +104,6 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   onBlur={handleBlur}
                   size="medium"
                   error={undefined}
-
                 />
                 <BarberInput
                   disabled={!editar}
@@ -265,9 +264,9 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                 <button
                   type="button"
                   onClick={() => setEditar(!editar)}
-                  className={styles.container__header_button}
+                  className={`${styles.container__header_button} ${editar ? styles.cancelButton : styles.editButton}`}
                 >
-                  {editar ? 'Salvar' : 'Editar'}
+                  {editar ? 'Cancelar' : 'Editar'}
                 </button>
                 {editar && (
                   <button

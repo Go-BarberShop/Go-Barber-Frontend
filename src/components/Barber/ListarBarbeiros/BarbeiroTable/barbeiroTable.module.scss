@@ -1,197 +1,118 @@
 .content {
+  width: 100%;
+  overflow-x: auto; // Adiciona rolagem horizontal se necessário
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  &__table {
     width: 100%;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  
-    &__table {
+    margin-bottom: 10em;
+    font-weight: 400;
+
+    &__header {
+      display: table-header-group;
+      background-color: rgba(var(--orange));
+      color: rgba(var(--white));
       width: 100%;
-      margin-bottom: 10em;
-      font-weight: 400;
-  
-      &__header {
-        display: table-header-group;
-        background-color: rgba(var(--orange));
-        color: rgba(var(--white));
-        width: 100%;
-        height: 3em;
-        text-align: center;
-        th {
+      height: 3em;
+      text-align: center;
+      
+      th {
+        display: table-cell;
+        vertical-align: middle;
+        align-items: center;
+        padding: 10px;
+        width: 25%; // Ajuste a largura das colunas conforme necessário
+        
+        div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5em;
+        }
+        span {
+          position: absolute;
+          margin: -0.3em 0 0 0.5em;
+        }
+      }
+
+      th:first-child {
+        border-radius: 1em 0 0 0;
+      }
+      th:last-child {
+        border-radius: 0 1em 0 0;
+      }
+    }
+
+    &__body {
+      font-size: 0.875em;
+      
+      &_click {
+        cursor: pointer;
+      }
+      
+      tr {
+        display: table-row;
+        border: 1px solid rgba(var(--gray-hard));
+
+        td {
+          width: 16em; // Ajuste a largura das células conforme necessário
+          height: 4em;
           display: table-cell;
           vertical-align: middle;
-          align-items: center;
           padding: 10px;
+
+          background-color: rgba(var(--shape));
+          color: rgba(var(--white));
+          font-weight: 400;
+          border: 1px solid rgba(var(--gray-hard));
           
-          div {
+          img {
+            padding: 0.5em;
+          }
+
+          &_container_buttons {
+            width: 100%;
+
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 0.5em;
+
+            gap: 1em;
           }
-          span {
-            position: absolute;
-            margin: -0.3em 0 0 0.5em;
-          }
-        }
-  
-        th:first-child {
-          border-radius: 1em 0 0 0;
-        }
-        th:last-child {
-          border-radius: 0 1em 0 0;
-        }
-      }
-  
-      &__body {
-        font-size: 0.875em;
-        &_click {
-          cursor: pointer;
-        }
-        tr {
-          display: table-row;
-          border: 1px solid rgba(var(--gray-hard));
-  
-          td {
-            width: 8em;
-            height: 4em;
-            display: table-cell;
-            vertical-align: middle;
-            padding: 10px;
-  
-            background-color: rgba(var(--shape));
-            color: rgba(var(--white));
-            font-weight: 400;
-            border: 1px solid rgba(var(--gray-hard));
-            img {
-              padding: 0.5em;
-            }
-  
-            &_container_buttons {
-              width: 100%;
-  
-              display: flex;
-              justify-content: center;
-              align-items: center;
-  
-              gap: 1em;
-            }
-            &_container_buttons:first-child {
-              padding: 10px 15px;
-              position: initial;
-              transform: translate(0);
-              width: auto;  
-              background: none;
-            }
-  
-          }
-        }
-      }
-      button {
-        &:focus {
-          cursor: pointer;
-        }
-        &:last-child {
-          display: none;
-        }
-      }
-    }
-  }
-  
-  .no_border {
-    border: none;
-    background: none;
-  }
-  
-  .contentBigger {
-    display: inline;
-  }
-  
-  .contentSmall {
-    display: none;
-  }
-  
-  @media all and (min-width: 768px) {
-    .content {
-      button {
-        &:focus {
-          cursor: pointer;
-        }
-        &:last-child {
-          display: inline;
-        }
-      }
-    }
-  }
-  
-  @media all and (max-width: 460px) {
-    .content {
-      &__table {
-        &__buttonTabela {
-          display: flex;
-          width: 95%;
-        }
-        &__button {
-          display: flex;
-          border: 1px solid;
-          align-items: center;
-          background-color: rgba(var(--orange));
-          color: rgba(var(--white));
-          font-weight: 500;
-          border-radius: 8px;
-          padding: 0.5em 1em;
-          margin-left: auto;
-          width: 7em;
-  
-          h1 {
-            margin-right: 10px;
-          }
-          &_img {
-            padding: 0.4em 0.7em;
-            margin: -0.4em -0.7em;
-          }
-        }
-  
-        &__body {
-          display: flex;
-          flex-direction: column;
-  
-          tr {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            padding: 1em;
-            justify-content: center;
-            align-items: start;
-            height: 18em;
-            margin-top: 1em;
-            border-radius: 1em;
-          }
-  
-          td {
-            text-align: left;
-          }
-  
-          td:before {
-            content: attr(data-label);
-            display: block;
-            text-transform: uppercase;
-            font-weight: bold;
-            text-align: left;
-            margin-bottom: 1em;
+          &_container_buttons:first-child {
+            padding: 10px 15px;
+            position: initial;
+            transform: translate(0);
+            width: auto;  
+            background: none;
           }
         }
       }
     }
-  
-    .contentBigger {
-      display: none;
-    }
-  
-    .contentSmall {
-      display: inline;
+
+    button {
+      &:focus {
+        cursor: pointer;
+      }
+      &:last-child {
+        display: none;
+      }
     }
   }
-  
+}
+
+@media all and (max-width: 768px) {
+  .content {
+    &__table {
+      &__header, &__body {
+        th, td {
+          width: auto; // Ajuste para responsividade
+        }
+      }
+    }
+  }
+}
