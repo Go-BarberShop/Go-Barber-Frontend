@@ -74,7 +74,12 @@ export default function BarberRegister() {
 
   return (
     <>
-    <HeaderDetalhamento titulo="Barbeiros" diretorioAnterior="Home /" diretorioAtual="Barbeiros" hrefAnterior={APP_ROUTES.private.barbeiros}/>
+      <HeaderDetalhamento
+        titulo="Barbeiros"
+        diretorioAnterior="Home /"
+        diretorioAtual="Barbeiros"
+        hrefAnterior={APP_ROUTES.private.barbeiros.name}
+      />
       <div className={styles.container}>
         <Formik
           initialValues={initialValues}
@@ -94,7 +99,11 @@ export default function BarberRegister() {
           }) => (
             <Form>
               <h3>Informações pessoais</h3>
-              <img src="/assets/photo.svg" alt="photo" className={styles.photo}/>
+              <img
+                src="/assets/photo.svg"
+                alt="photo"
+                className={styles.photo}
+              />
               <div className={styles.personalInfo}>
                 <div className={styles.flexRow}>
                   <BarberInput
