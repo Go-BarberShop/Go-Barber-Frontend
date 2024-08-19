@@ -1,0 +1,148 @@
+"use client"
+
+
+import { Form, Formik } from "formik";
+import { useEffect, useState } from "react";
+
+import style from "./detalhar-promocao.module.scss";
+
+import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
+import DadosPromocao from "./DadosProduto";
+import { useRouter } from "next/navigation";
+import { useMutation } from "react-query";
+import { putPromocaoById } from "@/api/promocoes/putPromocaoById";
+import { APP_ROUTES } from "@/constants/app-routes";
+import ListaEstoque from "../ListaEstoque";
+
+interface DetalharEstoqueProps {
+    hrefAnterior: string;
+    diretorioAtual: string;
+    dirAnt: string;
+    hrefAtual: string;
+    backDetalhamento: () => void;
+    estoque: Estoque;
+}
+interface Estoque {
+  id: string;
+  productId: string;
+  quantity: number;
+  batch: string;
+  expirationDate: string;
+  acquisitionDate: string;
+}
+
+  const DetalharEstoque : React.FC<DetalharEstoqueProps> = ({ hrefAnterior, backDetalhamento, estoque }) => {
+
+    const { push } = useRouter();
+    const [editar, setEditar] = useState(false);
+
+    const [formData, setFormData] = useState({
+      id: estoque.id,
+      productId: estoque.productId, 
+      quantity: estoque.quantity || 0,
+      batch: estoque.batch || '',
+      expirationDate: estoque.expirationDate || '',
+      acquisitionDate: estoque.acquisitionDate || '',
+    });
+  
+    useEffect(() => {
+      if (estoque) {
+        setFormData({
+          id: estoque.id,
+          productId: estoque.productId, // Ensure consistency here too
+          quantity: estoque.quantity || 0,
+          batch: estoque.batch || '',
+          expirationDate: estoque.expirationDate || '',
+          acquisitionDate: estoque.acquisitionDate || '',
+        });
+      }
+    }, [estoque]);
+
+  const { mutate } = useMutation(
+    async (values: Estoque) => {
+        console.log(values);
+      return putPromocaoById(estoque.id, values);
+    }, {
+    onSuccess: () => {
+        push(APP_ROUTES.private.produtos.name); 
+    },
+    onError: (error) => {
+      console.log("Erro ao cadastrar um novo produto", error);
+    }
+  });
+
+
+  return (
+    <div id="header" className={style.container}>
+        <HeaderDetalhamento
+            titulo="Produtos"
+            hrefAnterior={backDetalhamento}
+            diretorioAnterior="Home / Produtos / "
+            diretorioAtual="Informações do Estoque"
+
+       />
+      <div className={style.container__ContainerForm}>
+        <Formik
+          initialValues={formData}
+          enableReinitialize
+          onSubmit={(values, { setSubmitting }) => {
+            mutate(values)
+            setSubmitting(false);
+
+            
+          }}
+        >
+          
+          {(formik) => {
+            return (
+
+              <Form
+                className={style.container__ContainerForm_form}
+              >
+                  <div className={style.container__header}>
+                     <div className={style.container__header_title}>
+                      <h1>Informações do Estoque</h1>
+                      </div>
+                      {editar === false ? (
+                      <button
+                          onClick={() => setEditar(true)}
+                          className={style.container__header_button}>
+
+                          <span>Editar</span>
+                          {/*<Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} /> */}
+                      </button >
+                      ) : (
+                      <button
+                          onClick={() => setEditar(false)}
+                          className={style.container__header_button}>
+
+                          <span>Salvar</span>
+                          {/*<Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />*/}
+                      </button >
+                      )}
+                  </div>
+
+
+                <DadosPromocao formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
+                {/*
+                  hrefAnterior === "/agricultores" && (
+                    <DadosAtividadesRurais formik={formik} editar={editar} />
+                  )*/
+                }
+               
+              </Form >
+            )
+          }
+          }
+        </Formik >
+        <div>
+          
+        </div>
+      </div >
+
+    </div >
+  );
+}
+
+
+export default DetalharEstoque;
