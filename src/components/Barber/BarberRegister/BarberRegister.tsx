@@ -1,12 +1,14 @@
 "use client";
 
 import styles from "./BarberRegister.module.scss";
-import BarberInput from "../BarberInput/index"
+import BarberInput from "../BarberInput/index";
 import FormButton from "../FormButton/index";
 import SelectBarber from "../SelectBarber/index";
 import { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
+import { APP_ROUTES } from "@/constants/app-routes";
 
 export default function BarberRegister() {
   const [serviceType] = useState([
@@ -42,7 +44,7 @@ export default function BarberRegister() {
     // admissão
     salario: "",
     dataAdmissao: "",
-    serviceType: "", 
+    serviceType: "",
     workload: "",
     workSchedule: "",
   };
@@ -71,199 +73,204 @@ export default function BarberRegister() {
   });
 
   return (
-    <div className={styles.container}>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validateSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log("Valores: ", values);
-          setSubmitting(false);
-        }}
-      >
-        {({
-          values,
-          handleChange,
-          handleBlur,
-          errors,
-          touched,
-          setFieldValue,
-        }) => (
-          <Form>
-            <h3>Informações pessoais</h3>
-            <img className={styles.img} src={"../../../../public/blank-profile-picture-973460_1280.webp"} alt="" />
-            <div className={styles.personalInfo}>
-              <div className={styles.flexRow}>
-                <BarberInput
-                  type="text"
-                  label="Nome"
-                  name="name"
-                  value={values.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.name && errors.name}
-                />
-                <BarberInput
-                  type="text"
-                  label="Email"
-                  name="email"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.email && errors.email}
-                />
+    <>
+    <HeaderDetalhamento titulo="Barbeiros" diretorioAnterior="Home /" diretorioAtual="Barbeiros" hrefAnterior={APP_ROUTES}/>
+      <div className={styles.container}>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validateSchema}
+          onSubmit={(values, { setSubmitting }) => {
+            console.log("Valores: ", values);
+            setSubmitting(false);
+          }}
+        >
+          {({
+            values,
+            handleChange,
+            handleBlur,
+            errors,
+            touched,
+            setFieldValue,
+          }) => (
+            <Form>
+              <h3>Informações pessoais</h3>
+              <img src="/assets/photo.svg" alt="photo" className={styles.photo}/>
+              <div className={styles.personalInfo}>
+                <div className={styles.flexRow}>
+                  <BarberInput
+                    type="text"
+                    label="Nome"
+                    name="name"
+                    value={values.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.name && errors.name}
+                  />
+                  <BarberInput
+                    type="text"
+                    label="Email"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.email && errors.email}
+                  />
+                </div>
+                <div className={styles.flexRow}>
+                  <BarberInput
+                    type="text"
+                    label="Telefone"
+                    name="telefone"
+                    value={values.telefone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.telefone && errors.telefone}
+                  />
+                  <BarberInput
+                    type="text"
+                    label="CPF"
+                    name="cpf"
+                    value={values.cpf}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.cpf && errors.cpf}
+                  />
+                </div>
               </div>
-              <div className={styles.flexRow}>
-                <BarberInput
-                  type="text"
-                  label="Telefone"
-                  name="telefone"
-                  value={values.telefone}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.telefone && errors.telefone}
-                />
-                <BarberInput
-                  type="text"
-                  label="CPF"
-                  name="cpf"
-                  value={values.cpf}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.cpf && errors.cpf}
-                />
-              </div>
-            </div>
 
-            <h3>Endereço</h3>
-            <div className={styles.address}>
-              <div className={styles.flexRow}>
-                <BarberInput
-                  size="large"
-                  type="text"
-                  label="CEP"
-                  name="cep"
-                  value={values.cep}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.cep && errors.cep}
-                />
-                <BarberInput
-                  size="large"
-                  type="text"
-                  label="Rua"
-                  name="rua"
-                  value={values.rua}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.rua && errors.rua}
-                />
-                <BarberInput
-                  size="large"
-                  type="text"
-                  label="Cidade"
-                  name="cidade"
-                  value={values.cidade}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.cidade && errors.cidade}
-                />
-              </div>
-              <div className={styles.flexRow}>
-                <BarberInput
-                  size="large"
-                  type="text"
-                  label="Número"
-                  name="numero"
-                  value={values.numero}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.numero && errors.numero}
-                />
-                <BarberInput
-                  size="large"
-                  type="text"
-                  label="Bairro"
-                  name="bairro"
-                  value={values.bairro}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.bairro && errors.bairro}
-                />
-                <BarberInput
-                  size="large"
-                  type="text"
-                  label="Estado"
-                  name="estado"
-                  value={values.estado}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.estado && errors.estado}
-                />
-              </div>
-            </div>
-            <h3>Informações de admissão</h3>
-            <div className={styles.admissionInfo}>
-              <div className={styles.admissionTop}>
-                <BarberInput
-                  size="large"
-                  type="text"
-                  label="Salário"
-                  name="salario"
-                  value={values.salario}
-                  onChange={(e) => {
-                    setFieldValue("salario", Number(e.target.value));
-                  }}
-                  onBlur={handleBlur}
-                  error={touched.salario && errors.salario}
-                />
-                <BarberInput
-                  type="date"
-                  label="Data de Admissão"
-                  name="dataAdmissao"
-                  value={values.dataAdmissao}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.dataAdmissao && errors.dataAdmissao}
-                />
-              </div>
-              <div className={styles.selectArea}>
+              <h3>Endereço</h3>
+              <div className={styles.address}>
                 <div className={styles.flexRow}>
-                  <SelectBarber
-                    optionArray={serviceType}
-                    label="Tipo de serviço"
-                    value={values.serviceType}
-                    onChange={(e) =>
-                      setFieldValue("serviceType", e.target.value)
-                    }
+                  <BarberInput
+                    size="large"
+                    type="text"
+                    label="CEP"
+                    name="cep"
+                    value={values.cep}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.cep && errors.cep}
+                  />
+                  <BarberInput
+                    size="large"
+                    type="text"
+                    label="Rua"
+                    name="rua"
+                    value={values.rua}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.rua && errors.rua}
+                  />
+                  <BarberInput
+                    size="large"
+                    type="text"
+                    label="Cidade"
+                    name="cidade"
+                    value={values.cidade}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.cidade && errors.cidade}
                   />
                 </div>
                 <div className={styles.flexRow}>
-                  <SelectBarber
-                    optionArray={workload}
-                    label="Carga horária semanal"
-                    value={values.workload}
-                    onChange={(e) => setFieldValue("workload", e.target.value)}
+                  <BarberInput
+                    size="large"
+                    type="text"
+                    label="Número"
+                    name="numero"
+                    value={values.numero}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.numero && errors.numero}
                   />
-                </div>
-                <div className={styles.flexRow}>
-                  <SelectBarber
-                    optionArray={workSchedule}
-                    label="Horários de trabalho"
-                    value={values.workSchedule}
-                    onChange={(e) =>
-                      setFieldValue("workSchedule", e.target.value)
-                    }
+                  <BarberInput
+                    size="large"
+                    type="text"
+                    label="Bairro"
+                    name="bairro"
+                    value={values.bairro}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.bairro && errors.bairro}
+                  />
+                  <BarberInput
+                    size="large"
+                    type="text"
+                    label="Estado"
+                    name="estado"
+                    value={values.estado}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.estado && errors.estado}
                   />
                 </div>
               </div>
-            </div>
-            <div className={styles.buttons}>
-              <FormButton type="submit">Concluir</FormButton>
-              <FormButton type="cancel">Cancelar</FormButton>
-            </div>
-          </Form>
-        )}
-      </Formik>
-    </div>
+              <h3>Informações de admissão</h3>
+              <div className={styles.admissionInfo}>
+                <div className={styles.admissionTop}>
+                  <BarberInput
+                    size="large"
+                    type="text"
+                    label="Salário"
+                    name="salario"
+                    value={values.salario}
+                    onChange={(e) => {
+                      setFieldValue("salario", Number(e.target.value));
+                    }}
+                    onBlur={handleBlur}
+                    error={touched.salario && errors.salario}
+                  />
+                  <BarberInput
+                    type="date"
+                    label="Data de Admissão"
+                    name="dataAdmissao"
+                    value={values.dataAdmissao}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.dataAdmissao && errors.dataAdmissao}
+                  />
+                </div>
+                <div className={styles.selectArea}>
+                  <div className={styles.flexRow}>
+                    <SelectBarber
+                      optionArray={serviceType}
+                      label="Tipo de serviço"
+                      value={values.serviceType}
+                      onChange={(e) =>
+                        setFieldValue("serviceType", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div className={styles.flexRow}>
+                    <SelectBarber
+                      optionArray={workload}
+                      label="Carga horária semanal"
+                      value={values.workload}
+                      onChange={(e) =>
+                        setFieldValue("workload", e.target.value)
+                      }
+                    />
+                  </div>
+                  <div className={styles.flexRow}>
+                    <SelectBarber
+                      optionArray={workSchedule}
+                      label="Horários de trabalho"
+                      value={values.workSchedule}
+                      onChange={(e) =>
+                        setFieldValue("workSchedule", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className={styles.buttons}>
+                <FormButton type="submit">Concluir</FormButton>
+                <FormButton type="cancel">Cancelar</FormButton>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </>
   );
 }
