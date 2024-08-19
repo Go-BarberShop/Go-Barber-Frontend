@@ -6,6 +6,10 @@ export const APP_ROUTES = {
         barbeiros: {
             name: "/barbeiros"
         },
+        barbeiros_cadastro:{
+            name: "/barbeiros/novo"
+        },
+        barbeiros_editar: (id: string) => `/barbeiros/editar/${id}`,
         servicos: {
             name: "/servicos"
         },
