@@ -21,7 +21,7 @@ const Menu = () => {
                         route={APP_ROUTES.private.barbeiros.name}
                     />
                     <Botao_menu 
-                        title="Gerenciamento Serviço" 
+                        title="Gerenciamento Serviços" 
                         icon="/assets/icons/cadeira.svg"
                         route={APP_ROUTES.private.servicos.name}
                     />

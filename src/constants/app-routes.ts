@@ -9,6 +9,9 @@ export const APP_ROUTES = {
         servicos: {
             name: "/servicos"
         },
+        cadastrar_servico: {
+            name: "/servicos/cadastrar-servico"
+        },
         produtos: {
             name: "/produtos"
         },
