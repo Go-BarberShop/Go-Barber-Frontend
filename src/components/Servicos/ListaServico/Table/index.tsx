@@ -3,7 +3,7 @@
 import { useState } from "react";
 import style from "./table.module.scss";
 import { deleteServico } from "@/api/servicos/deleteServico";
-import ConfirmationModal from "@/components/ConfirmationDeleteButton";
+import ConfirmationModal from "../ExcluirServico";
 
 interface TableProps {
   table1: string;
