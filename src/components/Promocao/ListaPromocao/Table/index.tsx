@@ -3,6 +3,8 @@ import ConfirmationModal from "../BotaoConfirmar";
 import style from "./table.module.scss";
 import React, { useState } from 'react';
 import { postNotificarPromocao } from "@/api/promocoes/postNotificarPromocao";
+import { deletePromocao } from "@/api/promocoes/deletePromocao";
+import ConfirmationPromocaoModal from "../ExcluirPromocao";
 
 interface TableProps {
   table1: string;
@@ -11,7 +13,7 @@ interface TableProps {
   table4: string;
   table5: string;
   listPromocoes: Promocao[];
-  setPromocoes: (promocoes: Promocao[]) => void;
+  setPromocoes: (promocoes: Promocao[]) => void; 
   onSelectPromocao: (promocao: Promocao) => void;
   currentPage: number;
   totalPages: number;
@@ -40,11 +42,16 @@ const Table: React.FC<TableProps> = ({
   setCurrentPage 
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedPromocao, setSelectedPromocao] = useState<Promocao | null>(null);
+  const [selectedPromocaoId, setSelectedPromocaoId] = useState<string | null>(null);
+  const [promocoes, setPromocoes] = useState<Promocao[]>([]);
+
 
   const handleClose = () => {
     setIsModalOpen(false);
-};
+    setIsDeleteModalOpen(false);
+  };
 
   const handleOpenModal = (promocao: Promocao) => {
     setSelectedPromocao(promocao);
@@ -68,10 +75,32 @@ const Table: React.FC<TableProps> = ({
       }
     }
   
-    setIsModalOpen(false);
+    handleClose();
+  };
+
+  const openDeleteModal = (id: string) => {
+    setSelectedPromocaoId(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setSelectedPromocaoId(null);
+    handleClose();
+  };
+
+  const handleConfirmDelete = async () => {
+    if (selectedPromocaoId) {
+      try {
+        await deletePromocao(selectedPromocaoId);  // Adicione a lógica de exclusão
+        // Atualize a lista de promoções usando setPromocoes
+        setPromocoes(listPromocoes.filter(promocao => promocao.id !== selectedPromocaoId));
+      } catch (error) {
+        console.error('Erro ao excluir a promoção:', error);
+      }
+      closeDeleteModal();
+    }
   };
   
-
 
   return (
     <>
@@ -117,6 +146,15 @@ const Table: React.FC<TableProps> = ({
                       alt="Enviar" 
                     />
                   </button>
+                  <button 
+                    onClick={() => openDeleteModal(promocao.id)} 
+                    className={style.content__table__body_click}
+                  >
+                    <img 
+                      src="/assets/icons/excluir.svg" 
+                      alt="Excluir" 
+                    />
+                  </button>
                 </td>
               </tr>
             ))}
@@ -138,7 +176,15 @@ const Table: React.FC<TableProps> = ({
           isOpen={isModalOpen}
           onClose={handleClose}
           onConfirm={handleConfirm}
-          promocaoName={selectedPromocao.name}
+          promocaoName={selectedPromocao.name}  // Para o envio
+        />
+      )}
+      {selectedPromocaoId && (
+        <ConfirmationPromocaoModal
+          isOpen={isDeleteModalOpen}
+          onClose={closeDeleteModal}
+          onConfirm={handleConfirmDelete}
+          promocaoId={selectedPromocaoId}  // Para a exclusão
         />
       )}
     </>
