@@ -1,0 +1,104 @@
+import { useEffect, useState } from "react";
+import style from "./servicos.module.scss";
+import { useMutation } from "react-query";
+import Link from "next/link";
+import Image from "next/image";
+import Table from "./Table";
+import { getAllServico } from "@/api/servicos/getAllServicos"; 
+import { useRouter } from "next/navigation";
+import { APP_ROUTES } from "@/constants/app-routes";
+import DetalharServico from "../DetalharServico";
+import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
+
+interface Servico {
+  id: string;
+  name: string;
+  description: string;
+  value: string;
+  time: string;
+}
+
+const ServicoComponent = () => {
+  const [servicos, setServicos] = useState<Servico[]>([]);
+  const [selectedServico, setSelectedServico] = useState<Servico | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const { push } = useRouter();
+
+  const { mutate } = useMutation(() => getAllServico(currentPage, 3), {
+    onSuccess: (res) => {
+        setServicos(res.data.content);
+        setTotalPages(res.data.totalPages);
+    },
+    onError: (error) => {
+      console.error('Erro ao recuperar os serviços:', error);
+    },
+  });
+
+  useEffect(() => {
+    mutate();
+  }, [currentPage]);
+
+  const filteredServicos = servicos.filter((servico) =>
+    servico.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleSelectServico = (servico: Servico) => {
+    setSelectedServico(servico);
+  };
+
+  const handleBackToList = () => {
+    setSelectedServico(null);
+  };
+
+  if (selectedServico) {
+    return (
+      <DetalharServico
+        diretorioAtual="dirAtual"
+        servico={selectedServico}
+        backDetalhamento={handleBackToList}
+        dirAnt="dirAnt"
+        hrefAnterior={APP_ROUTES.private.home.name}
+        hrefAtual={APP_ROUTES.private.servicos.name} 
+      />
+    );
+  }
+
+  return (
+    <div>
+      <div className={style.header}>
+        <HeaderDetalhamento
+          titulo="Serviços"
+          hrefAnterior={APP_ROUTES.private.home.name}
+          diretorioAnterior="Home /"
+          diretorioAtual="Serviços"
+        />
+        <div className={style.header__container}>
+          <div className={style.header__container_botoes}>
+            <button onClick={() => push(APP_ROUTES.private.cadastrar_servico.name)}>
+              <h1>Adicionar Serviço</h1>
+              <img src="/assets/icons/cadeira.svg" alt="Cadeira" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <Table
+        listServicos={filteredServicos}
+        setServicos={setServicos}
+        onSelectServico={handleSelectServico}
+        table1="Nome"
+        table2="Valor"
+        table3="Descrição"
+        table4="Tempo"
+        table5="Ações"
+        currentPage={currentPage}
+        totalPages={totalPages}
+        setCurrentPage={setCurrentPage}
+      />
+    </div>
+  );
+};
+
+export default ServicoComponent;

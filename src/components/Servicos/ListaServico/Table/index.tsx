@@ -1,0 +1,105 @@
+"use client";
+
+import Image from "next/image";
+import style from "./table.module.scss";
+import { deleteServico } from "@/api/servicos/deleteServico";
+
+interface TableProps {
+  table1: string;
+  table2: string;
+  table3: string;
+  table4: string;
+  table5: string;
+  listServicos: Servico[];
+  setServicos: (servicos: Servico[]) => void;
+  onSelectServico: (servico: Servico) => void;
+  currentPage: number;
+  totalPages: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+}
+
+interface Servico {
+  id: string;
+  name: string;
+  description: string;
+  value: string;
+  time: string;
+}
+
+const Table: React.FC<TableProps> = ({
+  listServicos,
+  setServicos,
+  onSelectServico,
+  table1,
+  table2,
+  table3,
+  table4,
+  table5,
+  currentPage,
+  totalPages,
+  setCurrentPage
+}) => {
+
+  const handleDeleteServico = async (id: string) => {
+    await deleteServico(id);
+    setServicos(listServicos.filter(servico => servico.id !== id));
+  }
+
+  return (
+    <>
+      <div className={style.content}>
+        <table className={style.content__table}>
+          <thead className={style.content__table__header}>
+            <tr>
+              <th>{table1}</th>
+              <th>{table2}</th>
+              <th>{table3}</th>
+              <th>{table4}</th>
+              <th className={style.content__table__header_name3}>
+                <div>
+                  {table5}
+                  <img src="/assets/icons/informacao.svg" alt="Visualizar" />
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody className={style.content__table__body}>
+            {listServicos.map((servico, index) => (
+              <tr key={index}>
+                <td>{servico.name}</td>
+                <td>{servico.value}</td>
+                <td>{servico.description}</td>
+                <td>{servico.time} min</td>
+                <td>
+                  <img 
+                    src="/assets/icons/visualizar.svg" 
+                    alt="Visualizar" 
+                    onClick={() => onSelectServico(servico)} 
+                    className={style.content__table__body_click} 
+                  />
+                  <img 
+                    src="/assets/icons/enviar.svg" 
+                    alt="Excluir" 
+                    onClick={() => handleDeleteServico(servico.id)} 
+                    className={style.content__table__body_click} 
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className={style.content__table__pagination}>
+          <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))} disabled={currentPage === 0}>
+            Previous
+          </button>
+          <span>Page {currentPage + 1} of {totalPages}</span>
+          <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))} disabled={currentPage === totalPages - 1}>
+            Next
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Table;
