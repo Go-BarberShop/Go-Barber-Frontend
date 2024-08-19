@@ -3,11 +3,12 @@ import style from "./produto.module.scss";
 import { useMutation } from "react-query";
 
 import Table from "./Table";
-import { getAllPromocoes } from "@/api/promocoes/getAllPromocoes";
+
 import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/constants/app-routes";
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
 import DetalharProduto from "../DetalharProduto";
+import { getAllProdutos } from "@/api/produtos/getAllProdutos";
 
 interface Produto {
   id: string;
@@ -27,7 +28,7 @@ const ListaProdutos = () => {
   const [totalPages, setTotalPages] = useState(0);
   const { push } = useRouter();
 
-  const { mutate } = useMutation(() => getAllPromocoes(currentPage, 3), {
+  const { mutate } = useMutation(() => getAllProdutos(currentPage, 3), {
     onSuccess: (res) => {
       setProdutos(res.data.content);
       setTotalPages(res.data.totalPages);

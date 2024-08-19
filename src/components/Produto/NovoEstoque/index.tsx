@@ -3,22 +3,12 @@
 import { useMutation } from "react-query";
 import { Form, Formik } from "formik";
 import style from "./cadastrar-produto.module.scss";
-import DadosProduto from "./dadosProduto/index";
 import * as Yup from "yup";
-import { postPromocao } from "@/api/promocoes/postPromocao";
 import { APP_ROUTES } from "@/constants/app-routes";
 import { useRouter } from "next/navigation";
 import DadosEstoque from "./dadosEstoque/index";
 import { postProduto } from "@/api/produtos/postProduto";
 
-interface Produto {
-  id: string;
-  nameProduct: string;
-  brandProduct: string;
-  priceProduct: string;
-  size: string;
-  description: string;
-}
 
 interface Estoque {
   id: string;
@@ -29,52 +19,32 @@ interface Estoque {
   acquisitionDate: string;
 }
 
-interface FormValues {
-  produto: Produto;
-  estoque: Estoque;
-}
 
-const CadastrarProduto = () => {
+
+const NovoEstoque = () => {
   const { push } = useRouter();
 
-  const initialValues: FormValues = {
-    produto: {
-      id: "",
-      nameProduct: "",
-      brandProduct: "",
-      priceProduct: "",
-      size: "",
-      description: "",
-    },
-    estoque: {
+  const initialValues = {
       id: "",
       productId: "",
       quantity: 0,
       batch: "",
       expirationDate: "",
       acquisitionDate: "",
-    },
   };
 
   const validateSchema = Yup.object().shape({
-    produto: Yup.object().shape({
-      nameProduct: Yup.string()
-        .min(5, "O nome deve ter no mínimo 5 caracteres")
-        .required("Obrigatório"),
-      priceProduct: Yup.number().required("Obrigatório"),
-    }),
-    estoque: Yup.object().shape({
+   
       quantity: Yup.number().required("Obrigatório"),
       expirationDate: Yup.date().required("Obrigatório"),
       acquisitionDate: Yup.date().required("Obrigatório"),
-    }),
   });
 
   const { mutate } = useMutation(
-    async (values: FormValues) => {
+    async (values: Estoque) => {
       console.log(values);
 
-      return postProduto(values.produto);
+      return postProduto(values);
     },
     {
       onSuccess: (res) => {
@@ -91,7 +61,7 @@ const CadastrarProduto = () => {
     <>
       <div className={style.header}>
         <div className={style.header__title}>
-          <h1>Produtos</h1>
+          <h1>Estoque</h1>
           <div className={style.header__title_line}></div>
         </div>
         <div className={style.header__navegacao}>
@@ -104,7 +74,7 @@ const CadastrarProduto = () => {
           </div>
           <div className={style.header__navegacao_guia}>
             <span>Home / Produtos / </span>
-            <h1>Cadastrar Produto</h1>
+            <h1>Cadastrar Estoque</h1>
           </div>
         </div>
       </div>
@@ -122,7 +92,6 @@ const CadastrarProduto = () => {
             {(formik) => {
               return (
                 <Form className={style.container__ContainerForm_form}>
-                  <DadosProduto formik={formik} />
                   <DadosEstoque formik={formik} />
 
                   {/* Exemplo: <DadosEstoque formik={formik} /> */}
@@ -151,4 +120,4 @@ const CadastrarProduto = () => {
   );
 };
 
-export default CadastrarProduto;
+export default NovoEstoque;
