@@ -2,7 +2,6 @@
 
 import { useMutation } from "react-query";
 import { Form, Formik } from "formik";
-import { useState } from "react";
 import style from "./cadastrar-servico.module.scss";
 import DadosServico from "./dadosServicos/index";
 import * as Yup from 'yup';

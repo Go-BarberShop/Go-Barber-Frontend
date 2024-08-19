@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "./servicos.module.scss";
 import { useMutation } from "react-query";
-import Link from "next/link";
-import Image from "next/image";
 import Table from "./Table";
 import { getAllServico } from "@/api/servicos/getAllServicos"; 
 import { useRouter } from "next/navigation";

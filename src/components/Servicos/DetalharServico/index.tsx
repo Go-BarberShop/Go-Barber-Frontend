@@ -2,11 +2,7 @@
 
 import { Form, Formik, FormikProps } from "formik";
 import { useEffect, useState } from "react";
-
 import style from "./detalhar-servico.module.scss"; 
-
-import HeaderNavegacao from "@/components/Header/HeaderNavegacao";
-import Link from "next/link";
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
 import DadosServico from "./DadosServico"; 
 import { useRouter } from "next/navigation";

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import style from "./table.module.scss";
 import { deleteServico } from "@/api/servicos/deleteServico";
 

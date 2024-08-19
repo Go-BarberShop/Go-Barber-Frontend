@@ -1,8 +1,6 @@
 "use client";
 
 import style from "./servico.module.scss";
-import { useEffect, useState } from "react";
-import { useMutation } from "react-query";
 
 interface DadosServicoProps {
     formik: any;
