@@ -1,6 +1,6 @@
 {
-  "/page": "app/page.js",
   "/barbeiros/id/page": "app/barbeiros/id/page.js",
-  "/promocoes/page": "app/promocoes/page.js",
-  "/barbeiros/cadastrar-barbeiro/page": "app/barbeiros/cadastrar-barbeiro/page.js"
+  "/barbeiros/novo/page": "app/barbeiros/novo/page.js",
+  "/barbeiros/page": "app/barbeiros/page.js",
+  "/page": "app/page.js"
 }

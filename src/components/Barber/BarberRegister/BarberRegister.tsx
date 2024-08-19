@@ -74,7 +74,7 @@ export default function BarberRegister() {
 
   return (
     <>
-    <HeaderDetalhamento titulo="Barbeiros" diretorioAnterior="Home /" diretorioAtual="Barbeiros" hrefAnterior={APP_ROUTES}/>
+    <HeaderDetalhamento titulo="Barbeiros" diretorioAnterior="Home /" diretorioAtual="Barbeiros" hrefAnterior={APP_ROUTES.private.barbeiros}/>
       <div className={styles.container}>
         <Formik
           initialValues={initialValues}
