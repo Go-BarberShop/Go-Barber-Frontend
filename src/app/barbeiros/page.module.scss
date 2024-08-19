@@ -1,5 +1,5 @@
 .container {
-    min-height: 100vh; /* Garante que o container ocupe toda a altura da viewport */
+    min-height: 100vh; 
     width: 100%;
 
     display: grid;
@@ -10,7 +10,7 @@
     &__menu {
         display: flex;
         background-color: #333; 
-        height: 100%; /* Garante que o menu ocupe toda a altura do container */
+        height: 100%; 
     }
 
     &__main {

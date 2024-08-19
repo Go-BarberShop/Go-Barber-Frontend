@@ -1,6 +1,6 @@
 .content {
   width: 100%;
-  overflow-x: auto; // Adiciona rolagem horizontal se necessário
+  overflow-x: auto; 
   
   display: flex;
   align-items: center;
@@ -25,7 +25,7 @@
         vertical-align: middle;
         align-items: center;
         padding: 10px;
-        width: 25%; // Ajuste a largura das colunas conforme necessário
+        width: 25%; 
         
         div {
           display: flex;
