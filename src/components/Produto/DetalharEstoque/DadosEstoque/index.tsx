@@ -7,7 +7,7 @@ interface DadosEstoqueProps {
     hrefAnterior: string;
     }
 
-const DadosPromocao: React.FC<DadosEstoqueProps> = ({ formik, editar }) => {
+const DadosEstoque: React.FC<DadosEstoqueProps> = ({ formik, editar }) => {
 
 
   return (
@@ -16,14 +16,14 @@ const DadosPromocao: React.FC<DadosEstoqueProps> = ({ formik, editar }) => {
               <div>
                 <div className={style.container__ContainerForm_form_halfContainer}>
                 <div>
-                    <label htmlFor="batch">Lote </label>
+                    <label htmlFor="batchNumber">Lote </label>
                     <input
-                      id="batch"
+                      id="batchNumber"
                       className={style.container__ContainerForm_form_input}
-                      name="batch"
+                      name="batchNumber"
                       placeholder="Não informado"
                       onBlur={formik.handleBlur}
-                      value={formik.values.batch}
+                      value={formik.values.batchNumber}
                       disabled
                     />
                   </div>
@@ -71,20 +71,20 @@ const DadosPromocao: React.FC<DadosEstoqueProps> = ({ formik, editar }) => {
           <div>
               <div className={style.container__ContainerForm_form_halfContainer}>
                 <div>
-                  <label htmlFor="batch">Lote</label>
+                  <label htmlFor="batchNumber">Lote</label>
                   <input
                     className={style.container__ContainerForm_form_input}
-                    id="batch"
-                    name="batch"
-                    placeholder={formik.values.batch}
+                    id="batchNumber"
+                    name="batchNumber"
+                    placeholder={formik.values.batchNumber}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.batch}
+                    value={formik.values.batchNumber}
                     required
                   />
                 </div>
-                {formik.touched.batch && formik.errors.batch ? (
-                    <span className={style.form__error}>{formik.errors.batch}</span>
+                {formik.touched.batchNumber && formik.errors.batchNumber ? (
+                    <span className={style.form__error}>{formik.errors.batchNumber}</span>
                   ) : null}
 
                 <div>
@@ -145,4 +145,4 @@ const DadosPromocao: React.FC<DadosEstoqueProps> = ({ formik, editar }) => {
 }
 
 
-export default DadosPromocao;
+export default DadosEstoque;

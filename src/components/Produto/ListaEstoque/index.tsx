@@ -4,31 +4,33 @@ import { useMutation } from "react-query";
 import Table from "./Table";
 import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/constants/app-routes";
-import { getAllProdutos } from "@/api/produtos/getAllProdutos";
+import { getAllEstoqueByProductId } from "@/api/estoque/getAllEstoqueByProductId";
 
 interface Estoque {
   id: string;
-  productId: string;
+  idProduct: string;
   quantity: number;
-  batch: string;
+  batchNumber: string;
   expirationDate: string;
   acquisitionDate: string;
 }
 
 interface ListaEstoqueProps {
-  onSelectEstoque: (estoque: Estoque) => void; // Nova prop para selecionar um estoque
+  onSelectEstoque: (estoque: Estoque) => void;
+  idProduct: string;
+  onNovoEstoque: () => void;
 }
 
-const ListaEstoque: React.FC<ListaEstoqueProps> = ({ onSelectEstoque }) => {
+const ListaEstoque: React.FC<ListaEstoqueProps> = ({ onSelectEstoque, onNovoEstoque, idProduct }) => {
   const [estoques, setEstoques] = useState<Estoque[]>([]);
   const [searchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const { push } = useRouter();
 
-  const { mutate } = useMutation(() => getAllProdutos(currentPage, 3), {
+  const { mutate } = useMutation(() => getAllEstoqueByProductId(currentPage, 3, idProduct), {
     onSuccess: (res) => {
-      setEstoques(res.data.content);
+      setEstoques(res.data.content || {});
       setTotalPages(res.data.totalPages);
     },
     onError: (error) => {
@@ -36,13 +38,13 @@ const ListaEstoque: React.FC<ListaEstoqueProps> = ({ onSelectEstoque }) => {
     }
   });
 
-  useEffect(() => {
-    //mutate();
-  }, [currentPage]);
-
   const filteredEstoques = estoques.filter((estoque) =>
-    estoque?.batch.toLowerCase().includes(searchTerm.toLowerCase())
+    estoque?.batchNumber.includes(searchTerm.toLowerCase())
   );
+
+  useEffect(() => {
+    mutate();
+  }, [currentPage]);
 
   return (
     <div>
@@ -53,10 +55,8 @@ const ListaEstoque: React.FC<ListaEstoqueProps> = ({ onSelectEstoque }) => {
             <h1>Estoques</h1>
           </div>
           <div className={style.header__container_botoes}>
-            <button onClick={() => (push(APP_ROUTES.private.novo_estoque.name))}>
-              <h1>
-                Novo Estoque
-              </h1>
+            <button onClick={onNovoEstoque}>
+              <h1>Novo Estoque</h1>
               <img src="/assets/icons/navalha.svg" alt="Navalha" />
             </button>
           </div>
@@ -66,7 +66,7 @@ const ListaEstoque: React.FC<ListaEstoqueProps> = ({ onSelectEstoque }) => {
       <Table
         listEstoques={filteredEstoques}
         setEstoques={setEstoques}
-        onSelectEstoque={onSelectEstoque} // Passando a função de seleção para a tabela
+        onSelectEstoque={onSelectEstoque}
         table1="Compra"
         table2="Validade"
         table3="Quantidade"

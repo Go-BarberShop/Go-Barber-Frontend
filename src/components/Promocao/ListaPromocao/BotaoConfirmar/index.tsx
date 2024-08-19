@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import styles from './ConfirmationModal.module.scss';
+import styles from './confirmationModal.module.scss';
 
 interface ConfirmationModalProps {
   isOpen: boolean;

@@ -15,36 +15,14 @@ interface TableProps {
   totalPages: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
-
 interface Produto {
-  id: string;
-  name: string;
-  brand: string;
-  price: string;
+  idProduct: string;
+  nameProduct: string;
+  brandProduct: string;
+  priceProduct: string;
   size: string;
-  description: string;
-
+  descriptionProduct: string;
 }
-const produtoMock: Produto[] = [
-  {
-    id: "1",
-    name: "Produto Exemplo",
-    brand: "Marca Exemplo",
-    price: "R$ 100,00",
-    size: "150g",
-    description: "asdfasdfaf",
-
-  },
-  {
-    id: "2",
-    name: "Outro Produto",
-    brand: "Outra Marca",
-    price: "R$ 150,00",
-    size: "300g",
-    description: "asdfaasdasdfaf",
-
-  },
-];
 
 const Table: React.FC<TableProps> = ({ 
   listProdutos,  
@@ -83,35 +61,11 @@ const Table: React.FC<TableProps> = ({
               </tr>
             </thead>
             <tbody className={style.content__table__body}>
-            {produtoMock.map((produto, index) => (
-                <tr key={index}>
-                  <td>{produto.name}</td>
-                  <td>{produto.brand}</td>
-                  <td>{produto.price}</td>
-                  <td>{produto.size}</td>
-                  <td>
-                  <button 
-                    onClick={() => onSelectProduto(produto)} 
-                    className={style.content__table__body_click}
-                  >
-                    <img 
-                      src="/assets/icons/visualizar.svg" 
-                      alt="Visualizar" 
-                    />
-                  </button>
-                    <img 
-                      src="/assets/icons/enviar.svg" 
-                      alt="Enviar" 
-                      className={style.content__table__body_click} 
-                    />
-                  </td>
-                </tr>
-              ))}
               {listProdutos.map((produto, index) => (
                 <tr key={index}>
-                  <td>{produto.name}</td>
-                  <td>{produto.brand}</td>
-                  <td>{produto.price}</td>
+                  <td>{produto.nameProduct}</td>
+                  <td>{produto.brandProduct}</td>
+                  <td>{produto.priceProduct}</td>
                   <td>{produto.size}</td>
                   <td>
                   <button 

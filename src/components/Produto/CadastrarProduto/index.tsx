@@ -12,19 +12,19 @@ import DadosEstoque from "./dadosEstoque/index";
 import { postProduto } from "@/api/produtos/postProduto";
 
 interface Produto {
-  id: string;
+  idProduct: string;
   nameProduct: string;
   brandProduct: string;
   priceProduct: string;
   size: string;
-  description: string;
+  descriptionProduct: string;
 }
 
 interface Estoque {
   id: string;
-  productId: string;
+  idProduct: string;
   quantity: number;
-  batch: string;
+  batchNumber: string;
   expirationDate: string;
   acquisitionDate: string;
 }
@@ -39,18 +39,18 @@ const CadastrarProduto = () => {
 
   const initialValues: FormValues = {
     produto: {
-      id: "",
+      idProduct: "",
       nameProduct: "",
       brandProduct: "",
       priceProduct: "",
       size: "",
-      description: "",
+      descriptionProduct: "",
     },
     estoque: {
       id: "",
-      productId: "",
+      idProduct: "",
       quantity: 0,
-      batch: "",
+      batchNumber: "",
       expirationDate: "",
       acquisitionDate: "",
     },
