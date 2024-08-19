@@ -58,7 +58,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
         titulo="Barbeiros" 
         diretorioAnterior="Gerenciar Barbeiros /" 
         diretorioAtual={barbeiro.nome} 
-        hrefAnterior={APP_ROUTES.private.barbeiros}
+        hrefAnterior={backDetalhamento}
       />
       <div className={styles.container}>
         <Formik
@@ -84,6 +84,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
               <h2>Informações pessoais</h2>
               <div className={styles.personalInfo}>
                 <BarberInput
+                  disabled={!editar}
                   type="text"
                   label="Nome completo:"
                   name="nome"
@@ -91,9 +92,10 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   onChange={handleChange}
                   onBlur={handleBlur}
                   size="medium"
-                  error={undefined} // Você pode adicionar lógica para mostrar erros
+                  error={undefined}
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="text"
                   label="Telefone:"
                   name="telefone"
@@ -102,8 +104,10 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   onBlur={handleBlur}
                   size="medium"
                   error={undefined}
+
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="email"
                   label="Email:"
                   name="email"
@@ -114,6 +118,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   error={undefined}
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="text"
                   label="CPF:"
                   name="cpf"
@@ -129,6 +134,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
               <h2>Endereço</h2>
               <div className={styles.address}>
                 <BarberInput
+                  disabled={!editar}
                   type="text"
                   label="CEP:"
                   name="cep"
@@ -139,6 +145,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   error={undefined}
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="text"
                   label="Rua:"
                   name="rua"
@@ -149,6 +156,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   error={undefined}
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="number"
                   label="Número:"
                   name="numero"
@@ -159,6 +167,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   error={undefined}
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="text"
                   label="Complemento:"
                   name="complemento"
@@ -169,6 +178,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   error={undefined}
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="text"
                   label="Bairro:"
                   name="bairro"
@@ -179,6 +189,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   error={undefined}
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="text"
                   label="Cidade:"
                   name="cidade"
@@ -189,6 +200,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   error={undefined}
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="text"
                   label="Estado:"
                   name="estado"
@@ -204,6 +216,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
               <h2>Informações de Admissão</h2>
               <div className={styles.admissionInfo}>
                 <BarberInput
+                  disabled={!editar}
                   type="number"
                   label="Salário:"
                   name="salario"
@@ -214,6 +227,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   error={undefined}
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="date"
                   label="Data de Admissão:"
                   name="dataAdmissao"
@@ -224,6 +238,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   error={undefined}
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="text"
                   label="Tipo de Serviço:"
                   name="tipoServico"
@@ -234,6 +249,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
                   error={undefined}
                 />
                 <BarberInput
+                  disabled={!editar}
                   type="number"
                   label="Carga Horária:"
                   name="cargaHoraria"

@@ -10,6 +10,7 @@ interface BarberInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   error?: string | false;
+  disabled?: any;
 }
 
 const BarberInput: React.FC<BarberInputProps> = ({
@@ -21,6 +22,7 @@ const BarberInput: React.FC<BarberInputProps> = ({
   onChange,
   onBlur,
   error,
+  disabled
 }) => {
   const inputClassName = `${styles[type]} ${styles[size]} ${error ? styles.error : ''}`;
 
@@ -43,6 +45,7 @@ const BarberInput: React.FC<BarberInputProps> = ({
         value={type === 'number' ? value : value.toString()}
         onChange={handleChange}
         onBlur={onBlur}
+        disabled={disabled}
       />
       {error && <div className={styles.errorMessage}>{error}</div>}
     </div>
