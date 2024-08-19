@@ -2,32 +2,31 @@
 
 import { useMutation } from "react-query";
 import { Form, Formik } from "formik";
-import style from "./cadastrar-promocao.module.scss";
-import DadosPromocao from "./dadosPromocao/index";
+import style from "./cadastrar-produto.module.scss";
+import DadosProduto from "./dadosProduto/index";
 import * as Yup from 'yup';
 import { postPromocao } from "@/api/promocoes/postPromocao";
 import { APP_ROUTES } from "@/constants/app-routes";
 import { useRouter } from "next/navigation";
 
-
-interface Promocao {
+interface Produto {
+  id: string;
   name: string;
-  totalPrice: string;
-  startDate: string;
-  endDate: string;
-  coupon: string | null;  
+  brand: string;
+  price: string;
+  size: string;
 }
 
 
-const CadastroPromocao = () => {
+const CadastrarProduto = () => {
   const { push } = useRouter();
 
-  const initialValues: Promocao = {
+  const initialValues: Produto = {
+    id: "",
     name: "",
-    totalPrice: "",
-    startDate: "",
-    endDate: "",
-    coupon: ""
+    brand: "",
+    price: "",
+    size: "",
   };
 
   const validateSchema = Yup.object().shape({
@@ -46,14 +45,12 @@ const CadastroPromocao = () => {
   });
 
   const { mutate } = useMutation(
-    async (values: Promocao) => {
-      const coupon = values.coupon === "" ? null : values.coupon;
-      const updatedValues = { ...values, coupon }; // Atualiza o campo coupon no objeto values
+    async (values: Produto) => {
     
-      return postPromocao(updatedValues);    
+      return postPromocao(values);    
     }, {
     onSuccess: () => {
-        push(APP_ROUTES.private.promocoes.name); // Ajuste conforme necessário
+        push(APP_ROUTES.private.produtos.name); // Ajuste conforme necessário
     },
     onError: (error) => {
       console.log("Erro ao cadastrar uma nova promoção", error);
@@ -74,7 +71,7 @@ const CadastroPromocao = () => {
             <h1>Voltar</h1>
           </div>
           <div className={style.header__navegacao_guia}>
-            <span>Home / Promoções /</span><h1>Cadastrar Promoção</h1>
+            <span>Home / Produtos / </span><h1>Cadastrar Produto</h1>
           </div>
         </div>
         
@@ -92,12 +89,12 @@ const CadastroPromocao = () => {
           {(formik) => {
             return (
               <Form className={style.container__ContainerForm_form}>
-                <DadosPromocao formik={formik} />
+                <DadosProduto formik={formik} />
                 <div className={style.container__ContainerForm_buttons}>
                   <button
                     className={style.container__ContainerForm_buttons_link}
                     type="button"
-                    onClick={() => push(APP_ROUTES.private.promocoes.name)}
+                    onClick={() => push(APP_ROUTES.private.produtos.name)}
                   >
                     <h1>Voltar</h1>
                   </button>
@@ -118,4 +115,4 @@ const CadastroPromocao = () => {
   );
 };
 
-export default CadastroPromocao;
+export default CadastrarProduto;
