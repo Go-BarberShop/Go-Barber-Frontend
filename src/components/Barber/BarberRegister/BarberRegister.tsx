@@ -9,6 +9,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
 import { APP_ROUTES } from "@/constants/app-routes";
+import { useRouter } from "next/navigation";
 
 export default function BarberRegister() {
   const [serviceType] = useState([
@@ -71,6 +72,12 @@ export default function BarberRegister() {
       .typeError("Salário deve ser um número"),
     dataAdmissao: Yup.date().required("Data de admissão é obrigatória"),
   });
+
+  const { push } = useRouter();
+
+  const handleClick = () => {
+    push(APP_ROUTES.private.barbeiros.name);
+  };
 
   return (
     <>
@@ -273,8 +280,10 @@ export default function BarberRegister() {
                 </div>
               </div>
               <div className={styles.buttons}>
+                <FormButton onClick={handleClick} type="cancel">
+                  Cancelar
+                </FormButton>
                 <FormButton type="submit">Concluir</FormButton>
-                <FormButton type="cancel">Cancelar</FormButton>
               </div>
             </Form>
           )}

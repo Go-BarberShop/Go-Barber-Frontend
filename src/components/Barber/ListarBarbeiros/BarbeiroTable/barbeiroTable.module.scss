@@ -52,6 +52,8 @@
       
       &_click {
         cursor: pointer;
+        background: none;
+        border: none;
       }
       
       tr {
@@ -59,7 +61,7 @@
         border: 1px solid rgba(var(--gray-hard));
 
         td {
-          width: 16em; // Ajuste a largura das células conforme necessário
+          width: 16em; 
           height: 4em;
           display: table-cell;
           vertical-align: middle;
@@ -110,7 +112,7 @@
     &__table {
       &__header, &__body {
         th, td {
-          width: auto; // Ajuste para responsividade
+          width: auto; 
         }
       }
     }
