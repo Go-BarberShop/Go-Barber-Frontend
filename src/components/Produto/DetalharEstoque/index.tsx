@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 import style from "./detalhar-promocao.module.scss";
 
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
-import DadosPromocao from "./DadosProduto";
+import DadosPromocao from "./DadosEstoque";
 import { useRouter } from "next/navigation";
 import { useMutation } from "react-query";
 import { putPromocaoById } from "@/api/promocoes/putPromocaoById";
 import { APP_ROUTES } from "@/constants/app-routes";
 import ListaEstoque from "../ListaEstoque";
+import DadosEstoque from "./DadosEstoque";
+import { putEstoqueById } from "@/api/estoque/putEstoqueById";
 
 interface DetalharEstoqueProps {
     hrefAnterior: string;
@@ -24,9 +26,9 @@ interface DetalharEstoqueProps {
 }
 interface Estoque {
   id: string;
-  productId: string;
+  idProduct: string;
   quantity: number;
-  batch: string;
+  batchNumber: string;
   expirationDate: string;
   acquisitionDate: string;
 }
@@ -38,9 +40,9 @@ interface Estoque {
 
     const [formData, setFormData] = useState({
       id: estoque.id,
-      productId: estoque.productId, 
+      idProduct: estoque.idProduct, 
       quantity: estoque.quantity || 0,
-      batch: estoque.batch || '',
+      batchNumber: estoque.batchNumber || '',
       expirationDate: estoque.expirationDate || '',
       acquisitionDate: estoque.acquisitionDate || '',
     });
@@ -49,9 +51,9 @@ interface Estoque {
       if (estoque) {
         setFormData({
           id: estoque.id,
-          productId: estoque.productId, // Ensure consistency here too
+          idProduct: estoque.idProduct, // Ensure consistency here too
           quantity: estoque.quantity || 0,
-          batch: estoque.batch || '',
+          batchNumber: estoque.batchNumber || '',
           expirationDate: estoque.expirationDate || '',
           acquisitionDate: estoque.acquisitionDate || '',
         });
@@ -61,7 +63,7 @@ interface Estoque {
   const { mutate } = useMutation(
     async (values: Estoque) => {
         console.log(values);
-      return putPromocaoById(estoque.id, values);
+      return putEstoqueById(estoque.id, values);
     }, {
     onSuccess: () => {
         push(APP_ROUTES.private.produtos.name); 
@@ -123,7 +125,7 @@ interface Estoque {
                   </div>
 
 
-                <DadosPromocao formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
+                <DadosEstoque formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
                 {/*
                   hrefAnterior === "/agricultores" && (
                     <DadosAtividadesRurais formik={formik} editar={editar} />

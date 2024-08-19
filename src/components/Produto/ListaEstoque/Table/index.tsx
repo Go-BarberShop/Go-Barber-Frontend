@@ -18,32 +18,12 @@ interface TableProps {
 
 interface Estoque {
   id: string;
-  productId: string;
+  idProduct: string;
   quantity: number;
-  batch: string;
+  batchNumber: string;
   expirationDate: string;
   acquisitionDate: string;
 }
-const estoqueMock: Estoque[] = [
-  {
-    id: "1",
-    productId: "1",
-    quantity: 0,
-    batch: "sdfas",
-    expirationDate: "asdf",
-    acquisitionDate: "asdfa",
-
-  },
-  {
-    id: "2",
-    productId: "1",
-    quantity: 0,
-    batch: "sdfas",
-    expirationDate: "asdf",
-    acquisitionDate: "asdfa",
-
-  },
-];
 
 const Table: React.FC<TableProps> = ({ 
   listEstoques,  
@@ -80,29 +60,6 @@ const Table: React.FC<TableProps> = ({
               </tr>
             </thead>
             <tbody className={style.content__table__body}>
-            {estoqueMock.map((estoque, index) => (
-                <tr key={index}>
-                  <td>{estoque.acquisitionDate}</td>
-                  <td>{estoque.expirationDate}</td>
-                  <td>{estoque.quantity}</td>
-                  <td>
-                  <button 
-                    onClick={() => onSelectEstoque(estoque)} 
-                    className={style.content__table__body_click}
-                  >
-                    <img 
-                      src="/assets/icons/visualizar.svg" 
-                      alt="Visualizar" 
-                    />
-                  </button>
-                    <img 
-                      src="/assets/icons/enviar.svg" 
-                      alt="Enviar" 
-                      className={style.content__table__body_click} 
-                    />
-                  </td>
-                </tr>
-              ))}
               {listEstoques.map((estoque, index) => (
                 <tr key={index}>
                   <td>{estoque.acquisitionDate}</td>

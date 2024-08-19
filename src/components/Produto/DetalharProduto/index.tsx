@@ -1,16 +1,15 @@
-"use client";
-
-import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import style from "./detalhar-promocao.module.scss";
+import style from "./detalhar-produto.module.scss";
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
-import DadosPromocao from "./DadosProduto";
+import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useMutation } from "react-query";
-import { putPromocaoById } from "@/api/promocoes/putPromocaoById";
-import { APP_ROUTES } from "@/constants/app-routes";
 import ListaEstoque from "../ListaEstoque";
-import DetalharEstoque from "../DetalharEstoque"; // Assuming this is the component that shows stock details
+import DetalharEstoque from "../DetalharEstoque";
+import { putProdutoById } from "@/api/produtos/putProdutoById";
+import DadosProduto from "./DadosProduto";
+import { APP_ROUTES } from "@/constants/app-routes";
+import NovoEstoque from "../NovoEstoque";
 
 interface DetalharProdutoProps {
   hrefAnterior: string;
@@ -19,21 +18,22 @@ interface DetalharProdutoProps {
   hrefAtual: string;
   backDetalhamento: () => void;
   produto: Produto;
+  onNovoEstoque: () => void;  // Adicionando a prop para lidar com o botão Novo Estoque
 }
 
 interface Produto {
-  id: string;
-  name: string;
-  brand: string;
-  price: string;
+  idProduct: string;
+  nameProduct: string;
+  brandProduct: string;
+  priceProduct: string;
   size: string;
-  description: string;
+  descriptionProduct: string;
 }
 interface Estoque {
   id: string;
-  productId: string;
+  idProduct: string;
   quantity: number;
-  batch: string;
+  batchNumber: string;
   expirationDate: string;
   acquisitionDate: string;
 }
@@ -45,37 +45,37 @@ const DetalharProduto: React.FC<DetalharProdutoProps> = ({
   const { push } = useRouter();
   const [editar, setEditar] = useState(false);
   const [selectedEstoque, setSelectedEstoque] = useState<Estoque | null>(null);
+  const [novoEstoque, setNovoEstoque] = useState(false); // Estado para controlar se o NovoEstoque está sendo exibido
 
   const [formData, setFormData] = useState({
-    id: produto.id,
-    name: "",
-    brand: "",
-    price: "",
+    idProduct: produto.idProduct,
+    nameProduct: "",
+    brandProduct: "",
+    priceProduct: "",
     size: "",
-    description: "",
+    descriptionProduct: "",
   });
 
   useEffect(() => {
     if (produto) {
       setFormData({
-        id: produto.id,
-        name: produto.name || "",
-        brand: produto.brand || "",
-        price: produto.price || "",
+        idProduct: produto.idProduct,
+        nameProduct: produto.nameProduct || "",
+        brandProduct: produto.brandProduct || "",
+        priceProduct: produto.priceProduct || "",
         size: produto.size || "",
-        description: produto.description || "",
+        descriptionProduct: produto.descriptionProduct || "",
       });
     }
   }, [produto]);
 
   const { mutate } = useMutation(
     async (values: Produto) => {
-      console.log(values);
-      return putPromocaoById(produto.id, values);
+      return putProdutoById(produto.idProduct, values);
     },
     {
       onSuccess: () => {
-        push(APP_ROUTES.private.produtos.name);
+        setEditar(false);
       },
       onError: (error) => {
         console.log("Erro ao cadastrar um novo produto", error);
@@ -86,6 +86,21 @@ const DetalharProduto: React.FC<DetalharProdutoProps> = ({
   const handleSelectEstoque = (estoque: Estoque) => {
     setSelectedEstoque(estoque);
   };
+
+  const handleNovoEstoque = () => {
+    setNovoEstoque(true);
+  };
+
+  if (novoEstoque) {
+    return (
+      <NovoEstoque
+        productId={produto.idProduct}
+        onCancel={() => {
+          setNovoEstoque(false); // Retorna ao detalhamento do produto
+        }}
+      />
+    );
+  }
 
   if (selectedEstoque) {
     return (
@@ -117,37 +132,43 @@ const DetalharProduto: React.FC<DetalharProdutoProps> = ({
             setSubmitting(false);
           }}
         >
-          {(formik) => {
-            return (
-              <Form className={style.container__ContainerForm_form}>
-                <div className={style.container__header}>
-                  <div className={style.container__header_title}>
-                    <h1>Informações do produto</h1>
-                  </div>
-                  {editar === false ? (
-                    <button
-                      onClick={() => setEditar(true)}
-                      className={style.container__header_button}
-                    >
-                      <span>Editar</span>
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => setEditar(false)}
-                      className={style.container__header_button}
-                    >
-                      <span>Salvar</span>
-                    </button>
-                  )}
+          {(formik) => (
+            <Form className={style.container__ContainerForm_form}>
+              <div className={style.container__header}>
+                <div className={style.container__header_title}>
+                  <h1>Informações do produto</h1>
                 </div>
+                {!editar ? (
+                  <button
+                    onClick={() => setEditar(true)}
+                    className={style.container__header_button}
+                  >
+                    <span>Editar</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setEditar(false)}
+                    className={style.container__header_button}
+                  >
+                    <span>Salvar</span>
+                  </button>
+                )}
+              </div>
 
-                <DadosPromocao formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
-              </Form>
-            );
-          }}
+              <DadosProduto
+                formik={formik}
+                editar={editar}
+                hrefAnterior={hrefAnterior}
+              />
+            </Form>
+          )}
         </Formik>
         <div>
-          <ListaEstoque onSelectEstoque={handleSelectEstoque} />
+        <ListaEstoque
+            onSelectEstoque={handleSelectEstoque}
+            idProduct={produto.idProduct}
+            onNovoEstoque={handleNovoEstoque} // Adicione esta linha
+          />
         </div>
       </div>
     </div>

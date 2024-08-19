@@ -8,18 +8,18 @@ export default function DadosProduto({ formik }) {
       </div>
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
-          <label htmlFor="estoque.batch">Lote<span>*</span></label>
+          <label htmlFor="estoque.batchNumber">Lote<span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
-            id="estoque.batch"
-            name="estoque.batch"
+            id="estoque.batchNumber"
+            name="estoque.batchNumber"
             placeholder="Insira o código do lote"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.estoque.batch}
+            value={formik.values.estoque.batchNumber}
           />
-          {formik.touched.estoque?.batch && formik.errors.estoque?.batch ? (
-            <span className={style.form__error}>{formik.errors.estoque.batch}</span>
+          {formik.touched.estoque?.batchNumber && formik.errors.estoque?.batchNumber ? (
+            <span className={style.form__error}>{formik.errors.estoque.batchNumber}</span>
           ) : null}
         </div>
         <div>

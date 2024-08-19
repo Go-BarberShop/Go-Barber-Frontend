@@ -7,7 +7,7 @@ interface DadosProdutoProps {
     hrefAnterior: string;
     }
 
-const DadosPromocao: React.FC<DadosProdutoProps> = ({ formik, editar }) => {
+const DadosProduto: React.FC<DadosProdutoProps> = ({ formik, editar }) => {
 
 
   return (
@@ -16,38 +16,38 @@ const DadosPromocao: React.FC<DadosProdutoProps> = ({ formik, editar }) => {
               <div>
                 <div className={style.container__ContainerForm_form_halfContainer}>
                   <div>
-                    <label htmlFor="name">Nome</label>
+                    <label htmlFor="nameProduct">Nome</label>
                     <input
-                      id="name"
+                      id="nameProduct"
                       className={style.container__ContainerForm_form_input}
-                      name="name"
+                      name="nameProduct"
                       placeholder="Não informado"
                       onBlur={formik.h1andleBlur}
-                      value={formik.values.name}
+                      value={formik.values.nameProduct}
                       disabled
                     />
                   </div>
                   <div>
-                    <label htmlFor="brand">Nome da Marca </label>
+                    <label htmlFor="brandProduct">Nome da Marca </label>
                     <input
-                      id="brand"
+                      id="brandProduct"
                       className={style.container__ContainerForm_form_input}
-                      name="brand"
+                      name="brandProduct"
                       placeholder="Não informado"
                       onBlur={formik.handleBlur}
-                      value={formik.values.brand}
+                      value={formik.values.brandProduct}
                       disabled
                     />
                   </div>
                   <div>
-                    <label htmlFor="price">Valor</label>
+                    <label htmlFor="priceProduct">Valor</label>
                     <input
-                      id="price"
+                      id="priceProduct"
                       className={style.container__ContainerForm_form_input}
-                      name="price"
+                      name="priceProduct"
                       placeholder="Não informado"
                       onBlur={formik.handleBlur}
-                      value={formik.values.price}
+                      value={formik.values.priceProduct}
                       disabled
                     />
                   </div>
@@ -67,15 +67,15 @@ const DadosPromocao: React.FC<DadosProdutoProps> = ({ formik, editar }) => {
 
                 <div className={style.container__ContainerForm_form_oneContainer}>
                   <div>
-                    <label htmlFor="description">Descrição </label>
+                    <label htmlFor="descriptionProduct">Descrição </label>
                     <input
-                      id="description"
+                      id="descriptionProduct"
                       className={style.container__ContainerForm_form_oneContainer_input}
-                      name="description"
+                      name="descriptionProduct"
                       placeholder="Não informado"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.description}
+                      value={formik.values.descriptionProduct}
                       disabled
                     />
                   </div>
@@ -86,53 +86,53 @@ const DadosPromocao: React.FC<DadosProdutoProps> = ({ formik, editar }) => {
           <div>
               <div className={style.container__ContainerForm_form_halfContainer}>
                 <div>
-                  <label htmlFor="name">Nome</label>
+                  <label htmlFor="nameProduct">Nome</label>
                   <input
                     className={style.container__ContainerForm_form_input}
-                    id="name"
-                    name="name"
-                    placeholder={formik.values.name}
+                    id="nameProduct"
+                    name="nameProduct"
+                    placeholder={formik.values.nameProduct}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.name}
+                    value={formik.values.nameProduct}
                     required
                   />
                 </div>
-                {formik.touched.name && formik.errors.name ? (
-                    <span className={style.form__error}>{formik.errors.name}</span>
+                {formik.touched.nameProduct && formik.errors.nameProduct ? (
+                    <span className={style.form__error}>{formik.errors.nameProduct}</span>
                   ) : null}
 
                 <div>
-                  <label htmlFor="brand">Nome da Marca</label>
+                  <label htmlFor="brandProduct">Nome da Marca</label>
                   <input
                     className={style.container__ContainerForm_form_input}
-                    id="brand"
-                    name="brand"
+                    id="brandProduct"
+                    name="brandProduct"
                     placeholder={formik.values.startDate}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.brand}
+                    value={formik.values.brandProduct}
                     required
                   />
-                  {formik.touched.brand && formik.errors.brand ? (
-                    <span className={style.form__error}>{formik.errors.brand}</span>
+                  {formik.touched.brandProduct && formik.errors.brandProduct ? (
+                    <span className={style.form__error}>{formik.errors.brandProduct}</span>
                   ) : null}
                 </div>
                 <div>
-                  <label htmlFor="price">Valor</label>
+                  <label htmlFor="priceProduct">Valor</label>
                   <input
                     className={style.container__ContainerForm_form_input}
-                    id="price"
-                    name="price"
-                    placeholder={formik.values.price}
+                    id="priceProduct"
+                    name="priceProduct"
+                    placeholder={formik.values.priceProduct}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.price}
+                    value={formik.values.priceProduct}
                     required
                   />
                 </div>
-                {formik.touched.price && formik.errors.price ? (
-                    <span className={style.form__error}>{formik.errors.price}</span>
+                {formik.touched.priceProduct && formik.errors.priceProduct ? (
+                    <span className={style.form__error}>{formik.errors.priceProduct}</span>
                   ) : null}
                 <div>
                   <label htmlFor="size">Peso </label>
@@ -153,20 +153,20 @@ const DadosPromocao: React.FC<DadosProdutoProps> = ({ formik, editar }) => {
               </div>
               <div className={style.container__ContainerForm_form_oneContainer}>
                 <div>
-                  <label htmlFor="description">Descrição</label>
+                  <label htmlFor="descriptionProduct">Descrição</label>
                   <input
                     className={style.container__ContainerForm_form_input}
-                    id="description"
-                    name="description"
-                    placeholder={formik.values.coupon}
+                    id="descriptionProduct"
+                    name="descriptionProduct"
+                    placeholder={formik.values.descriptionProduct}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.coupon}
+                    value={formik.values.descriptionProduct}
                     required
                   />
                 </div>
-                {formik.touched.description && formik.errors.description ? (
-                    <span className={style.form__error}>{formik.errors.description}</span>
+                {formik.touched.descriptionProduct && formik.errors.descriptionProduct ? (
+                    <span className={style.form__error}>{formik.errors.descriptionProduct}</span>
                   ) : null}
                 </div>
             </div>
@@ -177,4 +177,4 @@ const DadosPromocao: React.FC<DadosProdutoProps> = ({ formik, editar }) => {
 }
 
 
-export default DadosPromocao;
+export default DadosProduto;

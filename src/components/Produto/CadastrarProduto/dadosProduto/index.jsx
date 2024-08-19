@@ -76,18 +76,18 @@ export default function DadosEstoque({ formik }) {
       </div>
       <div className={style.container__ContainerForm_form_oneContainer}>
         <div>
-          <label htmlFor="produto.description">Descrição <span>*</span></label>
+          <label htmlFor="produto.descriptionProduct">Descrição <span>*</span></label>
           <input
             className={style.container__ContainerForm_form_halfContainer_input}
-            id="produto.description"
-            name="produto.description"
+            id="produto.descriptionProduct"
+            name="produto.descriptionProduct"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.produto.description}
             required
           />
-          {formik.touched.produto?.description && formik.errors.produto?.description ? (
-            <span className={style.form__error}>{formik.errors.produto.description}</span>
+          {formik.touched.produto?.descriptionProduct && formik.errors.produto?.descriptionProduct ? (
+            <span className={style.form__error}>{formik.errors.produto.descriptionProduct}</span>
           ) : null}
         </div>
       </div>

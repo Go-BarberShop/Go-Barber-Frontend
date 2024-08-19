@@ -8,21 +8,22 @@ import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/constants/app-routes";
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
 import DetalharProduto from "../DetalharProduto";
+import NovoEstoque from "../NovoEstoque"; // Importando o componente NovoEstoque
 import { getAllProdutos } from "@/api/produtos/getAllProdutos";
 
 interface Produto {
-  id: string;
-  name: string;
-  brand: string;
-  price: string;
+  idProduct: string;
+  nameProduct: string;
+  brandProduct: string;
+  priceProduct: string;
   size: string;
-  description: string;
+  descriptionProduct: string;
 }
-
 
 const ListaProdutos = () => {
   const [produtos, setProdutos] = useState<Produto[]>([]);
   const [selectedProduto, setSelectedProduto] = useState<Produto | null>(null);
+  const [showNovoEstoque, setShowNovoEstoque] = useState(false); // Estado para controlar a exibição do NovoEstoque
   const [searchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -39,11 +40,11 @@ const ListaProdutos = () => {
   });
 
   useEffect(() => {
-    //mutate();
+    mutate();
   }, [currentPage]);
 
   const filteredProdutos = produtos.filter((produto) =>
-    produto.name.toLowerCase().includes(searchTerm.toLowerCase())
+    produto.nameProduct.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleSelectProduto = (produto: Produto) => {
@@ -52,17 +53,31 @@ const ListaProdutos = () => {
 
   const handleBackToList = () => {
     setSelectedProduto(null);
+    setShowNovoEstoque(false); // Resetar a exibição do NovoEstoque
   };
 
+  // Verifica se deve renderizar o NovoEstoque
+  if (showNovoEstoque) {
+    return (
+      <NovoEstoque
+        productId={selectedProduto?.idProduct || ''}
+        onCancel={handleBackToList} // Callback para voltar ao detalhamento do produto
+      />
+    );
+  }
+
   if (selectedProduto) {
-    return <DetalharProduto
-      diretorioAtual="dirAtual"
-      produto={selectedProduto}
-      backDetalhamento={handleBackToList}
-      dirAnt="dirAnt"
-      hrefAnterior={APP_ROUTES.private.home.name}
-      hrefAtual={APP_ROUTES.private.promocoes.name}
-    />
+    return (
+      <DetalharProduto
+        diretorioAtual="dirAtual"
+        produto={selectedProduto}
+        backDetalhamento={handleBackToList}
+        dirAnt="dirAnt"
+        hrefAnterior={APP_ROUTES.private.home.name}
+        hrefAtual={APP_ROUTES.private.promocoes.name}
+        onNovoEstoque={() => setShowNovoEstoque(true)} // Define para mostrar o NovoEstoque
+      />
+    );
   }
 
   return (
@@ -75,7 +90,7 @@ const ListaProdutos = () => {
           diretorioAtual="Produtos"
         />
         <div className={style.header__container}>
-         <div className={style.header__container_botoes}>
+          <div className={style.header__container_botoes}>
             <button onClick={() => (push(APP_ROUTES.private.cadastrar_produtos.name))}>
               <h1>
                 Adicionar Produto
