@@ -23,6 +23,12 @@
       "static/chunks/main-app.js",
       "static/css/app/promocoes/page.css",
       "static/chunks/app/promocoes/page.js"
+    ],
+    "/barbeiros/cadastrar-barbeiro/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/barbeiros/cadastrar-barbeiro/page.css",
+      "static/chunks/app/barbeiros/cadastrar-barbeiro/page.js"
     ]
   }
 }

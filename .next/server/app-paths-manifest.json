@@ -1,5 +1,5 @@
 {
-  "/page": "app/page.js",
-  "/home/page": "app/home/page.js",
-  "/promocoes/page": "app/promocoes/page.js"
+  "/barbeiros/cadastrar-barbeiro/page": "app/barbeiros/cadastrar-barbeiro/page.js",
+  "/promocoes/page": "app/promocoes/page.js",
+  "/page": "app/page.js"
 }

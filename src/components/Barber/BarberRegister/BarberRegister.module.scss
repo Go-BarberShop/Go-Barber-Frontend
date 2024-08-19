@@ -1,7 +1,7 @@
 .container {
     background-color: #3E3B47;
     border-radius: 5px;
-    min-height: 600px;
+    min-height: 100vh;
     width: 50vw; 
     max-width: 1200px; 
     padding: 20px; 
@@ -15,10 +15,10 @@
     }
   }
   
-  .personalInfo, .address, .admissionInfo {
+  .personalInfo, .address{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5px; /* Reduza o gap para 5px */
+    gap: 5px; 
     margin-bottom: 15px;
   }
   
@@ -27,6 +27,22 @@
     display: flex;
     justify-content: flex-end;
     gap: 10px;
+  }
+
+  .admissionInfo{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .admissionTop{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .selectArea{
+    display: flex;
+    gap: 10px ;
   }
   
   @media (max-width: 768px) {
