@@ -18,6 +18,9 @@ export const APP_ROUTES = {
         cadastrar_produtos: {
             name: "/produtos/cadastrar-produto"
         },
+        novo_estoque: {
+            name: "/produtos/novo-estoque"
+        },
         promocoes: {
             name: "/promocoes"
         },
