@@ -3,9 +3,7 @@
 import { useMutation } from "react-query";
 import { Form, Formik } from "formik";
 import style from "./cadastrar-produto.module.scss";
-import DadosProduto from "./dadosProduto/index";
 import * as Yup from "yup";
-import { postPromocao } from "@/api/promocoes/postPromocao";
 import { APP_ROUTES } from "@/constants/app-routes";
 import { useRouter } from "next/navigation";
 import DadosEstoque from "./dadosEstoque/index";
