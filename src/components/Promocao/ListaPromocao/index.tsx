@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "./promocao.module.scss";
 import { useMutation } from "react-query";
-
 import Table from "./Table";
 import { getAllPromocoes } from "@/api/promocoes/getAllPromocoes";
 import { useRouter } from "next/navigation";
