@@ -7,7 +7,7 @@ import { APP_ROUTES } from "@/constants/app-routes";
 import { getAllEstoqueByProductId } from "@/api/estoque/getAllEstoqueByProductId";
 
 interface Estoque {
-  id: string;
+  idStock: string;
   idProduct: string;
   quantity: number;
   batchNumber: string;

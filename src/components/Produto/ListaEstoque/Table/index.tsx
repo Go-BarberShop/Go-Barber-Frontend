@@ -17,7 +17,7 @@ interface TableProps {
 
 
 interface Estoque {
-  id: string;
+  idStock: string;
   idProduct: string;
   quantity: number;
   batchNumber: string;

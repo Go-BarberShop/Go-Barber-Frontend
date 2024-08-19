@@ -30,7 +30,7 @@ interface Produto {
   descriptionProduct: string;
 }
 interface Estoque {
-  id: string;
+  idStock: string;
   idProduct: string;
   quantity: number;
   batchNumber: string;
