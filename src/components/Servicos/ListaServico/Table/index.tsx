@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import style from "./table.module.scss";
 import { deleteServico } from "@/api/servicos/deleteServico";
+import ConfirmationModal from "@/components/ConfirmationDeleteButton";
 
 interface TableProps {
   table1: string;
@@ -38,11 +40,26 @@ const Table: React.FC<TableProps> = ({
   totalPages,
   setCurrentPage
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedServicoId, setSelectedServicoId] = useState<string | null>(null);
 
-  const handleDeleteServico = async (id: string) => {
-    await deleteServico(id);
-    setServicos(listServicos.filter(servico => servico.id !== id));
-  }
+  const openModal = (id: string) => {
+    setSelectedServicoId(id);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedServicoId(null);
+    setIsModalOpen(false);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (selectedServicoId) {
+      await deleteServico(selectedServicoId);
+      setServicos(listServicos.filter(servico => servico.id !== selectedServicoId));
+      closeModal();
+    }
+  };
 
   return (
     <>
@@ -77,9 +94,9 @@ const Table: React.FC<TableProps> = ({
                     className={style.content__table__body_click} 
                   />
                   <img 
-                    src="/assets/icons/enviar.svg" 
+                    src="/assets/icons/excluir.svg" 
                     alt="Excluir" 
-                    onClick={() => handleDeleteServico(servico.id)} 
+                    onClick={() => openModal(servico.id)} 
                     className={style.content__table__body_click} 
                   />
                 </td>
@@ -97,6 +114,12 @@ const Table: React.FC<TableProps> = ({
           </button>
         </div>
       </div>
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={handleConfirmDelete}
+        message="Tem certeza que deseja excluir este serviço?"
+      />
     </>
   );
 };
