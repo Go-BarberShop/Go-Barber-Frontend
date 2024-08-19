@@ -26,10 +26,10 @@ const ServicoComponent = () => {
 
   const { mutate } = useMutation(() => getAllServico(currentPage, 3), {
     onSuccess: (res) => {
-        setServicos(res.data.content);
-        setTotalPages(res.data.totalPages);
+      setServicos(res.data.content);
+      setTotalPages(res.data.totalPages);
     },
-    onError: (error) => {
+    onError: (error: unknown) => {
       console.error('Erro ao recuperar os serviços:', error);
     },
   });
@@ -76,7 +76,7 @@ const ServicoComponent = () => {
           <div className={style.header__container_botoes}>
             <button onClick={() => push(APP_ROUTES.private.cadastrar_servico.name)}>
               <h1>Adicionar Serviço</h1>
-              <img src="/assets/icons/cadeira.svg" alt="Cadeira" />
+              <img src="/assets/icons/cadeira.svg" alt="Ícone de Cadeira" />
             </button>
           </div>
         </div>
