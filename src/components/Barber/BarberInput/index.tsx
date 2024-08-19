@@ -28,7 +28,6 @@ const BarberInput: React.FC<BarberInputProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
-    // Convert value to number if input type is 'number'
     const newValue = type === 'number' ? Number(value) : value;
     onChange({ target: { name, value: newValue } } as React.ChangeEvent<HTMLInputElement>);
   };
