@@ -25,7 +25,7 @@ interface DetalharEstoqueProps {
     estoque: Estoque;
 }
 interface Estoque {
-  id: string;
+  idStock: string;
   idProduct: string;
   quantity: number;
   batchNumber: string;
@@ -39,7 +39,7 @@ interface Estoque {
     const [editar, setEditar] = useState(false);
 
     const [formData, setFormData] = useState({
-      id: estoque.id,
+      idStock: estoque.idStock,
       idProduct: estoque.idProduct, 
       quantity: estoque.quantity || 0,
       batchNumber: estoque.batchNumber || '',
@@ -50,7 +50,7 @@ interface Estoque {
     useEffect(() => {
       if (estoque) {
         setFormData({
-          id: estoque.id,
+          idStock: estoque.idStock,
           idProduct: estoque.idProduct, // Ensure consistency here too
           quantity: estoque.quantity || 0,
           batchNumber: estoque.batchNumber || '',
@@ -63,7 +63,7 @@ interface Estoque {
   const { mutate } = useMutation(
     async (values: Estoque) => {
         console.log(values);
-      return putEstoqueById(estoque.id, values);
+      return putEstoqueById(estoque.idStock, values);
     }, {
     onSuccess: () => {
         push(APP_ROUTES.private.produtos.name); 

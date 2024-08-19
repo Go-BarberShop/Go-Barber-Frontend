@@ -104,7 +104,7 @@ const DadosEstoque: React.FC<DadosEstoqueProps> = ({ formik, editar }) => {
                   ) : null}
                 </div>
                 <div>
-                  <label htmlFor="acquisitionDate">Data de compra</label>
+                  <label htmlFor="acquisitionDate">Data de Compra</label>
                   <input
                     className={style.container__ContainerForm_form_input}
                     id="acquisitionDate"
@@ -120,7 +120,7 @@ const DadosEstoque: React.FC<DadosEstoqueProps> = ({ formik, editar }) => {
                     <span className={style.form__error}>{formik.errors.acquisitionDate}</span>
                   ) : null}
                 <div>
-                  <label htmlFor="size">Validade </label>
+                  <label htmlFor="size">Validade do Produto </label>
                   <input
                     className={style.container__ContainerForm_form_input}
                     id="expirationDate"
