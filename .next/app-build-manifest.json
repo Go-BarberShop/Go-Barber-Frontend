@@ -24,12 +24,6 @@
       "static/css/app/promocoes/page.css",
       "static/chunks/app/promocoes/page.js"
     ],
-    "/barbeiros/id/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/barbeiros/id/page.css",
-      "static/chunks/app/barbeiros/id/page.js"
-    ],
     "/barbeiros/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",

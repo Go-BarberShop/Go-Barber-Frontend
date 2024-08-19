@@ -3,7 +3,7 @@ import style from "./ListarBarbeiros.module.scss";
 import { useMutation } from "react-query";
 import Link from "next/link";
 import Image from "next/image";
-import BarbeiroTable from "./BarbeiroTable/index";
+import BarbeiroTable from "./BarbeiroTable";
 import { getAllBarbers } from "@/api/barbeiro/getAllBarbers";
 import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/constants/app-routes";
@@ -23,7 +23,7 @@ interface Barbeiro {
   bairro: string;
   cidade: string;
   estado: string;
-  salario: 0;
+  salario: number;
   dataAdmissao: string;
   tipoServico: string;
   cargaHoraria: number;
@@ -31,10 +31,9 @@ interface Barbeiro {
 
 const BarbeiroComponent = () => {
   const [barbeiros, setBarbeiros] = useState<Barbeiro[]>([]);
-  const [selectedBarbeiro, setSelectedBarbeiro] = useState<Barbeiro | null>(
-    null
-  );
-  const [searchTerm] = useState("");
+  const [selectedBarbeiro, setSelectedBarbeiro] = useState<Barbeiro | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [open, setOpen] = useState(false);
   const { push } = useRouter();
 
   const { mutate } = useMutation(getAllBarbers, {
@@ -48,7 +47,7 @@ const BarbeiroComponent = () => {
 
   useEffect(() => {
     mutate();
-  }, []);
+  }, [mutate]);
 
   const filteredBarbeiros = barbeiros.filter((barbeiro) =>
     barbeiro.nome.toLowerCase().includes(searchTerm.toLowerCase())
@@ -126,8 +125,11 @@ const BarbeiroComponent = () => {
       {/* <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
       <BarbeiroTable
         listBarbeiros={filteredBarbeiros}
+        onSelectBarbeiros={handleSelectBarbeiro}
         setBarbeiros={setBarbeiros}
-        onSelectBarbeiro={handleSelectBarbeiro}
+        table1="Nome"
+        table2="Contato"
+        table3="Ações"
       />
     </div>
   );

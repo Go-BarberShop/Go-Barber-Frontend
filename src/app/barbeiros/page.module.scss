@@ -1,26 +1,22 @@
-.container{
-    height: 100%;
+.container {
+    min-height: 100vh; /* Garante que o container ocupe toda a altura da viewport */
     width: 100%;
 
     display: grid;
     grid-template-columns: 0.8fr 2fr;
 
-
     background-color: rgba(var(--background));
 
-
-    &__menu{
+    &__menu {
         display: flex;
-
-
-    
+        background-color: #333; 
+        height: 100%; /* Garante que o menu ocupe toda a altura do container */
     }
-    &__main{
+
+    &__main {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-    
 }
-

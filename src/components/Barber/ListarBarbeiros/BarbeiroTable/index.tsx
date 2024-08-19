@@ -7,9 +7,8 @@ interface TableProps {
   table1: string;
   table2: string;
   table3: string;
-  table4: string;
   listBarbeiros: Barbeiro[];
-  setBarbeiros: (barbeiro: Barbeiro[]) => void;
+  setBarbeiros: (barbeiros: Barbeiro[]) => void;
   onSelectBarbeiros: (barbeiro: Barbeiro) => void;
 }
 
@@ -79,6 +78,8 @@ const BarbeiroTable: React.FC<TableProps> = ({
   onSelectBarbeiros,
   setBarbeiros,
 }) => {
+  const displayBarbeiros = listBarbeiros.length > 0 ? listBarbeiros : barbeiroMock;
+
   return (
     <>
       <div className={style.content}>
@@ -96,29 +97,7 @@ const BarbeiroTable: React.FC<TableProps> = ({
             </tr>
           </thead>
           <tbody className={style.content__table__body}>
-            {barbeiroMock.map((barbeiro, index) => (
-              <tr key={index}>
-                <td>{barbeiro.nome}</td>
-                <td>{barbeiro.telefone}</td>
-                <td>
-                  <button 
-                    onClick={() => onSelectBarbeiros(barbeiro)} 
-                    className={style.content__table__body_click}
-                  >
-                    <img 
-                      src="/assets/icons/visualizar.svg" 
-                      alt="Visualizar" 
-                    />
-                  </button>
-                  <img 
-                    src="/assets/icons/enviar.svg" 
-                    alt="Enviar" 
-                    className={style.content__table__body_click} 
-                  />
-                </td>
-              </tr>
-            ))}
-            {listBarbeiros.map((barbeiro, index) => (
+            {displayBarbeiros.map((barbeiro, index) => (
               <tr key={index}>
                 <td>{barbeiro.nome}</td>
                 <td>{barbeiro.telefone}</td>
