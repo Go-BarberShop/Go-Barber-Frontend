@@ -1,9 +1,9 @@
 "use client";
 
 import styles from "./BarberRegister.module.scss";
-import BarberInput from "../BarberInput/index";
-import FormButton from "../FormButton/index";
-import SelectBarber from "../SelectBarber/index";
+import BarberInput from "@/components/Barber/BarberInput";
+import FormButton from "@/components/Barber/FormButton";
+import SelectBarber from "@/components/Barber/SelectBarber";
 import { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";

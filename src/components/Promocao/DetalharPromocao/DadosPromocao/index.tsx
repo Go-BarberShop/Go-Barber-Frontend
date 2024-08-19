@@ -1,7 +1,5 @@
 "use client"
 import style from "./promocao.module.scss";
-import { useEffect, useState } from "react";
-import { useMutation } from "react-query";
 
 interface DadosPromocaoProps {
     formik: any;
@@ -9,7 +7,7 @@ interface DadosPromocaoProps {
     hrefAnterior: string;
     }
 
-const DadosPromocao: React.FC<DadosPromocaoProps> = ({ formik, editar, hrefAnterior }) => {
+const DadosPromocao: React.FC<DadosPromocaoProps> = ({ formik, editar }) => {
 
 
   return (
@@ -21,7 +19,7 @@ const DadosPromocao: React.FC<DadosPromocaoProps> = ({ formik, editar, hrefAnter
         {editar === false ? (
           <>
             <div>
-              <label htmlFor="nome">Nome</label>
+              <label htmlFor="name">Nome</label>
               <input
                 id="name"
                 className={style.container__ContainerForm_form_input}

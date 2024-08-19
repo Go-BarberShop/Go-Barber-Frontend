@@ -2,7 +2,6 @@
 
 import { useMutation } from "react-query";
 import { Form, Formik } from "formik";
-import { useState } from "react";
 import style from "./cadastrar-promocao.module.scss";
 import DadosPromocao from "./dadosPromocao/index";
 import * as Yup from 'yup';
@@ -13,18 +12,19 @@ import { useRouter } from "next/navigation";
 
 interface Promocao {
   name: string;
-  totalPrice: number;
+  totalPrice: string;
   startDate: string;
   endDate: string;
-  coupon: string;
+  coupon: string | null;  
 }
+
 
 const CadastroPromocao = () => {
   const { push } = useRouter();
 
   const initialValues: Promocao = {
     name: "",
-    totalPrice: 0,
+    totalPrice: "",
     startDate: "",
     endDate: "",
     coupon: ""
@@ -42,12 +42,15 @@ const CadastroPromocao = () => {
     endDate: Yup.date()
       .min(Yup.ref('startDate'), "O fim da promoção não pode ser antes da data de início.")
       .required('Obrigatório'),
+    
   });
 
-  const { status, mutate } = useMutation(
+  const { mutate } = useMutation(
     async (values: Promocao) => {
-        console.log(values);
-      return postPromocao(values);
+      const coupon = values.coupon === "" ? null : values.coupon;
+      const updatedValues = { ...values, coupon }; // Atualiza o campo coupon no objeto values
+    
+      return postPromocao(updatedValues);    
     }, {
     onSuccess: () => {
         push(APP_ROUTES.private.promocoes.name); // Ajuste conforme necessário
@@ -62,16 +65,16 @@ const CadastroPromocao = () => {
     <>
       <div className={style.header}>
         <div className={style.header__title}>
-            <h1>Promoções</h1>
+            <h1>Produtos</h1>
             <div className={style.header__title_line}></div>
         </div>
         <div className={style.header__navegacao}>
-          <div className={style.header__navegacao_voltar} onClick={() => (push(APP_ROUTES.private.promocoes.name))}>
+          <div className={style.header__navegacao_voltar} onClick={() => (push(APP_ROUTES.private.produtos.name))}>
             <img src="/assets/icons/menor_que.svg" alt="Voltar" />
             <h1>Voltar</h1>
           </div>
           <div className={style.header__navegacao_guia}>
-            <span>Promoções /</span><h1>Cadastrar Promoção</h1>
+            <span>Home / Promoções /</span><h1>Cadastrar Promoção</h1>
           </div>
         </div>
         

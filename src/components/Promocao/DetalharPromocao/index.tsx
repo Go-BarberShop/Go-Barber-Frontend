@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 
 import style from "./detalhar-promocao.module.scss";
 
-import HeaderNavegacao from "@/components/Header/HeaderNavegacao";
-import Link from "next/link";
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
 import DadosPromocao from "./DadosPromocao";
 import { useRouter } from "next/navigation";
@@ -32,10 +30,9 @@ interface Promocao {
     coupon: string;
   }
 
-  const DetalharPromocao : React.FC<DetalharPromocaoProps> = ({ hrefAnterior, diretorioAtual, dirAnt, hrefAtual, backDetalhamento, promocao }) => {
+  const DetalharPromocao : React.FC<DetalharPromocaoProps> = ({ hrefAnterior, backDetalhamento, promocao }) => {
 
     const { push } = useRouter();
-    const [etapas, setEtapas] = useState(0);
     const [editar, setEditar] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -61,7 +58,7 @@ interface Promocao {
   }, [promocao]);
 
 
-  const { status, mutate } = useMutation(
+  const { mutate } = useMutation(
     async (values: Promocao) => {
         console.log(values);
       return putPromocaoById(promocao.id, values);

@@ -36,9 +36,9 @@ const BarbeiroComponent = () => {
   const [open, setOpen] = useState(false);
   const { push } = useRouter();
 
-  const { mutate } = useMutation(getAllBarbers, {
+/*   const { mutate } = useMutation(getAllBarbers, {
     onSuccess: (res) => {
-      setBarbeiros(res.data);
+      setBarbeiros(res.data.content);
     },
     onError: (error) => {
       console.error("Erro ao recuperar os barbeiros:", error);
@@ -47,7 +47,7 @@ const BarbeiroComponent = () => {
 
   useEffect(() => {
     mutate();
-  }, [mutate]);
+  }, [mutate]); */
 
   const filteredBarbeiros = barbeiros.filter((barbeiro) =>
     barbeiro.nome.toLowerCase().includes(searchTerm.toLowerCase())
