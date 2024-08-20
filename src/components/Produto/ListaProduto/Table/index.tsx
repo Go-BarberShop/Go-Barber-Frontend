@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import style from "./table.module.scss";
+import ConfirmationModal from "../ExcluirProduto"; 
+import { deleteProduto } from "@/api/produtos/deleteProduto";
 
 interface TableProps {
   table1: string;
@@ -15,6 +18,7 @@ interface TableProps {
   totalPages: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
+
 interface Produto {
   idProduct: string;
   nameProduct: string;
@@ -34,40 +38,56 @@ const Table: React.FC<TableProps> = ({
   table5, 
   currentPage, 
   totalPages, 
-  setCurrentPage 
+  setCurrentPage,
+  setProdutos,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProdutoId, setSelectedProdutoId] = useState<string | null>(null);
 
- // const handleDeletePromocao = async (id: string) => {
-//    await deletePromocao(id);
- //   setPromocoes(listPromocoes.filter(promocao => promocao.coupon !== id));
- // };
+  const openModal = (id: string) => {
+    setSelectedProdutoId(id);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedProdutoId(null);
+    setIsModalOpen(false);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (selectedProdutoId) {
+      await deleteProduto(selectedProdutoId); 
+      setProdutos(listProdutos.filter(produto => produto.idProduct !== selectedProdutoId));
+      closeModal();
+    }
+  };
 
   return (
     <>
-        <div className={style.content}>
-          <table className={style.content__table}>
-            <thead className={style.content__table__header}>
-              <tr>
-                <th>{table1}</th>
-                <th>{table2}</th>
-                <th>{table3}</th>
-                <th>{table4}</th>
-                <th className={style.content__table__header_name3}>
-                  <div>
-                    {table5}
-                    <img src="/assets/icons/informacao.svg" alt="Visualizar" />
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <tbody className={style.content__table__body}>
-              {listProdutos.map((produto, index) => (
-                <tr key={index}>
-                  <td>{produto.nameProduct}</td>
-                  <td>{produto.brandProduct}</td>
-                  <td>{produto.priceProduct}</td>
-                  <td>{produto.size}</td>
-                  <td>
+      <div className={style.content}>
+        <table className={style.content__table}>
+          <thead className={style.content__table__header}>
+            <tr>
+              <th>{table1}</th>
+              <th>{table2}</th>
+              <th>{table3}</th>
+              <th>{table4}</th>
+              <th className={style.content__table__header_name3}>
+                <div>
+                  {table5}
+                  <img src="/assets/icons/informacao.svg" alt="Visualizar" />
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody className={style.content__table__body}>
+            {listProdutos.map((produto, index) => (
+              <tr key={index}>
+                <td>{produto.nameProduct}</td>
+                <td>{produto.brandProduct}</td>
+                <td>{produto.priceProduct}</td>
+                <td>{produto.size}</td>
+                <td>
                   <button 
                     onClick={() => onSelectProduto(produto)} 
                     className={style.content__table__body_click}
@@ -77,28 +97,41 @@ const Table: React.FC<TableProps> = ({
                       alt="Visualizar" 
                     />
                   </button>
-                    <img 
-                      src="/assets/icons/enviar.svg" 
-                      alt="Enviar" 
-                      className={style.content__table__body_click} 
-                    />
-                  </td>
-                </tr>
-              ))}
-              {/* Pagination Controls */}
-            </tbody>
-          </table>
-              <div className={style.content__table__pagination}>
-                <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))} disabled={currentPage === 0}>
-                  Previous
-                </button>
-                <span>Page {currentPage + 1} of {totalPages}</span>
-                <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))} disabled={currentPage === totalPages - 1}>
-                  Next
-                </button>
-              </div>
+                  <img 
+                    src="/assets/icons/excluir.svg" 
+                    alt="Excluir" 
+                    onClick={() => openModal(produto.idProduct)}
+                    className={style.content__table__body_click} 
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {/* Pagination Controls */}
+        <div className={style.content__table__pagination}>
+          <button 
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))} 
+            disabled={currentPage === 0}
+          >
+            Previous
+          </button>
+          <span>Page {currentPage + 1} of {totalPages}</span>
+          <button 
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))} 
+            disabled={currentPage === totalPages - 1}
+          >
+            Next
+          </button>
         </div>
+      </div>
 
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={handleConfirmDelete}
+        message="Tem certeza que deseja excluir este produto?"
+      />
     </>
   );
 };
