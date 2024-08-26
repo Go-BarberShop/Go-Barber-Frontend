@@ -60,7 +60,6 @@ interface Promocao {
 
   const { mutate } = useMutation(
     async (values: Promocao) => {
-        console.log(values);
       return putPromocaoById(promocao.id, values);
     }, {
     onSuccess: () => {
