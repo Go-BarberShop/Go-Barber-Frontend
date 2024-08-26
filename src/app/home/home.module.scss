@@ -12,9 +12,6 @@
     &__menu{
         width: 100%;
         display: flex;
-
-
-    
     }
     &__main{
         background-image: url('/assets/logo.svg');
@@ -22,6 +19,11 @@
         background-position: center;
         background-repeat: no-repeat;
     }
-    
+    &__construcao{
+        background-image: url('/assets/emConstrução.png');
+        background-size: 20% ;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 }
 
