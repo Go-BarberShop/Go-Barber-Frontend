@@ -33,12 +33,10 @@ const Login = () => {
         },
         {
             onSuccess: (res) => {
-                console.log(res)
                 api.defaults.headers.authorization = `Bearer ${res.data.token}`;
                 setStorageItem("token", res.data.token);
                 setStorageItem("userRole", res.data.role);
                 push(APP_ROUTES.private.home.name);
-                dispatch(setUserLogin(login));
                 setStorageItem("userlogin", login);
             },
             onError: (erro) => {

@@ -62,7 +62,6 @@ interface Estoque {
 
   const { mutate } = useMutation(
     async (values: Estoque) => {
-        console.log(values);
       return putEstoqueById(estoque.idStock, values);
     }, {
     onSuccess: () => {

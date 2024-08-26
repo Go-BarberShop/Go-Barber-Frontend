@@ -13,7 +13,6 @@ export default function page() {
   const [role, setRole] = useState<string | null>(getStorageItem("userRole"));
     
     const userLogin = useSelector((state: RootState) => state.userLogin);
-    console.log(role)
     function whatIsTypeUser() {
         if (role === "ADMIN") {
             return <LayoutAdmin />

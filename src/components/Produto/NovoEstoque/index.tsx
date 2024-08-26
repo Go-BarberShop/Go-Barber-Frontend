@@ -42,7 +42,6 @@ const NovoEstoque: React.FC<NovoEstoqueProps> = ({ productId, onCancel }) => {
 
   const { mutate } = useMutation(
     async (values: Estoque) => {
-      console.log(values);
       return postEstoque(values);
     },
     {

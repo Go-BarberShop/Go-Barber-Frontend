@@ -23,7 +23,6 @@ const PrivateRoute = (props: PrivateRouteProps) =>{
     const {push} = useRouter()
     
     useEffect(() =>{
-        console.log("token", token)
         api.defaults.headers.authorization = `Bearer ${token}`;
         if(token != undefined){
             setAuthorized(true);
@@ -41,7 +40,6 @@ const PrivateRoute = (props: PrivateRouteProps) =>{
            
         },{
             onSuccess: (res) =>{
-                console.log(res.data)
                 setAuthorized(true);
             },
             onError: (error) =>{

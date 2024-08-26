@@ -2,6 +2,12 @@
 import { APP_ROUTES } from "@/constants/app-routes";
 import style from "./header_menu.module.scss";
 import { useRouter } from "next/navigation";
+import { getStorageItem, setStorageItem } from "@/utils/localStore";
+import { useMutation } from "react-query";
+import { postLogout } from "@/api/auth/postLogout";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserLogin } from "@/redux/userLogin/userLoginSlice";
+import { RootState } from "@/redux/store";
 
 interface HeaderMenuProps {
     name: string;
@@ -9,6 +15,30 @@ interface HeaderMenuProps {
 }
 const Header_menu : React.FC<HeaderMenuProps> = ({ name, photo  }) => {
     const { push } = useRouter();
+
+    const userLogin: string = useSelector((state: RootState) => state.userLogin);
+    const dispatch = useDispatch();
+
+    const { status, mutate } = useMutation(
+        async () => {
+            return postLogout();
+        },{
+            onSuccess: (res) => {
+                
+                setStorageItem("token", "");
+                setStorageItem("userLogin", "");
+                setStorageItem("userRole", "");
+                dispatch(setUserLogin(""));
+                
+
+                push(APP_ROUTES.public.login);
+            },
+            onError: (erro) => {
+                console.error(erro);
+            }
+        }
+    );
+
 
     return (
         <>
@@ -25,7 +55,7 @@ const Header_menu : React.FC<HeaderMenuProps> = ({ name, photo  }) => {
                         <span>{name}</span>
                     </div>
                     <button className={style.header_menu__content__button}
-                    onClick={() => (push(APP_ROUTES.public.login))}>
+                    onClick={() => (mutate())}>
                     <span>Sair</span> 
                     <div className={style.header_menu__content__button_icon}></div>
                 </button>
