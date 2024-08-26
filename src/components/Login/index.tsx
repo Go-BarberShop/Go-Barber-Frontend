@@ -29,6 +29,7 @@ const Login = () => {
         async () => {
             // Passando um objeto conforme a interface credencial
             const credentials: credencial = { login, password };
+            console.log(credentials)
             return postLogin(credentials);
         },
         {
