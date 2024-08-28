@@ -5,11 +5,11 @@ import { Form, Formik } from "formik";
 import style from "./cadastrar-produto.module.scss";
 import DadosProduto from "./dadosProduto/index";
 import * as Yup from "yup";
-import { postPromocao } from "@/api/promocoes/postPromocao";
 import { APP_ROUTES } from "@/constants/app-routes";
 import { useRouter } from "next/navigation";
 import DadosEstoque from "./dadosEstoque/index";
 import { postProduto } from "@/api/produtos/postProduto";
+import { postEstoque } from "@/api/estoque/postEstoque";
 
 interface Produto {
   idProduct: string;
@@ -70,19 +70,37 @@ const CadastrarProduto = () => {
     }),
   });
 
-  const { mutate } = useMutation(
-    async (values: FormValues) => {
-      console.log(values);
-
-      return postProduto(values.produto);
+  const mutateStock = useMutation(
+    async (estoqueData: Estoque) => {
+      console.log("Stock Data:", estoqueData);
+      return postEstoque(estoqueData);
     },
     {
       onSuccess: (res) => {
-        console.log("sucess", res.data)
-        push(APP_ROUTES.private.produtos.name); // Ajuste conforme necessário
+        push(APP_ROUTES.private.produtos.name); // Redirect after successful stock creation
       },
       onError: (error) => {
-        console.log("Erro ao cadastrar uma nova promoção", error);
+        console.log("Erro ao cadastrar o estoque", error);
+      },
+    }
+  );
+
+  const mutateProduto = useMutation(
+    async (produtoData: FormValues) => {
+      console.log("Product Data:", produtoData.produto);
+      return postProduto(produtoData.produto);
+    },
+    {
+      onSuccess: (produtoResponse, formikValues) => {
+        const estoqueData = {
+          ...formikValues.estoque, // Use the updated Formik values
+          idProduct: produtoResponse.data.idProduct, // Ensure the product ID is passed to the stock data
+        };
+        console.log(estoqueData);
+        mutateStock.mutate(estoqueData); // Pass the modified stock data to mutateStock
+      },
+      onError: (error) => {
+        console.log("Erro ao cadastrar o produto", error);
       },
     }
   );
@@ -114,8 +132,8 @@ const CadastrarProduto = () => {
             initialValues={initialValues}
             validationSchema={validateSchema}
             onSubmit={(values, { setSubmitting }) => {
-              console.log("Entrou!", values)
-              mutate(values);
+              console.log("Entrou!", values);
+              mutateProduto.mutate(values); // Pass entire Formik values to mutateProduto
               setSubmitting(false);
             }}
           >
@@ -125,7 +143,6 @@ const CadastrarProduto = () => {
                   <DadosProduto formik={formik} />
                   <DadosEstoque formik={formik} />
 
-                  {/* Exemplo: <DadosEstoque formik={formik} /> */}
                   <div className={style.container__ContainerForm_buttons}>
                     <button
                       className={style.container__ContainerForm_buttons_link}
