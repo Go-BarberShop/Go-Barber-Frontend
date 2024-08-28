@@ -2,7 +2,7 @@
 
 import style from "./page.module.scss";
 import Menu from "@/components/Menu";
-import BarbeiroComponent from "@/components/Barber/ListarBarbeiros";
+import ListaBarbeiros from "@/components/Barbeiro/ListaBarbeiro";
 
 export default function Page() {
   return (
@@ -11,7 +11,7 @@ export default function Page() {
         <Menu />
       </div>
       <div className={style.container__main}>
-        <BarbeiroComponent />
+        <ListaBarbeiros />
       </div>
     </div>
   );
