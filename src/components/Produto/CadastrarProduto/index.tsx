@@ -10,24 +10,8 @@ import { useRouter } from "next/navigation";
 import DadosEstoque from "./dadosEstoque/index";
 import { postProduto } from "@/api/produtos/postProduto";
 import { postEstoque } from "@/api/estoque/postEstoque";
-
-interface Produto {
-  idProduct: string;
-  nameProduct: string;
-  brandProduct: string;
-  priceProduct: string;
-  size: string;
-  descriptionProduct: string;
-}
-
-interface Estoque {
-  id: string;
-  idProduct: string;
-  quantity: number;
-  batchNumber: string;
-  expirationDate: string;
-  acquisitionDate: string;
-}
+import { Produto } from "@/interfaces/produtoInterface";
+import { Estoque } from "@/interfaces/estoqueInterface";
 
 interface FormValues {
   produto: Produto;
@@ -47,7 +31,7 @@ const CadastrarProduto = () => {
       descriptionProduct: "",
     },
     estoque: {
-      id: "",
+      idStock: "",
       idProduct: "",
       quantity: 0,
       batchNumber: "",
