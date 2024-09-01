@@ -18,19 +18,22 @@ import { getAllServicos } from "@/api/servicos/getAllServicos";
 
 interface DetalharBarbeiroProps {
   hrefAnterior: string;
-  backDetalhamento: () => void;
   barbeiro: Barbeiro | any;
-  
 }
 
-const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backDetalhamento, barbeiro }) => {
+const MeuPerfil: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, barbeiro }) => {
   const { push } = useRouter();
   const [editar, setEditar] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [servicosDisponiveis, setServicosDisponiveis] = useState<Service[]>([]);
   const [servicosSelecionadosId, setServicosSelecionadosId] = useState<number[]>([]);
 
- 
+  useEffect(() => {
+    //fetchServicos();
+  }, []);
+
+
+
   const [formData, setFormData] = useState<Barbeiro>({
     idBarber: '',
     name: '',
@@ -56,7 +59,6 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backD
   });
 
   useEffect(() => {
-    fetchServicos()
     if (barbeiro) {
       setFormData({
         idBarber: barbeiro.idBarber || '',
@@ -86,6 +88,7 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backD
     }
   }, [barbeiro]);
 
+
   const { mutate: fetchServicos } = useMutation(() => getAllServicos(0, 100), {
     onSuccess: (res) => {
       setServicosDisponiveis(res.data.content);
@@ -94,7 +97,6 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backD
       console.error("Erro ao recuperar os serviços:", error);
     },
   });
-
 
   const handleServiceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedOptions = Array.from(event.target.selectedOptions);
@@ -119,44 +121,44 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backD
 
   const getBarberPhoto = async (idBarber: string) => {
     try {
-        const response = await getBarberPhotoById(idBarber);
+      const response = await getBarberPhotoById(idBarber);
 
-        if (response.data) {
-            const imageBlob = new Blob([response.data], { type: 'image/jpeg' });
-            const imageUrl = URL.createObjectURL(imageBlob);
+      if (response.data) {
+        const imageBlob = new Blob([response.data], { type: 'image/jpeg' });
+        const imageUrl = URL.createObjectURL(imageBlob);
 
-            console.log("URL da imagem gerada:", imageUrl);
+        console.log("URL da imagem gerada:", imageUrl);
 
-            setImagePreview(imageUrl);  // Atualiza o estado com a URL do Blob
-        } else {
-            console.error("Nenhum dado encontrado na resposta.");
-        }
+        setImagePreview(imageUrl);  // Atualiza o estado com a URL do Blob
+      } else {
+        console.error("Nenhum dado encontrado na resposta.");
+      }
     } catch (error) {
-        console.error("Erro ao buscar a imagem do barbeiro:", error);
+      console.error("Erro ao buscar a imagem do barbeiro:", error);
     }
-};
-
-  
+  };
 
 
-const updateBarber = useMutation(
-  async (values: Barbeiro) => {
-    // Extraia a imagem do values
-    const profilePhoto = values.profilePhoto as File;
-
-    // Remova a imagem e os services do objeto values
-    const { profilePhoto: _, ...updatedValues } = values;
 
 
-    return putBarberbeiroById(barbeiro.idBarber, updatedValues, profilePhoto);
-  }, {
-  onSuccess: () => {
-    push(APP_ROUTES.private.barbeiros.name);
-  },
-  onError: (error) => {
-    console.log("Erro ao atualizar o barbeiro", error);
-  }
-});
+  const updateBarber = useMutation(
+    async (values: Barbeiro) => {
+      // Extraia a imagem do values
+      const profilePhoto = values.profilePhoto as File;
+
+      // Remova a imagem e os services do objeto values
+      const { profilePhoto: _, ...updatedValues } = values;
+
+
+      return putBarberbeiroById(barbeiro.idBarber, updatedValues, profilePhoto);
+    }, {
+    onSuccess: () => {
+      push(APP_ROUTES.private.barbeiros.name);
+    },
+    onError: (error) => {
+      console.log("Erro ao atualizar o barbeiro", error);
+    }
+  });
 
 
 
@@ -177,10 +179,10 @@ const updateBarber = useMutation(
   return (
     <div id="header" className={style.container}>
       <HeaderDetalhamento
-        titulo="Barbeiro"
-        hrefAnterior={backDetalhamento}
-        diretorioAnterior="Home / Barbeiros / "
-        diretorioAtual="Informações do Barbeiro"
+        titulo="Meu Perfil"
+        hrefAnterior={APP_ROUTES.private.home.name}
+        diretorioAnterior="Home / "
+        diretorioAtual="Meu Perfil"
       />
       <div className={style.container__ContainerForm}>
         <Formik
@@ -194,7 +196,7 @@ const updateBarber = useMutation(
           {(formik) => (
             <Form className={style.container__ContainerForm_form}>
               <div className={style.container__header}>
-              <div className={style.container__header_title}>
+                <div className={style.container__header_title}>
                   <div className={style.container__photo}>
                     <div className={style.profilePhotoWrapper}>
                       <input
@@ -265,6 +267,7 @@ const updateBarber = useMutation(
               <div className={style.container__header_title}>
                 <h1>Informações de admissão</h1>
               </div>
+
               <DadosAdmissao formik={formik} editar={editar} hrefAnterior={hrefAnterior} servicosSelecionadosId={servicosSelecionadosId}
                 servicosDisponiveis={servicosDisponiveis}
                 handleServiceChange={handleServiceChange}
@@ -277,4 +280,4 @@ const updateBarber = useMutation(
   );
 };
 
-export default DetalharBarbeiro;
+export default MeuPerfil;

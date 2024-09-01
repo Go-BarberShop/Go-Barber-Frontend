@@ -4,6 +4,7 @@ import style from "./admissao.module.scss";
 import { Service } from "@/interfaces/barbeiroInterface";
 import { getAllServicos } from "@/api/servicos/getAllServicos";
 import { useMutation } from "react-query";
+
 interface DadosBarbeiroProps {
   formik: any;
   editar: boolean;
@@ -27,7 +28,7 @@ const DadosAdmissao: React.FC<DadosBarbeiroProps> = ({ formik, editar, servicosS
             placeholder="Não informado"
             onBlur={formik.handleBlur}
             value={formik.values.salary}
-            disabled={!editar}
+            disabled
             onChange={editar ? formik.handleChange : undefined}
           />
         </div>
@@ -42,7 +43,7 @@ const DadosAdmissao: React.FC<DadosBarbeiroProps> = ({ formik, editar, servicosS
             placeholder="Não informado"
             onBlur={formik.handleBlur}
             value={formik.values.admissionDate}
-            disabled={!editar}
+            disabled
             onChange={editar ? formik.handleChange : undefined}
           />
         </div>
@@ -55,7 +56,7 @@ const DadosAdmissao: React.FC<DadosBarbeiroProps> = ({ formik, editar, servicosS
             name="workload"
             placeholder="Não informado"
             value={formik.values.workload}
-            disabled={!editar}
+            disabled
             onChange={editar ? formik.handleChange : undefined}
           />
         </div>
@@ -70,7 +71,7 @@ const DadosAdmissao: React.FC<DadosBarbeiroProps> = ({ formik, editar, servicosS
             onChange={editar ? formik.handleChange : undefined}
             onBlur={formik.handleBlur}
             value={formik.values.start}
-            disabled={!editar}
+            disabled
           />
         </div>
 
@@ -84,30 +85,28 @@ const DadosAdmissao: React.FC<DadosBarbeiroProps> = ({ formik, editar, servicosS
             onChange={editar ? formik.handleChange : undefined}
             onBlur={formik.handleBlur}
             value={formik.values.end}
-            disabled={!editar}
+            disabled
           />
         </div>
       </div>
       <div>
         {editar ? (
           <div className={style.container__ContainerForm_form_halfContainer}>
-            <div>
-              <label htmlFor="services">Serviços</label>
-              <select
-                id="services"
-                name="services"
-                multiple
-                className={style.container__ContainerForm_form_input}
-                value={servicosSelecionadosId.map(String)}
-                onChange={handleServiceChange}
-              >
-                {servicosDisponiveis.map((servico) => (
-                  <option key={servico.id} value={String(servico.id)}>
-                    {servico.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <label htmlFor="services">Serviços</label>
+            <select
+              id="services"
+              name="services"
+              multiple
+              className={style.container__ContainerForm_form_input}
+              value={servicosSelecionadosId.map(String)}
+              onChange={handleServiceChange}
+            >
+              {servicosDisponiveis.map((servico) => (
+                <option key={servico.id} value={String(servico.id)}>
+                  {servico.name}
+                </option>
+              ))}
+            </select>
             {servicosSelecionadosId.length > 0 && (
               <div className={style.selectedServices}>
                 <h4>Serviços Selecionados:</h4>

@@ -199,7 +199,7 @@ const LayoutBarbeiro = () => {
                     <Botao_menu 
                         title="Meu Perfil" 
                         icon="/assets/icons/navalha.svg"
-                        route={APP_ROUTES.private.barbeiros.name}
+                        route={APP_ROUTES.private.meu_perfil.name}
                     />
                     
                 </div>

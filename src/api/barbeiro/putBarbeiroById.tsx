@@ -2,7 +2,7 @@ import axios from "axios";
 import { Barbeiro } from "@/interfaces/barbeiroInterface";
 import { getStorageItem } from "@/utils/localStore";
 
-export async function putBarberbeiroById(id: string | number, barber: Barbeiro, profilePhoto: File) {
+export async function putBarberbeiroById(id: string | number | undefined, barber: Barbeiro, profilePhoto: File) {
   const token = getStorageItem("token"); 
 
   const formData = new FormData();
