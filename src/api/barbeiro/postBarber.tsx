@@ -1,5 +1,35 @@
-import api from "@/api/http-common";
+import { Barbeiro } from "@/interfaces/barbeiroInterface";
 
-export async function postBarber(barberData: any){
-    return await api.post("/barber", barberData);
+export async function postBarber(barber: Barbeiro, profilePhoto:File) {
+  // Cria um objeto FormData para enviar o objeto JSON e a imagem
+  const formData = new FormData();
+
+  // Converte o objeto `barber` para uma string JSON
+  const barberJson = JSON.stringify(barber);
+
+  // Adiciona o JSON e a imagem ao FormData
+  formData.append("barber", barberJson);
+  formData.append("profilePhoto", profilePhoto, profilePhoto.name);
+
+  try {
+    // Faz a requisição usando fetch
+    const response = await fetch("https://go-barber-api.onrender.com/barber", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Accept": "*/*",
+        // Note que não definimos o "Content-Type" porque o navegador faz isso automaticamente com multipart/form-data
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro na requisição: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log("Resposta do servidor:", data);
+    return data;
+  } catch (error) {
+    console.error("Erro ao enviar a requisição:", error);
+  }
 }
