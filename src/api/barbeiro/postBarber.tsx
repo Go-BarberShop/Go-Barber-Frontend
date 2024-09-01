@@ -1,6 +1,11 @@
 import { Barbeiro } from "@/interfaces/barbeiroInterface";
+import { getStorageItem } from "@/utils/localStore";
+import { useState } from "react";
 
 export async function postBarber(barber: Barbeiro, profilePhoto:File) {
+
+
+  const token = getStorageItem("token"); 
   // Cria um objeto FormData para enviar o objeto JSON e a imagem
   const formData = new FormData();
 
@@ -19,6 +24,8 @@ export async function postBarber(barber: Barbeiro, profilePhoto:File) {
       headers: {
         "Accept": "*/*",
         // Note que não definimos o "Content-Type" porque o navegador faz isso automaticamente com multipart/form-data
+        "Authorization": `${token}`,
+
       },
     });
 

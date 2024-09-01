@@ -77,9 +77,6 @@ const CadastrarBarbeiro = () => {
       const updatedValues = { ...values };
       delete updatedValues.profilePhoto;
   
-      console.log("Values sem a imagem:", updatedValues);
-      console.log("Imagem extraída:", profilePhoto);
-  
       // Envie os valores e a imagem separadamente
       return postBarber(updatedValues, profilePhoto);
     },

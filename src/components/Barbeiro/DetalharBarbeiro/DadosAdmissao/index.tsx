@@ -56,7 +56,6 @@ const DadosAdmissao: React.FC<DadosBarbeiroProps> = ({ formik, editar }) => {
     formik.setFieldValue("idServices", updatedSelections);
   };
 
-  console.log(formik.values)
   return (
     <>
       <div className={style.container__ContainerForm_form_threePartsContainer}>

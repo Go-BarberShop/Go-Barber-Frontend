@@ -56,7 +56,6 @@ const CadastrarProduto = () => {
 
   const mutateStock = useMutation(
     async (estoqueData: Estoque) => {
-      console.log("Stock Data:", estoqueData);
       return postEstoque(estoqueData);
     },
     {
@@ -71,7 +70,6 @@ const CadastrarProduto = () => {
 
   const mutateProduto = useMutation(
     async (produtoData: FormValues) => {
-      console.log("Product Data:", produtoData.produto);
       return postProduto(produtoData.produto);
     },
     {
@@ -80,7 +78,6 @@ const CadastrarProduto = () => {
           ...formikValues.estoque, // Use the updated Formik values
           idProduct: produtoResponse.data.idProduct, // Ensure the product ID is passed to the stock data
         };
-        console.log(estoqueData);
         mutateStock.mutate(estoqueData); // Pass the modified stock data to mutateStock
       },
       onError: (error) => {
@@ -116,7 +113,6 @@ const CadastrarProduto = () => {
             initialValues={initialValues}
             validationSchema={validateSchema}
             onSubmit={(values, { setSubmitting }) => {
-              console.log("Entrou!", values);
               mutateProduto.mutate(values); // Pass entire Formik values to mutateProduto
               setSubmitting(false);
             }}

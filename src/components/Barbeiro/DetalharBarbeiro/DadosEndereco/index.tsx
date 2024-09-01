@@ -101,13 +101,13 @@ const DadosEndereco: React.FC<DadosBarbeiroProps> = ({ formik, editar }) => {
           <>
 
             <div>
-              <label htmlFor="cep">CEP</label>
+              <label htmlFor="address.cep">CEP</label>
 
               <input
                 className={style.container__ContainerForm_form_input}
-                id="cep"
-                name="cep"
-                placeholder={formik.values.cep}
+                id="address.cep"
+                name="address.cep"
+                placeholder={formik.values.address.cep}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.address.cep}
@@ -118,13 +118,13 @@ const DadosEndereco: React.FC<DadosBarbeiroProps> = ({ formik, editar }) => {
               <span className={style.form__error}>{formik.errors.cep}</span>
             ) : null}
             <div>
-              <label htmlFor="street">Rua</label>
+              <label htmlFor="address.street">Rua</label>
 
               <input
                 className={style.container__ContainerForm_form_input}
-                id="street"
-                name="street"
-                placeholder={formik.values.street}
+                id="address.street"
+                name="address.street"
+                placeholder={formik.values.address.street}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.address.street}
@@ -136,13 +136,13 @@ const DadosEndereco: React.FC<DadosBarbeiroProps> = ({ formik, editar }) => {
             ) : null}
 
             <div>
-              <label htmlFor="number">Número</label>
+              <label htmlFor="address.number">Número</label>
 
               <input
                 className={style.container__ContainerForm_form_input}
-                id="number"
-                name="number"
-                placeholder={formik.values.number}
+                id="address.number"
+                name="address.number"
+                placeholder={formik.values.address.number}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.address.number}
@@ -153,13 +153,13 @@ const DadosEndereco: React.FC<DadosBarbeiroProps> = ({ formik, editar }) => {
               ) : null}
             </div>
             <div>
-              <label htmlFor="neighborhood">Bairro</label>
+              <label htmlFor="address.neighborhood">Bairro</label>
 
               <input
                 className={style.container__ContainerForm_form_input}
-                id="neighborhood"
-                name="neighborhood"
-                placeholder={formik.values.neighborhood}
+                id="address.neighborhood"
+                name="address.neighborhood"
+                placeholder={formik.values.address.neighborhood}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.address.neighborhood}
@@ -171,12 +171,12 @@ const DadosEndereco: React.FC<DadosBarbeiroProps> = ({ formik, editar }) => {
             ) : null}
             <div>
 
-              <label htmlFor="city">Cidade </label>
+              <label htmlFor="address.city">Cidade </label>
               <input
                 className={style.container__ContainerForm_form_input}
-                id="city"
-                name="city"
-                placeholder={formik.values.city}
+                id="address.city"
+                name="address.city"
+                placeholder={formik.values.address.city}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.address.city}
@@ -188,12 +188,12 @@ const DadosEndereco: React.FC<DadosBarbeiroProps> = ({ formik, editar }) => {
             </div>
             <div>
 
-              <label htmlFor="state">Estado </label>
+              <label htmlFor="address.state">Estado </label>
               <input
                 className={style.container__ContainerForm_form_input}
-                id="state"
-                name="state"
-                placeholder={formik.values.state}
+                id="address.state"
+                name="address.state"
+                placeholder={formik.values.address.state}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.address.state}

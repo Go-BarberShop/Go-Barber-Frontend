@@ -44,7 +44,6 @@ const ListaBarbeiros = () => {
   };
 
   if (selectedBarbeiro) {
-    console.log(selectedBarbeiro)
     return <DetalharBarbeiro
       barbeiro={selectedBarbeiro}
       backDetalhamento={handleBackToList}

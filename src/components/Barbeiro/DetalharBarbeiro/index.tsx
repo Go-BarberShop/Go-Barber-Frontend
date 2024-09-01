@@ -13,7 +13,7 @@ import DadosEndereco from "./DadosEndereco";
 import DadosPessoais from "./DadosPessoais";
 import { APP_ROUTES } from "@/constants/app-routes";
 import { getBarberPhotoById } from "@/api/barbeiro/getBarberPhotoById ";
-import { putBarbeiroById } from "@/api/barbeiro/putBarbeiroById";
+import { putBarberbeiroById } from "@/api/barbeiro/putBarbeiroById";
 
 interface DetalharBarbeiroProps {
   hrefAnterior: string;
@@ -75,33 +75,48 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backD
       }
     }
   }, [barbeiro]);
-
   const getBarberPhoto = async (idBarber: string) => {
     try {
         const response = await getBarberPhotoById(idBarber);
 
-        // Acessa os dados da resposta e converte para Blob
-        const imageBlob = new Blob([response.data], { type: 'image/jpeg' });
-        const imageUrl = URL.createObjectURL(imageBlob);
+        if (response.data) {
+            const imageBlob = new Blob([response.data], { type: 'image/jpeg' });
+            const imageUrl = URL.createObjectURL(imageBlob);
 
-        setImagePreview(imageUrl);
+            console.log("URL da imagem gerada:", imageUrl);
+
+            setImagePreview(imageUrl);  // Atualiza o estado com a URL do Blob
+        } else {
+            console.error("Nenhum dado encontrado na resposta.");
+        }
     } catch (error) {
-        console.error("Erro ao buscar a imagem do barbeiro", error);
+        console.error("Erro ao buscar a imagem do barbeiro:", error);
     }
 };
 
+  
 
-  const updateBarber = useMutation(
-    async (values: Barbeiro) => {
-      return putBarbeiroById(barbeiro.idBarber, values);
-    }, {
-    onSuccess: () => {
-      push(APP_ROUTES.private.barbeiros.name);
-    },
-    onError: (error) => {
-      console.log("Erro ao atualizar o barbeiro", error);
-    }
-  });
+
+const updateBarber = useMutation(
+  async (values: Barbeiro) => {
+    // Extraia a imagem do values
+    const profilePhoto = values.profilePhoto as File;
+
+    // Remova a imagem e os services do objeto values
+    const { profilePhoto: _, ...updatedValues } = values;
+
+
+    return putBarberbeiroById(barbeiro.idBarber, updatedValues, profilePhoto);
+  }, {
+  onSuccess: () => {
+    push(APP_ROUTES.private.barbeiros.name);
+  },
+  onError: (error) => {
+    console.log("Erro ao atualizar o barbeiro", error);
+  }
+});
+
+
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>, setFieldValue: (field: string, value: any) => void) => {
     if (!editar) return;
