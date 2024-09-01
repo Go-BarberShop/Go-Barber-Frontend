@@ -1,19 +1,16 @@
 "use client"
 import style from "./promocao.module.scss";
 
-interface DadosPromocaoProps {
+interface DadosBarbeiroProps {
     formik: any;
     editar: boolean;
     hrefAnterior: string;
     }
 
-const DadosPromocao: React.FC<DadosPromocaoProps> = ({ formik, editar }) => {
-
+const DadosPessoais: React.FC<DadosBarbeiroProps> = ({ formik, editar }) => {
 
   return (
     <>
-      
-
       <div className={style.container__ContainerForm_form_halfContainer}>
 
         {editar === false ? (
@@ -31,61 +28,42 @@ const DadosPromocao: React.FC<DadosPromocaoProps> = ({ formik, editar }) => {
               />
             </div>
             <div>
-              <label htmlFor="startDate">Data de Inicio </label>
-
-
+              <label htmlFor="email">Email </label>
               <input
-                id="startDate"
+                id="email"
                 className={style.container__ContainerForm_form_input}
-                name="startDate"
+                name="email"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
-                value={formik.values.startDate}
+                value={formik.values.email}
                 disabled
               />
             </div>
             <div>
-              <label htmlFor="totalPrice">Valor</label>
-              <input
-                id="totalPrice"
+              <label htmlFor="contato">Telefone</label>
 
+              <input
+                id="contato"
                 className={style.container__ContainerForm_form_input}
-                name="totalPrice"
+                name="contato"
+                placeholder="Não informado"
+                value={formik.values.contato}
+                disabled
+              />
+            </div>
+            <div>
+              <label htmlFor="cpf">CPF</label>
+              <input
+                id="cpf"
+                className={style.container__ContainerForm_form_input}
+                name="cpf"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
-                value={formik.values.totalPrice}
+                value={formik.values.cpf}
                 disabled
               />
             </div>
             
-            <div>
-
-              <label htmlFor="endDate">Data Final</label>
-
-              <input
-                id="endDate"
-                className={style.container__ContainerForm_form_input}
-                name="endDate"
-                placeholder="Não informado"
-                value={formik.values.endDate}
-                disabled
-              />
-            </div>
-
-            <div>
-              <label htmlFor="coupon">Cupom </label>
-              <input
-                id="coupon"
-                className={style.container__ContainerForm_form_input}
-                name="coupon"
-                placeholder="Não informado"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.coupon}
-                disabled
-              />
-            </div>
-        
           </>
         ) : (
           <>
@@ -109,76 +87,58 @@ const DadosPromocao: React.FC<DadosPromocaoProps> = ({ formik, editar }) => {
               ) : null}
 
             <div>
-              <label htmlFor="startDate">Data Inicio</label>
+              <label htmlFor="email">Email</label>
 
               <input
                 className={style.container__ContainerForm_form_input}
-                id="startDate"
-                name="startDate"
-                type= "date"
-                placeholder={formik.values.startDate}
+                id="email"
+                name="email"
+                placeholder={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.startDate}
+                value={formik.values.email}
                 required
               />
-              {formik.touched.startDate && formik.errors.startDate ? (
-                <span className={style.form__error}>{formik.errors.startDate}</span>
+              {formik.touched.email && formik.errors.email ? (
+                <span className={style.form__error}>{formik.errors.email}</span>
               ) : null}
             </div>
-            <div>
-              <label htmlFor="totalPrice">Valor</label>
 
-              <input
-                className={style.container__ContainerForm_form_input}
-                id="totalPrice"
-                name="totalPrice"
-                placeholder={formik.values.totalPrice}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.totalPrice}
-                required
-              />
-            </div>
-            {formik.touched.totalPrice && formik.errors.totalPrice ? (
-                <span className={style.form__error}>{formik.errors.totalPrice}</span>
-              ) : null}
             <div>
 
-              <label htmlFor="endDate">Data Final </label>
+              <label htmlFor="contato">Telefone </label>
               <input
                 className={style.container__ContainerForm_form_input}
-                id="endDate"
-                name="endDate"
-                type="date"
-                placeholder={formik.values.endDate}
+                id="contato"
+                name="contato"
+                placeholder={formik.values.contato}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.endDate}
+                value={formik.values.contato}
                 required
               />
-              {formik.touched.endDate && formik.errors.endDate ? (
-                <span className={style.form__error}>{formik.errors.endDate}</span>
+              {formik.touched.contato && formik.errors.contato ? (
+                <span className={style.form__error}>{formik.errors.contato}</span>
               ) : null}
-            </div>
+            </div>   
+            
             <div>
-              <label htmlFor="coupon">Cupom</label>
 
+              <label htmlFor="cpf">CPF </label>
               <input
                 className={style.container__ContainerForm_form_input}
-                id="coupon"
-                name="coupon"
-                placeholder={formik.values.coupon}
+                id="cpf"
+                name="cpf"
+                placeholder={formik.values.cpf}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.coupon}
+                value={formik.values.cpf}
                 required
               />
-            </div>
-            {formik.touched.coupon && formik.errors.coupon ? (
-                <span className={style.form__error}>{formik.errors.coupon}</span>
+              {formik.touched.cpf && formik.errors.cpf ? (
+                <span className={style.form__error}>{formik.errors.cpf}</span>
               ) : null}
-
+            </div>            
           </>
         )}
 
@@ -188,4 +148,4 @@ const DadosPromocao: React.FC<DadosPromocaoProps> = ({ formik, editar }) => {
 }
 
 
-export default DadosPromocao;
+export default DadosPessoais;

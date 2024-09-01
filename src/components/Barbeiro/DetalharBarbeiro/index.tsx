@@ -1,144 +1,215 @@
-"use client"
-
+"use client";
 
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 
-import style from "./detalhar-promocao.module.scss";
-
+import style from "./detalhar-barbeiro.module.scss";
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
-import DadosPromocao from "./DadosPessoais";
 import { useRouter } from "next/navigation";
 import { useMutation } from "react-query";
-import { putPromocaoById } from "@/api/promocoes/putPromocaoById";
+import { Barbeiro } from '@/interfaces/barbeiroInterface';
+import DadosAdmissao from "./DadosAdmissao";
+import DadosEndereco from "./DadosEndereco";
+import DadosPessoais from "./DadosPessoais";
 import { APP_ROUTES } from "@/constants/app-routes";
+import { getBarberPhotoById } from "@/api/barbeiro/getBarberPhotoById ";
+import { putBarbeiroById } from "@/api/barbeiro/putBarbeiroById";
 
-interface DetalharPromocaoProps {
-    hrefAnterior: string;
-    diretorioAtual: string;
-    dirAnt: string;
-    hrefAtual: string;
-    backDetalhamento: () => void;
-    promocao: Promocao;
+interface DetalharBarbeiroProps {
+  hrefAnterior: string;
+  backDetalhamento: () => void;
+  barbeiro: Barbeiro;
 }
-interface Promocao {
-    id: string;
-    name: string;
-    totalPrice: string;
-    startDate: string;
-    endDate: string;
-    coupon: string;
-  }
 
-  const DetalharPromocao : React.FC<DetalharPromocaoProps> = ({ hrefAnterior, backDetalhamento, promocao }) => {
+const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backDetalhamento, barbeiro }) => {
+  const { push } = useRouter();
+  const [editar, setEditar] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-    const { push } = useRouter();
-    const [editar, setEditar] = useState(false);
-
-  const [formData, setFormData] = useState({
-    id: promocao.id,
+  const [formData, setFormData] = useState<Barbeiro>({
+    idBarber: '',
     name: '',
-    totalPrice: '',
-    startDate: '',
-    endDate: '',
-    coupon: '',
-  })
+    email: '',
+    contato: '',
+    password: '',
+    services: [],
+    cpf: '',
+    address: {
+      street: '',
+      number: 0,
+      neighborhood: '',
+      city: '',
+      state: '',
+    },
+    salary: 0,
+    start: '',
+    end: '',
+    admissionDate: '',
+    workload: 0,
+    idServices: [],
+    profilePhoto: undefined,
+  });
 
   useEffect(() => {
-    if (promocao) {
+    if (barbeiro) {
       setFormData({
-        id: promocao.id,
-        name: promocao.name || '',
-        totalPrice: promocao.totalPrice || '',
-        startDate: promocao.startDate || '',
-        endDate: promocao.endDate || '',
-        coupon: promocao.coupon || '',
-      })
+        idBarber: barbeiro.idBarber || '',
+        name: barbeiro.name || '',
+        email: barbeiro.email || '',
+        services: barbeiro.services || {},
+        password: barbeiro.password || '',
+        contato: barbeiro.contato || '',
+        cpf: barbeiro.cpf || '',
+        start: barbeiro.start || '',
+        end: barbeiro.end || '',
+        address: barbeiro.address || {},
+        salary: barbeiro.salary || 0,
+        admissionDate: barbeiro.admissionDate || '',
+        workload: barbeiro.workload || 0,
+        idServices: barbeiro.idServices || [],
+        profilePhoto: undefined,
+      });
+
+      if (barbeiro.idBarber) {
+        getBarberPhoto(barbeiro.idBarber);
+      }
     }
-  }, [promocao]);
+  }, [barbeiro]);
+
+  const getBarberPhoto = async (idBarber: string) => {
+    try {
+        const response = await getBarberPhotoById(idBarber);
+
+        // Acessa os dados da resposta e converte para Blob
+        const imageBlob = new Blob([response.data], { type: 'image/jpeg' });
+        const imageUrl = URL.createObjectURL(imageBlob);
+
+        setImagePreview(imageUrl);
+    } catch (error) {
+        console.error("Erro ao buscar a imagem do barbeiro", error);
+    }
+};
 
 
-  const { mutate } = useMutation(
-    async (values: Promocao) => {
-      return putPromocaoById(promocao.id, values);
+  const updateBarber = useMutation(
+    async (values: Barbeiro) => {
+      return putBarbeiroById(barbeiro.idBarber, values);
     }, {
     onSuccess: () => {
-        push(APP_ROUTES.private.promocoes.name); // Ajuste conforme necessário
+      push(APP_ROUTES.private.barbeiros.name);
     },
     onError: (error) => {
-      console.log("Erro ao cadastrar uma nova promoção", error);
+      console.log("Erro ao atualizar o barbeiro", error);
     }
   });
 
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>, setFieldValue: (field: string, value: any) => void) => {
+    if (!editar) return;
+
+    const file = event.currentTarget.files?.[0];
+    if (file) {
+      setFieldValue("profilePhoto", file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <div id="header" className={style.container}>
-        <HeaderDetalhamento
-            titulo="Promoções"
-            hrefAnterior={backDetalhamento}
-            diretorioAnterior="Home / Promoções / "
-            diretorioAtual="Informações da promoção"
-
-       />
+      <HeaderDetalhamento
+        titulo="Barbeiro"
+        hrefAnterior={backDetalhamento}
+        diretorioAnterior="Home / Barbeiros / "
+        diretorioAtual="Informações do Barbeiro"
+      />
       <div className={style.container__ContainerForm}>
         <Formik
           initialValues={formData}
           enableReinitialize
           onSubmit={(values, { setSubmitting }) => {
-            mutate(values)
+            updateBarber.mutate(values);
             setSubmitting(false);
-
-            
           }}
         >
-          
-          {(formik) => {
-            return (
-
-              <Form
-                className={style.container__ContainerForm_form}
-              >
-                  <div className={style.container__header}>
-                     <div className={style.container__header_title}>
-                      <h1>Informações da promoção</h1>
-                      </div>
-                      {editar === false ? (
-                      <button
-                          onClick={() => setEditar(true)}
-                          className={style.container__header_button}>
-
-                          <span>Editar</span>
-                          {/*<Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} /> */}
-                      </button >
+          {(formik) => (
+            <Form className={style.container__ContainerForm_form}>
+              <div className={style.container__header}>
+                <div className={style.container__photo}>
+                  <div className={style.profilePhotoWrapper}>
+                    <input
+                      type="file"
+                      id="profilePhoto"
+                      name="profilePhoto"
+                      accept="image/jpeg"
+                      onChange={(event) => handleImageChange(event, formik.setFieldValue)}
+                      disabled={!editar}
+                    />
+                    <label htmlFor="profilePhoto" className={style.profilePhotoLabel}>
+                      {imagePreview ? (
+                        <img src={imagePreview} alt="Profile Preview" className={style.profileImage} />
                       ) : (
-                      <button
-                          onClick={() => setEditar(false)}
-                          className={style.container__header_button}>
-
-                          <span>Salvar</span>
-                          {/*<Image src="/assets/iconLapis.svg" alt="editar perfil" width={25} height={25} />*/}
-                      </button >
+                        <img src="/assets/icons/perfil.svg" alt="Upload Icon" />
                       )}
+                    </label>
+                    {editar && (
+                      <span
+                        className={style.editIcon}
+                        onClick={() => {
+                          const fileInput = document.getElementById('profilePhoto');
+                          if (fileInput) {
+                            fileInput.click();
+                          }
+                        }}
+                      >
+                        <img src="/assets/icons/editar.svg" alt="Edit Icon" />
+                      </span>
+                    )}
                   </div>
 
+                  {formik.touched.profilePhoto && formik.errors.profilePhoto && (
+                    <span className={style.form__error}>{formik.errors.profilePhoto}</span>
+                  )}
+                </div>
+                <div className={style.container__header_title}>
+                  <h1>Informações do Barbeiro</h1>
+                </div>
+                {!editar ? (
+                  <button
+                    type="button"
+                    onClick={() => setEditar(true)}
+                    className={style.container__header_button}
+                  >
+                    <span>Editar</span>
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className={style.container__header_button}
+                  >
+                    <span>Salvar</span>
+                  </button>
+                )}
+              </div>
 
-                <DadosPromocao formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
-                {/*
-                  hrefAnterior === "/agricultores" && (
-                    <DadosAtividadesRurais formik={formik} editar={editar} />
-                  )*/
-                }
-               
-              </Form >
-            )
-          }
-          }
-        </Formik >
-      </div >
+              <DadosPessoais formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
+              <div className={style.container__header_title}>
+                <h1>Endereço</h1>
+              </div>
 
-    </div >
+              <DadosEndereco formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
+              <div className={style.container__header_title}>
+                <h1>Informações de admissão</h1>
+              </div>
+              <DadosAdmissao formik={formik} editar={editar} hrefAnterior={hrefAnterior} />
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </div>
   );
-}
+};
 
-
-export default DetalharPromocao;
+export default DetalharBarbeiro;
