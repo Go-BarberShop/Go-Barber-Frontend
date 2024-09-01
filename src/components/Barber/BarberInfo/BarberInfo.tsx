@@ -5,8 +5,8 @@ import { APP_ROUTES } from "@/constants/app-routes";
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
 import { useRouter } from "next/navigation";
 import { useMutation } from "react-query";
-import { putBarbeiroById } from "@/api/barbeiro/putBarbeiroById";
 import BarberInput from "../BarberInput";
+import { putBarberbeiroById } from "@/api/barbeiro/putBarbeiroById";
 
 interface BarberInfoValues {
   id: string;
@@ -42,7 +42,7 @@ const BarberInfo: React.FC<BarberInfoProps> = ({ hrefAnterior, backDetalhamento,
 
   const { mutate } = useMutation(
     async (values: BarberInfoValues) => {
-      return putBarbeiroById(values.id, values);
+      //return putBarberbeiroById(values.id, values);
     }, {
       onSuccess: () => {
         push(APP_ROUTES.private.barbeiros.name);
