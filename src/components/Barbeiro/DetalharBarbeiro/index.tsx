@@ -12,8 +12,8 @@ import DadosAdmissao from "./DadosAdmissao";
 import DadosEndereco from "./DadosEndereco";
 import DadosPessoais from "./DadosPessoais";
 import { APP_ROUTES } from "@/constants/app-routes";
-import { getBarberPhotoById } from "@/api/barbeiro/getBarberPhotoById ";
 import { putBarberbeiroById } from "@/api/barbeiro/putBarbeiroById";
+import { getBarberPhotoById } from "@/api/barbeiro/getBarberPhotoById";
 
 interface DetalharBarbeiroProps {
   hrefAnterior: string;
