@@ -345,6 +345,15 @@
   }
 }
 
+.consultas{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .consultas h1{
+
   font-size: 1.6em;
+  text-align: center;
+  padding: 10px;
 }

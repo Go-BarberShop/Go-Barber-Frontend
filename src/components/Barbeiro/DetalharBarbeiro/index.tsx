@@ -349,7 +349,6 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({
             {showAgendamentos && (
               <>
               <div className={style.consultas}>
-              <hr className={style.line} />
               <h1 className={style.container__header_title}>Agendamentos do Barbeiro</h1>
                 <AgendamentoTable
                   table1="Nome do Cliente"
@@ -362,7 +361,8 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({
                   currentPage={agendamentoPage}
                   setCurrentPage={setAgendamentoPage}
                 />
-              </div></>
+              </div>
+              </>
             
             )}
           </div>
