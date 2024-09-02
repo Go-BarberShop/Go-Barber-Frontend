@@ -18,7 +18,7 @@ import { getAllServicos } from "@/api/servicos/getAllServicos";
 import { Agendamento } from "@/interfaces/agendamentoInterface";
 import DetalharAgendamento from "@/components/Agendamento/DetalharAgendamento";
 import AgendamentoTable from "@/components/Agendamento/Table";
-import { mockAgendamentos, mockServicos, mockTotalAgendamentos } from "@/components/Agendamento/AgendamentoMock";
+import { getAllAtendimentos } from "@/api/atendimentos/getAllAtendimentos";
 interface DetalharBarbeiroProps {
   hrefAnterior: string;
   backDetalhamento: () => void;
@@ -38,10 +38,11 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({
     number[]
   >([]);
   const [showAgendamentos, setShowAgendamentos] = useState(false);
-  const [agendamentos, setAgendamentos] = useState<Agendamento[]>(mockAgendamentos);
+  const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
   const [selectedAgendamento, setSelectedAgendamento] =
     useState<Agendamento | null>(null);
-  const [agendamentoPage,setAgendamentoPage] = useState(0);
+  const [currentPage,setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   const [formData, setFormData] = useState<Barbeiro>({
     idBarber: "",
@@ -195,6 +196,20 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({
   const closeAgendamento = () => {
     setSelectedAgendamento(null);
   };
+
+  const {mutate} = useMutation(() => getAllAtendimentos(currentPage,3), {
+    onSuccess: (res) => {
+      setAgendamentos(res.data.content);
+      setTotalPages(res.data.totalPages);
+    },
+    onError: (error) => {
+      console.error(`Erro ao recuperar os agendamentos:`, error);
+    }
+  });
+
+  useEffect(() => {
+    mutate();
+  }, [currentPage]);
 
   return (
     <>
@@ -358,8 +373,8 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({
                   onSelectAgendamento={onSelectAgendamento}
                   setAgendamentos={setAgendamentos}
                   totalPages={1}
-                  currentPage={agendamentoPage}
-                  setCurrentPage={setAgendamentoPage}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
                 />
               </div>
               </>
