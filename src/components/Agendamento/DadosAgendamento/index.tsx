@@ -19,14 +19,14 @@ const DadosAgendamento: React.FC<DadosAgendamentoProps> = ({
         {editar === false ? (
           <>
             <div>
-              <label htmlFor="name">Nome do Agendamento</label>
+              <label htmlFor="name">Nome do cliente</label>
               <input
                 id="name"
                 className={style.container__ContainerForm_form_input}
                 name="name"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
-                value={formik.values.name}
+                value={formik.values.clientName}
                 disabled
               />
             </div>
@@ -38,7 +38,7 @@ const DadosAgendamento: React.FC<DadosAgendamentoProps> = ({
                 name="date"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
-                value={formik.values.date}
+                value={formik.values.startTime}
                 disabled
               />
             </div>
@@ -50,7 +50,7 @@ const DadosAgendamento: React.FC<DadosAgendamentoProps> = ({
                 name="price"
                 placeholder="Não informado"
                 onBlur={formik.handleBlur}
-                value={formik.values.price}
+                value={formik.values.serviceType[0].valueService}
                 disabled
               />
             </div>

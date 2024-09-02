@@ -2,7 +2,7 @@
 
 import { Form, Formik, FormikProps } from "formik";
 import { useEffect, useState } from "react";
-import style from "./DetalharAgendamento.module.scss";
+import style from "./detalharAgendamento.module.scss"
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
 import DadosAgendamento from "../DadosAgendamento";
 import { useRouter } from "next/navigation";
@@ -35,7 +35,8 @@ const DetalharAgendamento: React.FC<DetalharAgendamentoProps> = ({
     clientNumber: agendamento.clientNumber || '',
     startTime: agendamento.startTime || '',
     endTime: agendamento.endTime || '',
-    services: agendamento.services || [],
+    services: agendamento.barber.services || [],
+    serviceType: agendamento.serviceType || [],
   });
 
   useEffect(() => {
@@ -46,7 +47,8 @@ const DetalharAgendamento: React.FC<DetalharAgendamentoProps> = ({
         clientNumber: agendamento.clientNumber || '',
         startTime: agendamento.startTime || '',
         endTime: agendamento.endTime || '',
-        services: agendamento.services || [],
+        services: agendamento.barber.services || [],
+        serviceType: agendamento.serviceType || [],
       });
     }
   }, [agendamento]);
@@ -82,7 +84,7 @@ const DetalharAgendamento: React.FC<DetalharAgendamentoProps> = ({
             setSubmitting(false);
           }}
         >
-          {(formik: FormikProps<Agendamento>) => (
+          {(formik) => (
             <Form className={style.container__ContainerForm_form}>
               <div className={style.container__header}>
                 <div className={style.container__header_title}>

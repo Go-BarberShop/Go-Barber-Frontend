@@ -1,26 +1,44 @@
-import { Barbeiro } from "./barbeiroInterface";
-import { Servico } from "./servicoInterface";
+// agendamentoInterface.ts
 
-interface TimeService {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-}
+import { Service } from "@/interfaces/barbeiroInterface";
 
-interface ServiceType {
+export interface Agendamento {
+  clientName: string;
+  clientNumber: string;
+  barber: {
+    idBarber: string;
+    name: string;
+    email: string;
+    cpf: string;
+    address: {
+      street: string;
+      city: string;
+      neighborhood: string;
+      number: number;
+      state: string;
+    };
+    salary: number;
+    admissionDate: string;
+    workload: number;
+    services: Service[];
+    contato: string;
+    idServices: number[];
+    password: string;
+    start: string;
+    end: string;
+  };
+  serviceType: {
     idService: number;
     nameService: string;
     descriptionService: string;
     valueService: number;
-    timeService: TimeService;
-}
-
-export interface Agendamento {
-    clientName: string;
-    clientNumber: string;
-    barber: Barbeiro;
-    services: ServiceType[];
-    startTime: string;
-    endTime: string; 
+    timeService: {
+      hour: number;
+      minute: number;
+      second: number;
+      nano: number;
+    };
+  }[];
+  startTime: string;
+  endTime: string;
 }
