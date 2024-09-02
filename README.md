@@ -1,37 +1,26 @@
-# Go-Barber-Frontend
+# Go-Barber
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/816b29901b5b4f94b8b4accf0f7ffc8f)](https://app.codacy.com/gh/Go-BarberShop/Go-Barber-Frontend/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/816b29901b5b4f94b8b4accf0f7ffc8f)](https://app.codacy.com/gh/Go-BarberShop/Go-Barber-Frontend/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+<div align="center">
+    <img height=200 src="https://media.tenor.com/QckgX69_GBoAAAAi/berlin-funny-haircut.gif">
+</div>
 Sistema de gerenciamento para a barbearia fictícia GoBarber. Esse sistema é um projeto para a disciplina de Engenharia de Software
 
-## Getting Started
+## Integrantes
 
-First, run the development server:
+[Adenilson Ferreira Ramos](https://github.com/AdnRamos) | [Carlos Eduardo Bahia da Silva Araujo](https://github.com/Carlos-Bahia) | [Carlos Richard Martins dos Santos](https://github.com/Crichard7) | [Emanuel Reino Almeida da Costa Santos](https://github.com/Emanuel-Al) | [Gustavo Ferreira Wanderley](https://github.com/MESTREGUGABr) | [Ricaelle Nascimento Teixeira Pontes](https://github.com/ricaellenascimento) | [Lucas Galdêncio Barbosa](https://github.com/LucasGaldencio)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Sobre o Projeto
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Projeto para implementação de um SaaS em Java Spring Boot com foco no servidor para a disciplina de __Engenharia de Software__ ministrado pelo Professor Dr. [Rodrigo Andrade](https://github.com/rcaa), da UFAPE, referente ao período de 2024.1 com intuito de avaliação para a 2ª Verificação de Aprendizagem.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+O sistema serve como um ponto de encontro entre clientes e barbeiros, permitindo que os barbeiros se registrem, abram suas barbearias, definam horários e controlem o estoque. Além disso, permite a emissão de relatórios, oferece cupons e promoções aos clientes, entre outras funcionalidades definidas no Product Backlog.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## :construction: Status do Projeto
+<div align="center">
+Desenvolvimento 
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 1%
+</div>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
