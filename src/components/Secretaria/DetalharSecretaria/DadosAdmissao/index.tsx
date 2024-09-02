@@ -1,40 +1,13 @@
 "use client";
 import style from "./admissao.module.scss";
-import { Service } from "@/interfaces/barbeiroInterface";
-interface DadosBarbeiroProps {
+interface DadosSecretariaProps {
   formik: any;
   editar: boolean;
-  servicosSelecionadosId: number[];
-  servicosDisponiveis: Service[];
   hrefAnterior: string;
-  setServicosSelecionadosId: any;
-
 }
 
-const DadosAdmissao: React.FC<DadosBarbeiroProps> = ({ formik, editar, servicosSelecionadosId, servicosDisponiveis, setServicosSelecionadosId }) => {
+const DadosAdmissao: React.FC<DadosSecretariaProps> = ({ formik, editar  }) => {
 
-
-  const handleServiceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOptions = Array.from(event.target.selectedOptions);
-    const selectedIds = selectedOptions.map((option) => parseInt(option.value, 10));
-
-    const updatedSelections = [...servicosSelecionadosId];
-
-    selectedIds.forEach((id) => {
-      const index = updatedSelections.indexOf(id);
-      if (index > -1) {
-        // Remove o serviço se já estiver selecionado
-        updatedSelections.splice(index, 1);
-      } else {
-        // Adiciona o serviço se não estiver selecionado
-        updatedSelections.push(id);
-      }
-    });
-
-    setServicosSelecionadosId(updatedSelections);
-
-    formik.setFieldValue("idServices", updatedSelections);
-  };
   return (
     <>
       <div className={style.container__ContainerForm_form_threePartsContainer}>
@@ -107,41 +80,6 @@ const DadosAdmissao: React.FC<DadosBarbeiroProps> = ({ formik, editar, servicosS
             disabled={!editar}
           />
         </div>
-      </div>
-      <div>
-        {editar ? (
-          <div className={style.container__ContainerForm_form_halfContainer}>
-            <div>
-              <label htmlFor="services">Serviços</label>
-              <select
-                id="services"
-                name="services"
-                multiple
-                className={style.container__ContainerForm_form_input}
-                value={servicosSelecionadosId.map(String)}
-                onChange={handleServiceChange}
-              >
-                {servicosDisponiveis.map((servico) => (
-                  <option key={servico.id} value={String(servico.id)}>
-                    {servico.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {servicosSelecionadosId.length > 0 && (
-              <div className={style.selectedServices}>
-                <h4>Serviços Selecionados:</h4>
-                <p>{servicosSelecionadosId.map(id => servicosDisponiveis.find(service => service.id === id)?.name).join(", ")}</p>
-              </div>
-            )}
-            {formik.touched.services && formik.errors.services ? (
-              <span className={style.form__error}>{formik.errors.services}</span>
-            ) : null}
-          </div>
-        ) : ("")}
-        {formik.touched.services && formik.errors.services ? (
-          <span className={style.form__error}>{formik.errors.services}</span>
-        ) : null}
       </div>
     </>
   );

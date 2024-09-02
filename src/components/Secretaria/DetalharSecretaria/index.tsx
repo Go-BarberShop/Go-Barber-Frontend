@@ -7,23 +7,22 @@ import style from "./detalhar-barbeiro.module.scss";
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
 import { useRouter } from "next/navigation";
 import { useMutation } from "react-query";
-import { Barbeiro, Service } from '@/interfaces/barbeiroInterface';
+import { Service } from '@/interfaces/barbeiroInterface';
 import DadosAdmissao from "./DadosAdmissao";
 import DadosEndereco from "./DadosEndereco";
 import DadosPessoais from "./DadosPessoais";
-import { APP_ROUTES } from "@/constants/app-routes";
-import { putBarberbeiroById } from "@/api/barbeiro/putBarbeiroById";
-import { getBarberPhotoById } from "@/api/barbeiro/getBarberPhotoById";
-import { getAllServicos } from "@/api/servicos/getAllServicos";
+import { Secretaria } from "@/interfaces/secretariaInterface";
+import { getSecretariaPhotoById } from "@/api/secretaria/getSecretariaPhotoById";
+import { putSecretariaById } from "@/api/secretaria/putSecretariaById";
 
-interface DetalharBarbeiroProps {
+interface DetalharSecretariaProps {
   hrefAnterior: string;
   backDetalhamento: () => void;
-  barbeiro: Barbeiro | any;
+  secretaria: Secretaria | any;
   
 }
 
-const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backDetalhamento, barbeiro }) => {
+const DetalharSecretaria: React.FC<DetalharSecretariaProps> = ({ hrefAnterior, backDetalhamento, secretaria: secretaria }) => {
   const { push } = useRouter();
   const [editar, setEditar] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -31,13 +30,12 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backD
   const [servicosSelecionadosId, setServicosSelecionadosId] = useState<number[]>([]);
 
  
-  const [formData, setFormData] = useState<Barbeiro>({
-    idBarber: '',
+  const [formData, setFormData] = useState<Secretaria>({
+    idSecretary: '',
     name: '',
     email: '',
-    contato: '',
+    contact: '',
     password: '',
-    services: [],
     cpf: '',
     address: {
       street: '',
@@ -51,61 +49,44 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backD
     end: '',
     admissionDate: '',
     workload: 0,
-    idServices: [],
     profilePhoto: undefined,
   });
 
   useEffect(() => {
-    fetchServicos()
-    if (barbeiro) {
+    if (secretaria) {
       setFormData({
-        idBarber: barbeiro.idBarber || '',
-        name: barbeiro.name || '',
-        email: barbeiro.email || '',
-        services: barbeiro.services || {},
-        password: barbeiro.password || '',
-        contato: barbeiro.contato || '',
-        cpf: barbeiro.cpf || '',
-        start: barbeiro.start || '',
-        end: barbeiro.end || '',
-        address: barbeiro.address || {},
-        salary: barbeiro.salary || 0,
-        admissionDate: barbeiro.admissionDate || '',
-        workload: barbeiro.workload || 0,
-        idServices: barbeiro.idServices || [],
+        idSecretary: secretaria.idBarber || '',
+        name: secretaria.name || '',
+        email: secretaria.email || '',
+        password: secretaria.password || '',
+        contact: secretaria.contact || '',
+        cpf: secretaria.cpf || '',
+        start: secretaria.start || '',
+        end: secretaria.end || '',
+        address: secretaria.address || {},
+        salary: secretaria.salary || 0,
+        admissionDate: secretaria.admissionDate || '',
+        workload: secretaria.workload || 0,
         profilePhoto: undefined,
       });
 
-      if (barbeiro.idBarber) {
-        getBarberPhoto(barbeiro.idBarber);
-      }
-      if (barbeiro.services) {
-        const selectedServicesIds = barbeiro.services.map((service: Service) => service.id);
-        setServicosSelecionadosId(selectedServicesIds);
+      if (secretaria.idSecretary) {
+        getSecretariaPhoto(secretaria.idSecretary);
       }
     }
-  }, [barbeiro]);
-
-  const { mutate: fetchServicos } = useMutation(() => getAllServicos(0, 100), {
-    onSuccess: (res) => {
-      setServicosDisponiveis(res.data.content);
-
-    },
-    onError: (error: unknown) => {
-      console.error("Erro ao recuperar os serviços:", error);
-    },
-  });
+  }, [secretaria]);
 
 
 
 
-  const getBarberPhoto = async (idBarber: string) => {
+  const getSecretariaPhoto = async (idSecretary: string) => {
     try {
-        const response = await getBarberPhotoById(idBarber);
+        const response = await getSecretariaPhotoById(idSecretary);
 
         if (response.data) {
             const imageBlob = new Blob([response.data], { type: 'image/jpeg' });
             const imageUrl = URL.createObjectURL(imageBlob);
+
 
             setImagePreview(imageUrl);  // Atualiza o estado com a URL do Blob
         } else {
@@ -119,20 +100,19 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backD
   
 
 
-const updateBarber = useMutation(
-  async (values: Barbeiro) => {
-    console.log("values", values);
+const updateSecretaria = useMutation(
+  async (values: Secretaria) => {
     // Extraia a imagem do values
     const profilePhoto = values.profilePhoto as File;
 
     // Remova a imagem e os services do objeto values
     const { profilePhoto: _, ...updatedValues } = values;
 
-
-    return putBarberbeiroById(barbeiro.idBarber, updatedValues, profilePhoto);
+  
+    return putSecretariaById(secretaria.idSecretary, updatedValues, profilePhoto);
   }, {
-  onSuccess: () => {
-    push(APP_ROUTES.private.barbeiros.name);
+  onSuccess: (res) => {
+
   },
   onError: (error) => {
     console.log("Erro ao atualizar o barbeiro", error);
@@ -142,7 +122,7 @@ const updateBarber = useMutation(
 
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>, setFieldValue: (field: string, value: any) => void) => {
-    if (!editar) return;
+    //if (!editar) return;
 
     const file = event.currentTarget.files?.[0];
     if (file) {
@@ -158,17 +138,17 @@ const updateBarber = useMutation(
   return (
     <div id="header" className={style.container}>
       <HeaderDetalhamento
-        titulo="Barbeiro"
+        titulo="Secretaria"
         hrefAnterior={backDetalhamento}
-        diretorioAnterior="Home / Barbeiros / "
-        diretorioAtual="Informações do Barbeiro"
+        diretorioAnterior="Home / Secretarias / "
+        diretorioAtual="Informações da Secretaria"
       />
       <div className={style.container__ContainerForm}>
         <Formik
           initialValues={formData}
           enableReinitialize
           onSubmit={(values, { setSubmitting }) => {
-            updateBarber.mutate(values);
+            updateSecretaria.mutate(values);
             setSubmitting(false);
           }}
         >
@@ -214,9 +194,6 @@ const updateBarber = useMutation(
                   </div>
                   <div>
                     <h1>{formik.values.name}</h1>
-                    <p className={style.container__header_title}>
-                      {servicosSelecionadosId.map(id => servicosDisponiveis.find(service => service.id === id)?.name).join(", ")}
-                    </p>
                   </div>
                 </div>
                 {!editar ? (
@@ -248,15 +225,8 @@ const updateBarber = useMutation(
               <div className={style.container__header_title}>
                 <h1>Informações de admissão</h1>
               </div>
-              <DadosAdmissao
-                formik={formik}
-                editar={editar}
-                hrefAnterior={hrefAnterior}
-                servicosSelecionadosId={servicosSelecionadosId}
-                servicosDisponiveis={servicosDisponiveis}
-                setServicosSelecionadosId={setServicosSelecionadosId}
+              <DadosAdmissao formik={formik} editar={editar} hrefAnterior={hrefAnterior} 
               />
-              
             </Form>
           )}
         </Formik>
@@ -265,4 +235,4 @@ const updateBarber = useMutation(
   );
 };
 
-export default DetalharBarbeiro;
+export default DetalharSecretaria;

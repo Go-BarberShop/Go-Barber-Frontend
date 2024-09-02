@@ -13,7 +13,7 @@ export default function Home () {
             return <LayoutAdmin />
         } else if (role === "BARBER") {
             return <LayoutBarbeiro />
-        } else if (role === "ROLE_AGRICULTOR") {
+        } else if (role === "SECRETARY") {
              return <LayoutSecretaria/>
         }
     } 

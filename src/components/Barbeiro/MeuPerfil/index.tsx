@@ -127,7 +127,6 @@ const MeuPerfil: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, barbeiro }) 
         const imageBlob = new Blob([response.data], { type: 'image/jpeg' });
         const imageUrl = URL.createObjectURL(imageBlob);
 
-        console.log("URL da imagem gerada:", imageUrl);
 
         setImagePreview(imageUrl);  // Atualiza o estado com a URL do Blob
       } else {
@@ -251,6 +250,7 @@ const MeuPerfil: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, barbeiro }) 
                 ) : (
                   <button
                     type="submit"
+                    onClick={() => setEditar(false)}
                     className={style.container__header_button}
                   >
                     <span>Salvar</span>

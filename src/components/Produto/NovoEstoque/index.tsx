@@ -75,7 +75,6 @@ const NovoEstoque: React.FC<NovoEstoqueProps> = ({ productId, onCancel }) => {
             initialValues={initialValues}
             validationSchema={validateSchema}
             onSubmit={(values, { setSubmitting }) => {
-              console.log("Entrou!", values);
               mutate(values);
               setSubmitting(false);
             }}
