@@ -9,7 +9,8 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "react-query";
 import { putServicoById } from "@/api/servicos/putServicoById";
 import { APP_ROUTES } from "@/constants/app-routes";
-import { Agendamento } from "@/interfaces/Agendamento";
+import { Agendamento } from "@/interfaces/agendamentoInterface";
+import { putAtendimentoById } from "@/api/atendimentos/putAtendimentosById";
 
 interface DetalharAgendamentoProps {
   hrefAnterior: string;
@@ -29,28 +30,30 @@ const DetalharAgendamento: React.FC<DetalharAgendamentoProps> = ({
   const [editar, setEditar] = useState(false);
 
   const [formData, setFormData] = useState({
-    id: agendamento.id,
-    name: agendamento.name || '',
-    date: agendamento.date || '',
-    price: agendamento.price || 0,
+    barber: agendamento.barber,
+    clientName: agendamento.clientName || '',
+    clientNumber: agendamento.clientNumber || '',
+    startTime: agendamento.startTime || '',
+    endTime: agendamento.endTime || '',
     services: agendamento.services || [],
   });
 
   useEffect(() => {
     if (agendamento) {
       setFormData({
-        id: agendamento.id,
-        name: agendamento.name || '',
-        date: agendamento.date || '',
-        price: agendamento.price || 0,
+        barber: agendamento.barber,
+        clientName: agendamento.clientName,
+        clientNumber: agendamento.clientNumber || '',
+        startTime: agendamento.startTime || '',
+        endTime: agendamento.endTime || '',
         services: agendamento.services || [],
       });
     }
   }, [agendamento]);
 
-  const { mutate } = useMutation(
+/*   const { mutate } = useMutation(
     async (values: Agendamento) => {
-      return putServicoById(agendamento.id, values);
+      return putAtendimentoById(agendamento.id, values);
     },
     {
       onSuccess: () => {
@@ -61,7 +64,7 @@ const DetalharAgendamento: React.FC<DetalharAgendamentoProps> = ({
       },
     }
   );
-
+ */
   return (
     <div id="header" className={style.container}>
       <HeaderDetalhamento
@@ -75,7 +78,7 @@ const DetalharAgendamento: React.FC<DetalharAgendamentoProps> = ({
           initialValues={formData}
           enableReinitialize
           onSubmit={(values, { setSubmitting }) => {
-            mutate(values);
+            /* mutate(values); */
             setSubmitting(false);
           }}
         >
