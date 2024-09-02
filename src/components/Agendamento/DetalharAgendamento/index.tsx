@@ -5,9 +5,6 @@ import { useEffect, useState } from "react";
 import style from "./detalharAgendamento.module.scss"
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
 import DadosAgendamento from "../DadosAgendamento";
-import { useRouter } from "next/navigation";
-import { putServicoById } from "@/api/servicos/putServicoById";
-import { APP_ROUTES } from "@/constants/app-routes";
 import { Agendamento } from "@/interfaces/agendamentoInterface";
 
 interface DetalharAgendamentoProps {
