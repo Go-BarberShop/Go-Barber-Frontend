@@ -6,6 +6,9 @@ export const APP_ROUTES = {
         barbeiros: {
             name: "/barbeiros"
         },
+        historico: {
+            name: "/barbeiros/historico"
+        },
         meu_perfil: {
             name: "/barbeiros/meu-perfil"
         },
@@ -42,6 +45,7 @@ export const APP_ROUTES = {
         unauthorized: {
             name: "/unauthorized"
         }
+
     },
     public: {
         login: '/',

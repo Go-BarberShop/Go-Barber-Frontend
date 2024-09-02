@@ -15,6 +15,11 @@ import { APP_ROUTES } from "@/constants/app-routes";
 import { putBarberbeiroById } from "@/api/barbeiro/putBarbeiroById";
 import { getBarberPhotoById } from "@/api/barbeiro/getBarberPhotoById";
 import { getAllServicos } from "@/api/servicos/getAllServicos";
+import { Agendamento } from "@/interfaces/agendamentoInterface";
+import AgendamentoTable from "@/components/Agendamento/Table";
+import { getAllAtendimentos } from "@/api/atendimentos/getAllAtendimentos";
+import DetalharAgendamento from "@/components/Agendamento/DetalharAgendamento";
+
 
 interface DetalharBarbeiroProps {
   hrefAnterior: string;
@@ -29,6 +34,12 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({ hrefAnterior, backD
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [servicosDisponiveis, setServicosDisponiveis] = useState<Service[]>([]);
   const [servicosSelecionadosId, setServicosSelecionadosId] = useState<number[]>([]);
+  const [currentPage,setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [showAgendamentos, setShowAgendamentos] = useState(false);
+  const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
+  const [selectedAgendamento, setSelectedAgendamento] =
+    useState<Agendamento | null>(null);
 
  
   const [formData, setFormData] = useState<Barbeiro>({
@@ -155,6 +166,41 @@ const updateBarber = useMutation(
     }
   };
 
+  const {mutate} = useMutation(() => getAllAtendimentos(currentPage,3), {
+    onSuccess: (res) => {
+      setAgendamentos(res.data.content);
+      setTotalPages(res.data.totalPages);
+    },
+    onError: (error) => {
+      console.error("Erro ao recuperar os agendamentos:", error);
+    }
+  });
+
+  useEffect(() => {
+    mutate();
+  }, [currentPage]);
+
+  const onSelectAgendamento = (agendamento: Agendamento) => {
+    setSelectedAgendamento(agendamento);
+  };
+
+  const closeAgendamento = () => {
+    setSelectedAgendamento(null);
+  };
+
+  if(selectedAgendamento){
+    return(
+      <DetalharAgendamento
+      hrefAnterior={hrefAnterior}
+      diretorioAtual="Detalhes do Agendamento"
+      dirAnt="Historico de Atendimentos"
+      hrefAtual={barbeiro.name}
+      backDetalhamento={closeAgendamento}
+      agendamento={selectedAgendamento}
+    />
+    )
+  }
+
   return (
     <div id="header" className={style.container}>
       <HeaderDetalhamento
@@ -260,6 +306,28 @@ const updateBarber = useMutation(
             </Form>
           )}
         </Formik>
+        <button onClick={() => setShowAgendamentos(!showAgendamentos)} className={style.appointment_btn}>
+              Consultas
+            </button>
+            {showAgendamentos && (
+              <>
+              <div className={style.consultas}>
+              <h1 className={style.container__header_title}>Agendamentos do Barbeiro</h1>
+                <AgendamentoTable
+                  table1="Nome do Cliente"
+                  table2="Horário Agendado"
+                  table3="Tipo de Serviço"
+                  listAgendamentos={agendamentos}
+                  onSelectAgendamento={onSelectAgendamento}
+                  setAgendamentos={setAgendamentos}
+                  totalPages={1}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                />
+              </div>
+              </>
+            
+            )}
       </div>
     </div>
   );

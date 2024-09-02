@@ -284,6 +284,11 @@ const LayoutBarbeiro = () => {
                         icon="/assets/icons/navalha.svg"
                         route={APP_ROUTES.private.meu_perfil.name}
                     />
+                    <Botao_menu
+                        title="Histórico de atendimentos"
+                        icon="/assets/icons/navalha.svg"
+                        route={APP_ROUTES.private.historico.name}
+                    />
 
                 </div>
                 <div>
