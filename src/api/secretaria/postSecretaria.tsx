@@ -1,8 +1,7 @@
-import { Barbeiro } from "@/interfaces/barbeiroInterface";
+import { Secretaria } from "@/interfaces/secretariaInterface";
 import { getStorageItem } from "@/utils/localStore";
-import { useState } from "react";
 
-export async function postBarber(barber: Barbeiro, profilePhoto:File) {
+export async function postSecretaria(secretaria: Secretaria, profilePhoto:File) {
 
 
   const token = getStorageItem("token"); 
@@ -10,15 +9,15 @@ export async function postBarber(barber: Barbeiro, profilePhoto:File) {
   const formData = new FormData();
 
   // Converte o objeto `barber` para uma string JSON
-  const barberJson = JSON.stringify(barber);
+  const secretariaJson = JSON.stringify(secretaria);
 
   // Adiciona o JSON e a imagem ao FormData
-  formData.append("barber", barberJson);
+  formData.append("secretary", secretariaJson);
   formData.append("profilePhoto", profilePhoto, profilePhoto.name);
 
   try {
     // Faz a requisição usando fetch
-    const response = await fetch("https://go-barber-api.onrender.com/barber", {
+    const response = await fetch("https://go-barber-api.onrender.com/secretary", {
       method: "POST",
       body: formData,
       headers: {

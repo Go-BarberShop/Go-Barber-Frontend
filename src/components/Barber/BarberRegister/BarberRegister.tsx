@@ -92,7 +92,6 @@ export default function BarberRegister() {
           initialValues={initialValues}
           validationSchema={validateSchema}
           onSubmit={(values, { setSubmitting }) => {
-            console.log("Valores: ", values);
             setSubmitting(false);
           }}
         >

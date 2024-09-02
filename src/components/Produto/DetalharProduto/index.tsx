@@ -61,7 +61,6 @@ const DetalharProduto: React.FC<DetalharProdutoProps> = ({
     },
     {
       onSuccess: () => {
-        setEditar(false);
       },
       onError: (error) => {
         console.log("Erro ao cadastrar um novo produto", error);

@@ -12,6 +12,15 @@ export const APP_ROUTES = {
         cadastrar_barbeiro:{
             name: "/barbeiros/cadastrar-barbeiro"
         },
+        secretaria: {
+            name: "/secretarias"
+        },
+        meu_perfil_sec: {
+            name: "/secretarias/meu-perfil"
+        },
+        cadastrar_secretaria:{
+            name: "/secretarias/cadastrar-secretaria"
+        },
         servicos: {
             name: "/servicos"
         },
