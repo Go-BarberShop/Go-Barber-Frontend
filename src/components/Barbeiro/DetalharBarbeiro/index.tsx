@@ -192,9 +192,6 @@ const updateBarber = useMutation(
     return(
       <DetalharAgendamento
       hrefAnterior={hrefAnterior}
-      diretorioAtual="Detalhes do Agendamento"
-      dirAnt="Historico de Atendimentos"
-      hrefAtual={barbeiro.name}
       backDetalhamento={closeAgendamento}
       agendamento={selectedAgendamento}
     />

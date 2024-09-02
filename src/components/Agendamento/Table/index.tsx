@@ -57,13 +57,6 @@ const AgendamentoTable: React.FC<TableProps> = ({
                   >
                     <img src="/assets/icons/visualizar.svg" alt="Visualizar" />
                   </button>
-                  <button>
-                    <img
-                      src="/assets/icons/excluir.svg"
-                      alt="excluir"
-                      className={style.content__table__body_click}
-                    />
-                  </button>
                 </td>
               </tr>
             ))}
