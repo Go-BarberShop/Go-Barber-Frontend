@@ -66,6 +66,11 @@ const LayoutAdmin = () => {
             icon="/assets/icons/promocao.svg"
             route={APP_ROUTES.private.promocoes.name}
           />
+          <Botao_menu
+            title="Agendamentos"
+            icon="/assets/icons/promocao.svg"
+            route={APP_ROUTES.private.agendamentos.name}
+          />
         </div>
         <div>
           <Footer_menu />
@@ -163,6 +168,11 @@ const LayoutSecretaria = () => {
             title="Meu Perfil"
             icon="/assets/icons/navalha.svg"
             route={APP_ROUTES.private.meu_perfil_sec.name}
+          />
+          <Botao_menu
+            title="Agendamentos"
+            icon="/assets/icons/promocao.svg"
+            route={APP_ROUTES.private.agendamentos.name}
           />
         </div>
         <div>
@@ -267,7 +277,7 @@ const LayoutBarbeiro = () => {
             route={APP_ROUTES.private.meu_perfil.name}
           />
           <Botao_menu
-            title="Histórico de atendimentos"
+            title="Historico Agendamentos"
             icon="/assets/icons/navalha.svg"
             route={APP_ROUTES.private.historico.name}
           />
