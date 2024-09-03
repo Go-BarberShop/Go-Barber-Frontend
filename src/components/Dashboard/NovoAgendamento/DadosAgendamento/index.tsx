@@ -1,11 +1,11 @@
 import React from 'react';
 import { Field, ErrorMessage, FormikProps } from 'formik';
 import style from '../cadastrar-agendamento.module.scss';
-import { Agendamento } from '@/interfaces/agendamentoInterface'; // Supondo que você criou essa interface
+import { Agendamento1 } from '@/interfaces/agendamentoInterface'; // Supondo que você criou essa interface
 import { Servico } from '@/interfaces/servicoInterface'; // Definição da interface Servico
 
 interface DadosAgendamentoProps {
-  formik: FormikProps<Agendamento>;
+  formik: FormikProps<Agendamento1>;
   servicos: Servico[];
 }
 
