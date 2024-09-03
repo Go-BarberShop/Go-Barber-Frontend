@@ -5,7 +5,6 @@ import AgendamentoTable from "../Table";
 import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/constants/app-routes";
 import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
-import { getAllBarbers } from "@/api/barbeiro/getAllBarbers";
 import DetalharAgendamento from "../DetalharAgendamento";
 import { Agendamento } from "@/interfaces/agendamentoInterface";
 import { getAllAtendimentos } from "@/api/atendimentos/getAllAtendimentos";
@@ -29,7 +28,7 @@ const ListarAgendamentos = () => {
   });
 
   useEffect(() => {
-    mutate();
+    /* mutate(); */
   }, [currentPage]);
 
   const filteredAgendamentos = agendamentos.filter((agendamento) =>
@@ -47,7 +46,7 @@ const ListarAgendamentos = () => {
   if(selectedAgendamento){
     return(
       <DetalharAgendamento
-      hrefAtual={barbeiro.name}
+      hrefAnterior={APP_ROUTES.private.home.name}
       backDetalhamento={handleBackToList}
       agendamento={selectedAgendamento}
     />
@@ -55,26 +54,13 @@ const ListarAgendamentos = () => {
   }
 
   return (
-    <div>
-      <div className={style.header}>
+    <div className={style.container}>
         <HeaderDetalhamento
-          titulo="Barbeiros"
+          titulo="Agendamentos"
           hrefAnterior={APP_ROUTES.private.home.name}
           diretorioAnterior="Home /"
-          diretorioAtual="Barbeiros"
+          diretorioAtual="Agendamentos"
         />
-        <div className={style.header__container}>
-         <div className={style.header__container_botoes}>
-            <button onClick={() => (push(APP_ROUTES.private.cadastrar_barbeiro.name))}>
-              <h1>
-                Adicionar Barbeiro
-              </h1>
-              <img src="/assets/icons/navalha.svg" alt="Navalha" />
-            </button>
-          </div>
-        </div>
-      </div>
-
       <AgendamentoTable
         listAgendamentos={filteredAgendamentos}
         setAgendamentos={setAgendamentos}
