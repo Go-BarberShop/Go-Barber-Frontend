@@ -43,6 +43,8 @@ const DetalharAgendamento: React.FC<DetalharAgendamentoProps> = ({
     }
   }, [agendamento]);
 
+  console.log(agendamento.barber.idBarber);
+
   return (
     <div id="header" className={style.container}>
       <HeaderDetalhamento
