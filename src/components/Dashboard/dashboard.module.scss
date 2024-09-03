@@ -36,7 +36,7 @@
 
   &__calendar {
     margin: 5em 0em 0em 5em;
-    width: 300px;
+    width: 230px;
 
     .rdp-root {
       --rdp-accent-color: #ff9000; /* Cor de destaque para os dias selecionados e elementos da UI */
@@ -108,8 +108,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
-      height: 30px;
+      width: 20px;
+      height: 20px;
       text-align: center;
       margin: 4px;
       border-radius: 8px;
@@ -356,7 +356,7 @@
     background: #3E3B47;
     display: flex;
     align-items: center;
-    padding: 10px 60px;
+    padding: 10px 20px;
     border-radius: 10px;
     margin-left: 20px;
     margin-top: 4px;
@@ -410,8 +410,12 @@ align-items: center;
 margin-left: 16px;
 background: #3e3b47;
 border-radius: 10px;
-padding: 4px 12px;
+padding: 4px 4px;
 margin-top: 4px;
+span{
+  width: 100%;
+  font-size: 14px;
+}
 }
 
 .userAvatar {

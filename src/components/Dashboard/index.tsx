@@ -143,7 +143,7 @@ const Dashboard: React.FC = () => {
             <div className={styles.timeSlot}>
               <strong className={styles.timeSlotTitle}>Manhã</strong>
               {morningAppointments.map((appointment) => (
-                <div key={appointment.clientNumber + appointment.startTime} className={styles.appointment}>
+                <div key={appointment.startTime} className={styles.appointment}>
                   <span>
                     <FiClock />
                     {formatTime(appointment.startTime)}
@@ -156,17 +156,16 @@ const Dashboard: React.FC = () => {
                         className={styles.userAvatar}
                       />
                     )}
-                    <strong className={styles.userName} style={{ fontWeight: 600 }}>
+                   
+                    <h1 className={styles.userName} style={{ fontWeight: 600 }}>
                       {appointment.barber.name}
-                    </strong>
-                    <div className={styles.clientInfo}>
                       <span className={styles.clientName} style={{ color: 'orange', fontWeight: 500 }}>
-                         Cliente:  Contato: 
+                      {appointment.clientName}  - 
+                        {appointment.clientNumber}
                       </span>
-                      <span className={styles.clientContact} style={{ color: 'white', marginLeft: '10px' }}>
-                        {appointment.clientName} {appointment.clientNumber}
-                      </span>
-                    </div>
+                      
+                    </h1>
+                    
 
                   </div>
                 </div>
@@ -191,7 +190,14 @@ const Dashboard: React.FC = () => {
                         className={styles.userAvatar}
                       />
                     )}
-                    <strong className={styles.userName}>{appointment.barber.name}</strong>
+                    <h1 className={styles.userName} style={{ fontWeight: 600 }}>
+                      {appointment.barber.name}
+                      <span className={styles.clientName} style={{ color: 'orange', fontWeight: 500 }}>
+                      {appointment.clientName}  - 
+                        {appointment.clientNumber}
+                      </span>
+                      
+                    </h1>
                   </div>
                 </div>
               ))}
@@ -229,7 +235,6 @@ const Dashboard: React.FC = () => {
           modifiers={{
             available: (day: Date) => {
               const date = day.getDate();
-              console.log("Verificando disponibilidade do dia:", date);
               return appointments.some(
                 appointment => parseDateTime(appointment.startTime).getDate() === date
               );
