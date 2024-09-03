@@ -356,7 +356,7 @@
     background: #3E3B47;
     display: flex;
     align-items: center;
-    padding: 10px 54px;
+    padding: 10px 60px;
     border-radius: 10px;
     margin-left: 20px;
     margin-top: 4px;
@@ -420,6 +420,34 @@ border-radius: 50%;
 }
 
 .userName {
-color: #fff;
+color: #ffffff;
 margin-left: 8px;
+font-size: 1.2em;
+}
+.clientInfo {
+  margin-top: 10px;
+}
+
+.clientName {
+  font-size: 0.9em;
+}
+
+.clientContact {
+  font-size: 0.9em;
+}
+
+.registerButton {
+  background-color: #c7850b; /* Verde */
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.registerButton:hover {
+  background-color: #faa301; /* Verde mais escuro */
 }
