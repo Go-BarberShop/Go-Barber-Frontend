@@ -8,6 +8,7 @@ import HeaderDetalhamento from "@/components/Header/HeaderDetalhamento";
 import DetalharAgendamento from "../DetalharAgendamento";
 import { Agendamento } from "@/interfaces/agendamentoInterface";
 import { getAllAtendimentos } from "@/api/atendimentos/getAllAtendimentos";
+import { getHistoricoAtendimentos } from "@/api/atendimentos/getHistoricoAtendimentos";
 
 const ListarAgendamentos = () => {
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
@@ -18,7 +19,7 @@ const ListarAgendamentos = () => {
   const [totalPages, setTotalPages] = useState(0);
   const { push } = useRouter();
 
-  const { mutate } = useMutation(() => getAllAtendimentos(currentPage, 3), {
+  const { mutate } = useMutation(() => getHistoricoAtendimentos(currentPage, 3), {
     onSuccess: (res) => {
       setAgendamentos(res.data.content);
       setTotalPages(res.data.totalPages);

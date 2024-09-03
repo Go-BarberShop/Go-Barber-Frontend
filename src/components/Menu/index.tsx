@@ -66,11 +66,6 @@ const LayoutAdmin = () => {
             icon="/assets/icons/promocao.svg"
             route={APP_ROUTES.private.promocoes.name}
           />
-          <Botao_menu
-            title="Gerenciamento Histórico"
-            icon="/assets/icons/promocao.svg"
-            route={APP_ROUTES.private.historico.name}
-          />
         </div>
         <div>
           <Footer_menu />
