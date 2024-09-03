@@ -69,7 +69,7 @@ const LayoutAdmin = () => {
           <Botao_menu
             title="Agendamentos"
             icon="/assets/icons/promocao.svg"
-            route={APP_ROUTES.private.agendamentos.name}
+            route={APP_ROUTES.private.home.name}
           />
         </div>
         <div>
@@ -172,7 +172,7 @@ const LayoutSecretaria = () => {
           <Botao_menu
             title="Agendamentos"
             icon="/assets/icons/promocao.svg"
-            route={APP_ROUTES.private.agendamentos.name}
+            route={APP_ROUTES.private.home.name}
           />
         </div>
         <div>
@@ -277,7 +277,7 @@ const LayoutBarbeiro = () => {
             route={APP_ROUTES.private.meu_perfil.name}
           />
           <Botao_menu
-            title="Historico Agendamentos"
+            title="Historico Agendamento"
             icon="/assets/icons/navalha.svg"
             route={APP_ROUTES.private.historico.name}
           />
