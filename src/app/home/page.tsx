@@ -5,14 +5,12 @@ import Menu from "@/components/Menu";
 import Home from "@/components/Home";
 import { useState } from "react";
 import { getStorageItem } from "@/utils/localStore";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import Dashboard from "@/components/Dashboard";
 
 export default function page() {
 
   const [role, setRole] = useState<string | null>(getStorageItem("userRole"));
     
-    const userLogin = useSelector((state: RootState) => state.userLogin);
     function whatIsTypeUser() {
         if (role === "ADMIN") {
             return <LayoutAdmin />
@@ -35,7 +33,7 @@ const LayoutAdmin = () => {
             <Menu />
         </div>
         <div className={style.container__main}>
-            <Home />
+            <Dashboard />
         </div>
     </div>
   )
@@ -47,8 +45,8 @@ const LayoutSecretaria = () => {
           <div className={style.container__menu}>
               <Menu />
           </div>
-          <div className={style.container__contrucao}>
-              <Home />
+          <div>
+                <Dashboard />
           </div>
       </div>
     )
@@ -60,8 +58,8 @@ const LayoutBarbeiro = () => {
         <div className={style.container__menu}>
             <Menu />
         </div>
-        <div className={style.container__construcao}>
-            <Home />
+        <div className={style.container__main}>
+            <Dashboard />
         </div>
     </div>
   )
