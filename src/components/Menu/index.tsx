@@ -74,6 +74,11 @@ const LayoutAdmin = () => {
                         icon="/assets/icons/promocao.svg"
                         route={APP_ROUTES.private.promocoes.name}
                     />
+                    <Botao_menu
+                        title="Agendamentos"
+                        icon="/assets/icons/promocao.svg"
+                        route={APP_ROUTES.private.agendamentos.name}
+                    />
                 </div>
                 <div>
                     <Footer_menu />
@@ -176,7 +181,11 @@ const LayoutSecretaria = () => {
                         icon="/assets/icons/navalha.svg"
                         route={APP_ROUTES.private.meu_perfil_sec.name}
                     />
-
+                    <Botao_menu
+                        title="Agendamentos"
+                        icon="/assets/icons/promocao.svg"
+                        route={APP_ROUTES.private.agendamentos.name}
+                    />
                 </div>
                 <div>
                     <Footer_menu />

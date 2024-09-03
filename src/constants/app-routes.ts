@@ -39,6 +39,12 @@ export const APP_ROUTES = {
         cadastrar_promocao:{
             name: "/promocoes/cadastrar-promocao"
         },
+        agendamentos:{
+            name: "/agendamentos"
+        },
+        cadastrar_agendamento:{
+            name: "/agendamentos/cadastrar-agendamento"
+        },
         unauthorized: {
             name: "/unauthorized"
         }
