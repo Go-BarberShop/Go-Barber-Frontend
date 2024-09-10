@@ -4,6 +4,7 @@ import style from "./admissao.module.scss";
 import { Service } from "@/interfaces/barbeiroInterface";
 import { getAllServicos } from "@/api/servicos/getAllServicos";
 import { useMutation } from "react-query";
+import InputMask from "react-input-mask";
 
 interface DadosBarbeiroProps {
   formik: any;
@@ -106,14 +107,15 @@ const DadosAdmissao: React.FC<DadosBarbeiroProps> = ({ formik }) => {
       <div className={style.container__ContainerForm_form_halfContainer}>
         <div>
           <label htmlFor="start">Inicio de Expediente</label>
-          <input
+          <InputMask
+            mask="99:99"
             className={style.container__ContainerForm_form_input}
             id="start"
             name="start"
-            placeholder={formik.values.start}
+            placeholder="00:00"
+            value={formik.values.start}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.start}
             required
           />
           {formik.touched.start && formik.errors.start ? (
@@ -122,14 +124,15 @@ const DadosAdmissao: React.FC<DadosBarbeiroProps> = ({ formik }) => {
         </div>
         <div>
           <label htmlFor="end">Fim de Expediente</label>
-          <input
+          <InputMask
+            mask="99:99"
             className={style.container__ContainerForm_form_input}
             id="end"
             name="end"
-            placeholder={formik.values.end}
+            placeholder="00:00"
+            value={formik.values.end}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.end}
             required
           />
           {formik.touched.end && formik.errors.end ? (
