@@ -18,7 +18,7 @@ export async function postBarber(barber: Barbeiro, profilePhoto:File) {
 
   try {
     // Faz a requisição usando fetch
-    const response = await fetch("https://go-barber-api.onrender.com/barber", {
+    const response = await fetch("https://go-barber-back.onrender.com/barber", {
       method: "POST",
       body: formData,
       headers: {

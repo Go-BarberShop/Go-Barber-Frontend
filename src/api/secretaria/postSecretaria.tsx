@@ -17,7 +17,7 @@ export async function postSecretaria(secretaria: Secretaria, profilePhoto:File) 
 
   try {
     // Faz a requisição usando fetch
-    const response = await fetch("https://go-barber-api.onrender.com/secretary", {
+    const response = await fetch("https://go-barber-back.onrender.com/secretary", {
       method: "POST",
       body: formData,
       headers: {
