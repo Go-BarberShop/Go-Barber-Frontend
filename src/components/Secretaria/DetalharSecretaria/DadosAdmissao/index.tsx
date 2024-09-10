@@ -1,4 +1,5 @@
 "use client";
+import InputMask from "react-input-mask";
 import style from "./admissao.module.scss";
 interface DadosSecretariaProps {
   formik: any;
@@ -54,30 +55,32 @@ const DadosAdmissao: React.FC<DadosSecretariaProps> = ({ formik, editar  }) => {
         </div>
 
         <div>
-          <label htmlFor="start">Inicio de Expediente </label>
-          <input
+          <label htmlFor="start">Início de Expediente</label>
+          <InputMask
+            mask="99:99"
             id="start"
             className={style.container__ContainerForm_form_input}
             name="start"
-            placeholder="Não informado"
-            onChange={editar ? formik.handleChange : undefined}
-            onBlur={formik.handleBlur}
+            placeholder="00:00"
             value={formik.values.start}
             disabled={!editar}
+            onChange={editar ? formik.handleChange : undefined}
+            onBlur={formik.handleBlur}
           />
         </div>
 
         <div>
-          <label htmlFor="end">Fim de Expediente </label>
-          <input
+          <label htmlFor="end">Fim de Expediente</label>
+          <InputMask
+            mask="99:99"
             id="end"
             className={style.container__ContainerForm_form_input}
             name="end"
-            placeholder="Não informado"
-            onChange={editar ? formik.handleChange : undefined}
-            onBlur={formik.handleBlur}
+            placeholder="00:00"
             value={formik.values.end}
             disabled={!editar}
+            onChange={editar ? formik.handleChange : undefined}
+            onBlur={formik.handleBlur}
           />
         </div>
       </div>

@@ -26,7 +26,6 @@ export async function putBarberbeiroById(id: string | number | undefined, barber
       }
     );
 
-    console.log("Resposta do servidor:", response.data);
     return response.data;
   } catch (error) {
     console.error("Erro ao enviar a requisição:", error);

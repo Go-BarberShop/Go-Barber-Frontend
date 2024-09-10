@@ -7,29 +7,13 @@ import { postAppointment } from '@/api/agendamento/postAppointment';
 import style from './cadastrar-agendamento.module.scss';
 import DadosAgendamento from './DadosAgendamento';
 import { APP_ROUTES } from '@/constants/app-routes';
-import { Agendamento } from '@/interfaces/agendamentoInterface';
-import { Servico } from '@/interfaces/servicoInterface';
-import { getAllServicos } from '@/api/servicos/getAllServicos';
+import { Agendamento1 } from '@/interfaces/agendamentoInterface';
 
 const CadastroAgendamento = () => {
   const { push } = useRouter();
-  const [servicos, setServicos] = useState<Servico[]>([]);
 
-  useEffect(() => {
-    const fetchServicos = async () => {
-      try {
-        // Passe os argumentos necessários para a função getAllServicos
-        const response = await getAllServicos(1, 10); // Exemplo: página 1, tamanho 10
-        setServicos(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar serviços:', error);
-      }
-    };
 
-    fetchServicos();
-  }, []);
-
-  const initialValues: Agendamento = {
+  const initialValues: Agendamento1 = {
     clientName: '',
     clientNumber: '',
     barberId: 0,
@@ -52,7 +36,7 @@ const CadastroAgendamento = () => {
   });
 
   const { status, mutate } = useMutation(
-    async (values: Agendamento) => {
+    async (values: Agendamento1) => {
       return postAppointment(values); // Chamada à API para cadastrar o agendamento
     },
     {
@@ -98,7 +82,7 @@ const CadastroAgendamento = () => {
           >
             {(formik) => (
               <Form className={style.container__ContainerForm_form}>
-                <DadosAgendamento formik={formik} servicos={servicos} />
+                <DadosAgendamento formik={formik}/>
                 <div className={style.container__ContainerForm_buttons}>
                   <button
                     className={style.container__ContainerForm_buttons_link}

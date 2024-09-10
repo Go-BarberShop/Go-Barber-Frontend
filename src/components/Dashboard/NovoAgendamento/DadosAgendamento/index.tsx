@@ -1,17 +1,66 @@
-import React from 'react';
+"use client";
+import React, { useEffect, useState } from 'react';
 import { Field, ErrorMessage, FormikProps } from 'formik';
 import style from '../cadastrar-agendamento.module.scss';
-import { Agendamento } from '@/interfaces/agendamentoInterface'; // Supondo que você criou essa interface
-import { Servico } from '@/interfaces/servicoInterface'; // Definição da interface Servico
+import { Agendamento1 } from '@/interfaces/agendamentoInterface';
+import { useMutation } from 'react-query';
+import { getAllBarbers } from '@/api/barbeiro/getAllBarbers';
+import { useRouter } from 'next/navigation';
+import { Barbeiro } from '@/interfaces/barbeiroInterface';
 
-interface DadosAgendamentoProps {
-  formik: FormikProps<Agendamento>;
-  servicos: Servico[];
+interface Servico {
+  id: number;
+  name: string;
+  description?: string;
+  time?: number;
+  value?: number;
 }
 
-const DadosAgendamento: React.FC<DadosAgendamentoProps> = ({ formik, servicos }) => {
-  // Convert the selected service IDs from numbers to strings
+interface DadosAgendamentoProps {
+  formik: FormikProps<Agendamento1>;
+}
+
+const DadosAgendamento: React.FC<DadosAgendamentoProps> = ({ formik }) => {
   const serviceTypeIds = formik.values.serviceTypeIds.map(String);
+  const [barbeiros, setBarbeiros] = useState<Barbeiro[]>([]);
+  const [filteredServicos, setFilteredServicos] = useState<Servico[]>([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const { push } = useRouter();
+
+  const { mutate } = useMutation(() => getAllBarbers(currentPage, 10), {
+    onSuccess: (res) => {
+      setBarbeiros(res.data.content);
+      setTotalPages(res.data.totalPages);
+    },
+    onError: (error) => {
+      console.error('Erro ao recuperar os barbeiros:', error);
+    }
+  });
+
+  useEffect(() => {
+    mutate();
+  }, [currentPage]);
+
+  // Função que filtra os serviços com base no barbeiro selecionado
+  const filterServicesByBarbeiro = (barberId: string) => {
+    // Aqui, a comparação ocorre diretamente entre strings
+    const barbeiro = barbeiros.find(b => b.idBarber == barberId);
+    
+    if (barbeiro && barbeiro.services && Array.isArray(barbeiro.services)) {
+      // Atualiza a lista de serviços com os serviços associados ao barbeiro
+      setFilteredServicos(barbeiro.services);
+    } else {
+      // Limpa os serviços se o barbeiro não tiver serviços
+      setFilteredServicos([]);
+    }
+  };
+
+  const handleSelectBarbeiro = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const barberId = event.target.value;
+    formik.setFieldValue("barberId", barberId); // Atualiza o campo barbeiro no formik
+    filterServicesByBarbeiro(barberId); // Filtra os serviços com base no barbeiro selecionado
+  };
 
   return (
     <>
@@ -59,12 +108,16 @@ const DadosAgendamento: React.FC<DadosAgendamentoProps> = ({ formik, servicos })
             className={style.container__ContainerForm_form_halfContainer_input}
             id="barberId"
             name="barberId"
-            onChange={formik.handleChange}
+            onChange={handleSelectBarbeiro}
             onBlur={formik.handleBlur}
             value={formik.values.barberId || ''}
           >
             <option value="">Selecione um barbeiro</option>
-            {/* Aqui você deve mapear para os barbeiros disponíveis */}
+            {barbeiros.map((barbeiro) => (
+              <option key={barbeiro.idBarber} value={barbeiro.idBarber}>
+                {barbeiro.name}
+              </option>
+            ))}
           </select>
           {formik.touched.barberId && formik.errors.barberId ? (
             <span className={style.form__error}>{formik.errors.barberId}</span>
@@ -89,11 +142,11 @@ const DadosAgendamento: React.FC<DadosAgendamentoProps> = ({ formik, servicos })
               formik.setFieldValue('serviceTypeIds', values);
             }}
             onBlur={formik.handleBlur}
-            value={serviceTypeIds}
+            value={formik.values.serviceTypeIds.map(String)}
           >
-            {servicos && servicos.length > 0 ? (
-              servicos.map(servico => (
-                <option key={servico.id} value={servico.id}>
+            {filteredServicos.length > 0 ? (
+              filteredServicos.map(servico => (
+                <option key={servico.id} value={servico.id.toString()}>
                   {servico.name}
                 </option>
               ))

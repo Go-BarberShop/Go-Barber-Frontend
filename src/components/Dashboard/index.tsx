@@ -35,13 +35,11 @@ const Dashboard: React.FC = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
 
   const fetchBarberPhoto = async (barberId: number): Promise<string | undefined> => {
-    console.log(`Buscando foto para o barbeiro com ID ${barberId}`);
     try {
       const response = await getBarberPhotoById(barberId.toString());
       if (response.data) {
         const imageBlob = new Blob([response.data], { type: 'image/jpeg' });
         const imageUrl = URL.createObjectURL(imageBlob);
-        console.log(`Foto carregada para o barbeiro com ID ${barberId}`);
         return imageUrl;
       } else {
         console.error("Nenhum dado encontrado na resposta.");
@@ -54,12 +52,10 @@ const Dashboard: React.FC = () => {
   };
 
   const loadBarberPhotos = async (appointments: Appointment[]): Promise<Appointment[]> => {
-    console.log("Iniciando carregamento de fotos dos barbeiros para os agendamentos:", appointments);
 
     const updatedAppointments = await Promise.all(
       appointments.map(async (appointment) => {
         const barberPhoto = await fetchBarberPhoto(appointment.barber.idBarber);
-        console.log(`Foto do barbeiro para o ID ${appointment.barber.idBarber}:`, barberPhoto);
         return {
           ...appointment,
           barberPhoto,
@@ -67,7 +63,6 @@ const Dashboard: React.FC = () => {
       })
     );
 
-    console.log("Agendamentos atualizados com fotos dos barbeiros:", updatedAppointments);
     return updatedAppointments;
   };
 
@@ -75,7 +70,6 @@ const Dashboard: React.FC = () => {
     const loadAppointments = async () => {
         try {
             const response = await getAllAppointments(0, 100);
-            console.log("Resposta da API:", response.data); // Adicione este log
             const data = response.data.content as Appointment[]; // Certifique-se de que `content` é um array
             if (!Array.isArray(data)) {
                 throw new Error("A resposta não é um array.");
@@ -107,7 +101,6 @@ const Dashboard: React.FC = () => {
 
   const handleDateChange = (day: Date | undefined) => {
     if (day) {
-      console.log("Data selecionada:", day);
       setSelectedDate(day);
     }
   };

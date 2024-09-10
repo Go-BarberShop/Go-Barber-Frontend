@@ -42,7 +42,7 @@ export interface Agendamento {
   startTime: string;
   endTime: string;
 }
-export class Agendamento {
+export class Agendamento1 {
     clientName: string;
     clientNumber: string;
     barberId: number;

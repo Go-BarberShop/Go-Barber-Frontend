@@ -1,5 +1,4 @@
 .container {
-    min-height: 100vh; 
     width: 100%;
 
     display: grid;
@@ -8,13 +7,16 @@
     background-color: rgba(var(--background));
 
     &__menu {
+        width: 100%;
         display: flex;
         background-color: #333; 
         height: 100%; 
     }
 
     &__main {
+
         width: 100%;
+        height: 100vh;        
         display: flex;
         flex-direction: column;
         align-items: center;
