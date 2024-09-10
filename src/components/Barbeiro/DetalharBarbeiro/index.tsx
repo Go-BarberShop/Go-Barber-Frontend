@@ -131,7 +131,6 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({
 
   const updateBarber = useMutation(
     async (values: Barbeiro) => {
-      console.log("values", values);
       // Extraia a imagem do values
       const profilePhoto = values.profilePhoto as File;
 
@@ -166,8 +165,6 @@ const DetalharBarbeiro: React.FC<DetalharBarbeiroProps> = ({
       reader.readAsDataURL(file);
     }
   };
-
-  console.log("Barbeiro: ", Number(barbeiro.idBarber));
 
   const { mutate } = useMutation(
     () => getAllAtendimentosBarbeiro(Number(barbeiro.idBarber)),

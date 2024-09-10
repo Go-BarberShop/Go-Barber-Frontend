@@ -185,7 +185,7 @@ const CadastrarSecretaria = () => {
                   <button
                     className={style.container__ContainerForm_buttons_link}
                     type="button"
-                    onClick={() => push(APP_ROUTES.private.barbeiros.name)}
+                    onClick={() => push(APP_ROUTES.private.secretaria.name)}
                   >
                     <h1>Voltar</h1>
                   </button>
